@@ -1,26 +1,62 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.ProseMirror {
+    @apply outline-none focus:outline-none ring-0 focus:ring-0;
+    @apply min-h-screen;
+    overflow-y: auto;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.ProseMirror h1,
+.ProseMirror h2,
+.ProseMirror h3,
+.ProseMirror h4,
+.ProseMirror h5,
+.ProseMirror h6 {
+    @apply text-2xl font-bold text-gray-900 mt-6 mb-4 text-center col-span-full;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.node-smartLayout {
+    @apply w-full;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.node-smartLayoutItem {
+    @apply md:w-1/2 mx-auto;
+}
+
+/* Smart Layout Grid Variants - These will be set dynamically from backend */
+
+.smart-layout-grid.iconText>[data-node-view-content-react] {
+    @apply grid grid-cols-2 grid-rows-2;
+}
+
+.smart-layout-grid.imageText>[data-node-view-content-react] {
+    @apply grid grid-cols-3 grid-rows-2;
+}
+
+
+/* Default grid layout */
+.smart-layout-grid>[data-node-view-content-react] {
+    @apply grid grid-cols-1;
+}
+
+.ProseMirror .slide-body {
+    aspect-ratio: 16 / 9;
+    @apply border-2 shadow-lg border-gray-100 bg-gray-50 rounded-md p-4 my-4 outline-none transition-all duration-100 cursor-text;
+    overflow-y: auto;
+    max-width: 100%;
+    margin-bottom: 2rem;
+}
+
+.ProseMirror .slide-body:hover {
+    @apply border-blue-300;
+}
+
+.ProseMirror .slide-body:focus,
+.ProseMirror .slide-body:focus-within,
+.ProseMirror .slide-body.ProseMirror-focused {
+    @apply border-blue-400 border-2;
+}
+
+.ProseMirror .slide-body:focus-within * {
+    @apply outline-none;
 }
