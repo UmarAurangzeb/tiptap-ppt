@@ -6,45 +6,24 @@
     overflow-y: auto;
 }
 
-.ProseMirror h1,
-.ProseMirror h2,
-.ProseMirror h3,
-.ProseMirror h4,
-.ProseMirror h5,
-.ProseMirror h6 {
-    @apply text-2xl font-bold text-gray-900 mt-6 mb-4 text-center col-span-full;
-}
-
-.node-smartLayout {
-    @apply w-full;
-}
-
-.node-smartLayoutItem {
-    @apply md:w-1/2 mx-auto;
-}
-
-/* Smart Layout Grid Variants - These will be set dynamically from backend */
-
-.smart-layout-grid.iconText>[data-node-view-content-react] {
-    @apply grid grid-cols-2 grid-rows-2;
-}
-
-.smart-layout-grid.imageText>[data-node-view-content-react] {
-    @apply grid grid-cols-3 grid-rows-2;
-}
-
-
-/* Default grid layout */
-.smart-layout-grid>[data-node-view-content-react] {
-    @apply grid grid-cols-1;
-}
-
 .ProseMirror .slide-body {
     aspect-ratio: 16 / 9;
-    @apply border-2 shadow-lg border-gray-100 bg-gray-50 rounded-md p-4 my-4 outline-none transition-all duration-100 cursor-text;
-    overflow-y: auto;
-    max-width: 100%;
+    max-width: 1280px;
+    border: 2px solid #e5e7eb;
+    /* tailwind border-gray-100 */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    /* shadow-lg */
+    background-color: #f9fafb;
+    /* bg-gray-50 */
+    border-radius: 0.375rem;
+    padding: 1rem;
     margin-bottom: 2rem;
+    outline: none;
+    transition: all 0.1s;
+    cursor: text;
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
 }
 
 .ProseMirror .slide-body:hover {
@@ -60,3 +39,203 @@
 .ProseMirror .slide-body:focus-within * {
     @apply outline-none;
 }
+
+.node-titleSlide {
+    @apply w-full h-full;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-slide-grid {
+    @apply w-full h-full;
+}
+
+.title-slide-grid.imageTop>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50% minmax(min-content, auto) minmax(10%, min-content);
+    grid-template-areas:
+        "image image"
+        "title title"
+        "credit date";
+}
+
+/* Image */
+.title-slide-grid.imageTop>[data-node-view-content-react]>*:first-child,
+.title-slide-grid.imageTop>[data-node-view-content-react] img {
+    grid-area: image;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Title/Heading */
+.title-slide-grid.imageTop>[data-node-view-content-react] .node-heading {
+    grid-area: title;
+    text-align: center;
+    font-weight: bold;
+    align-self: center;
+}
+
+/* Date - spans 1 column (left), row 3 (gridColumn: 'span 1') */
+.title-slide-grid.imageTop>[data-node-view-content-react] .node-paragraph:first-of-type {
+    grid-column: span 1;
+    grid-row: 3;
+    margin-left: 10%;
+    align-self: center;
+    text-align: left;
+    margin-left: 10%;
+}
+
+/* Second and subsequent paragraphs - move to date area (right) */
+.title-slide-grid.imageTop>[data-node-view-content-react] .node-paragraph:last-of-type {
+    grid-area: date;
+    text-align: right;
+    margin-right: 10%;
+    margin-left: 0;
+}
+
+/* ===== IMAGE BOTTOM LAYOUT ===== */
+.title-slide-grid.imageBottom>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(min-content, 40%) minmax(15%, min-content) minmax(40%, auto);
+    grid-template-areas:
+        "title title"
+        "credit date"
+        "image image";
+}
+
+/* Title/Heading - spans 2 columns, row 1 */
+.title-slide-grid.imageBottom>[data-node-view-content-react] .node-heading {
+    grid-area: title;
+    text-align: center;
+    font-weight: bold;
+    align-self: center;
+}
+
+/* All paragraphs - put first in credit area (left) */
+.title-slide-grid.imageBottom>[data-node-view-content-react] .node-paragraph:first-of-type {
+    grid-area: credit;
+    align-self: center;
+    text-align: left;
+    margin-left: 5%;
+}
+
+/* Second paragraph - move to date area (right) */
+.title-slide-grid.imageBottom>[data-node-view-content-react] .node-paragraph:last-of-type {
+    grid-area: date;
+    text-align: center;
+    margin-right: 5%;
+    margin-left: 0;
+    justify-self: end;
+    align-self: center;
+}
+
+/* Image - spans 2 columns, row 3 */
+.title-slide-grid.imageBottom>[data-node-view-content-react]>*:first-child,
+.title-slide-grid.imageBottom>[data-node-view-content-react] img {
+    grid-area: image;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== CENTER TITLE LAYOUT ===== */
+.title-slide-grid.centerTitle>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "title title"
+        "credit date"
+}
+
+/* Hide images in center title layout */
+.title-slide-grid.centerTitle>[data-node-view-content-react]>*:first-child,
+.title-slide-grid.centerTitle>[data-node-view-content-react] img {
+    display: none;
+}
+
+/* Main heading - large and bold */
+.title-slide-grid.centerTitle>[data-node-view-content-react] .node-heading {
+    grid-area: title;
+    text-align: center;
+    justify-self: center;
+    align-self: end;
+    margin: 0;
+}
+
+.title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph {
+    grid-area: credit;
+    align-self: top;
+    text-align: right;
+    margin-left: 10%;
+}
+
+.title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:last-of-type {
+    grid-area: date;
+    align-self: top;
+    text-align: left;
+    margin-left: 5%;
+
+}
+
+/* .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:first-of-type {
+    grid-area: credit;
+    align-self: center;
+    text-align: right;
+    margin-left: 5%;
+} */
+
+/* Second paragraph - move to date area (right) */
+/* .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:last-of-type {
+    grid-area: date;
+    text-align: left;
+    margin-right: 5%;
+    margin-left: 0;
+    justify-self: end;
+    align-self: center;
+} */
+
+
+
+
+
+
+
+
+
+
+
+/* .node-smartLayout {
+    @apply w-full;
+}
+
+.node-smartLayoutItem {
+    @apply md:w-1/2 mx-auto;
+} */
+
+/* Smart Layout Grid Variants - These will be set dynamically from backend */
+/* 
+.smart-layout-grid.iconText>[data-node-view-content-react] {
+    @apply grid grid-cols-2 grid-rows-2;
+}
+
+.smart-layout-grid.imageText>[data-node-view-content-react] {
+    @apply grid grid-cols-3 grid-rows-2;
+}
+
+Default grid layout:
+.smart-layout-grid>[data-node-view-content-react] {
+    @apply grid grid-cols-1;
+}
+*/
+/* .ProseMirror .slide-body {
+    aspect-ratio: 16 / 9;
+    max-width: 1280px;
+    @apply border-2 shadow-lg border-gray-100 bg-gray-50 rounded-md p-4 my-4 outline-none transition-all duration-100 cursor-text;
+    overflow-y: auto;
+    margin-bottom: 2rem;
+} */

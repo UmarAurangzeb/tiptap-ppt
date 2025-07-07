@@ -1,106 +1,27 @@
 // components/ParagraphView.tsx
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
-import { useEditorDom } from '@/context/EditorContext'
-import { useSlideElements } from '@/context/SlideElementsContext'
+import { useElementTracking } from '@/hooks/useElementTracking'
+import { getResponsiveFontSize, getResponsiveStrokeWidth } from '@/utils/responsive'
 
 export default function ParagraphView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
-    const ref = useRef<HTMLDivElement>(null)
-    const editorRef = useEditorDom()
-    const { updateElement, removeElement } = useSlideElements()
+    const { ref, elementId, parentContainerWidth } = useElementTracking({
+        elementType: node.type.name,
+        node,
+        getElementData: (elementId, slideNumber, coordinates) => ({
+            content: node.textContent || ''
+        })
+    })
 
-    // Generate stable ID that persists across re-renders
-    const elementIdRef = useRef<string>(`paragraph-${Math.random().toString(36).substr(2, 9)}`)
-    const elementId = elementIdRef.current
-    useEffect(() => {
-        let debounceTimer: NodeJS.Timeout | null = null
 
-        const calculateDimensions = () => {
-            if (ref.current && editorRef?.current) {
-                const slideBody = ref.current.closest('.slide-body')
-                const slide_number = slideBody?.getAttribute('n') || '0'
-                if (slideBody) {
-                    const parentRect = slideBody.getBoundingClientRect()
-                    if (parentRect.width > 0 && parentRect.height > 0 && parentRect.x >= 0 && parentRect.y >= 0) {
-                        // console.log("rect", rect)
-                        const nodeRect = ref.current.getBoundingClientRect()
-                        const relativeX = nodeRect.x - parentRect.x
-                        const relativeY = nodeRect.y - parentRect.y
-                        if (nodeRect.width > 0 && nodeRect.height > 0 && relativeX >= 0 && relativeY >= 0) {
 
-                            updateElement({
-                                id: elementId,
-                                slide_number: slide_number,
-                                type: node.type.name,
-                                x: relativeX,
-                                y: relativeY,
-                                width: nodeRect.width,
-                                height: nodeRect.height,
-                                content: node.textContent || ''
-                            })
-                        }
-                    }
-                }
-            }
-        }
-
-        // Calculate dimensions on mount
-        calculateDimensions()
-
-        // Add resize event listener
-        window.addEventListener('resize', calculateDimensions)
-
-        // Watch for layout changes using ResizeObserver and MutationObserver
-        let resizeObserver: ResizeObserver | null = null
-        let mutationObserver: MutationObserver | null = null
-
-        if (ref.current) {
-            const slideBody = ref.current.closest('.slide-body')
-            if (slideBody) {
-                // Watch for size changes
-                resizeObserver = new ResizeObserver(() => {
-                    calculateDimensions()
-                })
-                resizeObserver.observe(slideBody)
-
-                // Watch for any DOM changes within slide-body
-                mutationObserver = new MutationObserver(() => {
-                    calculateDimensions()
-                })
-                mutationObserver.observe(slideBody, {
-                    childList: true,           // Watch for added/removed children
-                    subtree: true,             // Watch changes in entire subtree
-                    attributes: true,          // Watch for attribute changes (like class/style)
-                    characterData: true,       // Watch for text content changes
-                    attributeOldValue: true,   // Include old attribute values
-                    characterDataOldValue: true // Include old text values
-                })
-            }
-        }
-
-        // Cleanup
-        return () => {
-            window.removeEventListener('resize', calculateDimensions)
-            if (resizeObserver) {
-                resizeObserver.disconnect()
-            }
-            if (mutationObserver) {
-                mutationObserver.disconnect()
-            }
-        }
-    }, [elementId, updateElement, editorRef, node.textContent])
-
-    // Cleanup: remove element when component unmounts
-    useEffect(() => {
-        return () => {
-            if (ref.current) {
-                const slideBody = ref.current.closest('.slide-body')
-                const slide_number = slideBody?.getAttribute('n') || '0'
-                removeElement(elementId, slide_number)
-            }
-        }
-    }, [elementId, removeElement])
+    const paragraphStyle: React.CSSProperties = {
+        fontSize: getResponsiveFontSize(32, parentContainerWidth),
+        paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
+        paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
+        lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
+    };
 
     const selectParagraph = () => {
         const from = getPos()
@@ -127,7 +48,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                 ⋮
             </div>
             {/* Actual editable paragraph */}
-            <NodeViewContent as="p" className="focus:outline-none" />
+            <NodeViewContent as="p" className="focus:outline-none" style={paragraphStyle} />
         </NodeViewWrapper>
     )
 }

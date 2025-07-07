@@ -1,110 +1,18 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
-import { useEditorDom } from '@/context/EditorContext'
-import { useSlideElements } from '@/context/SlideElementsContext'
+import { useElementTracking } from '@/hooks/useElementTracking'
+import { getResponsiveFontSize, getResponsiveStrokeWidth } from '@/utils/responsive'
 
 export default function HeaderView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
-    const ref = useRef<HTMLDivElement>(null)
-    const editorRef = useEditorDom()
-    const { updateElement, removeElement } = useSlideElements()
-
-    // Generate stable ID that persists across re-renders
-    const elementIdRef = useRef<string>(`header-${Math.random().toString(36).substr(2, 9)}`)
-    const elementId = elementIdRef.current
-
-    useEffect(() => {
-        const calculateDimensions = () => {
-            if (ref.current && editorRef?.current) {
-                const slideBody = ref.current.closest('.slide-body')
-                const slide_number = slideBody?.getAttribute('n') || '0'
-                if (slideBody) {
-                    const parentRect = slideBody.getBoundingClientRect()
-                    if (parentRect.width > 0 && parentRect.height > 0 && parentRect.x >= 0 && parentRect.y >= 0) {
-                        const nodeRect = ref.current.getBoundingClientRect()
-                        const relativeX = nodeRect.x - parentRect.x
-                        const relativeY = nodeRect.y - parentRect.y
-                        if (nodeRect.width > 0 && nodeRect.height > 0 && relativeX >= 0 && relativeY >= 0) {
-                            console.log("coordinates of header:", node.textContent, {
-                                slide_number: slide_number,
-                                x: relativeX,
-                                y: relativeY,
-                                width: nodeRect.width,
-                                height: nodeRect.height,
-                            })
-                            updateElement({
-                                id: elementId,
-                                slide_number: slide_number,
-                                type: node.type.name, // Will be 'heading' for headers
-                                x: relativeX,
-                                y: relativeY,
-                                width: nodeRect.width,
-                                height: nodeRect.height,
-                                content: node.textContent || ''
-                            })
-                        }
-                    }
-                }
-            }
-        }
-
-        // Calculate dimensions on mount
-        calculateDimensions()
-
-        // Add resize event listener
-        window.addEventListener('resize', calculateDimensions)
-
-        // Watch for layout changes using ResizeObserver and MutationObserver
-        let resizeObserver: ResizeObserver | null = null
-        let mutationObserver: MutationObserver | null = null
-
-        if (ref.current) {
-            const slideBody = ref.current.closest('.slide-body')
-            if (slideBody) {
-                // Watch for size changes
-                resizeObserver = new ResizeObserver(() => {
-                    calculateDimensions()
-                })
-                resizeObserver.observe(slideBody)
-
-                // Watch for any DOM changes within slide-body
-                mutationObserver = new MutationObserver(() => {
-                    calculateDimensions()
-                })
-                mutationObserver.observe(slideBody, {
-                    childList: true,           // Watch for added/removed children
-                    subtree: true,             // Watch changes in entire subtree
-                    attributes: true,          // Watch for attribute changes (like class/style)
-                    characterData: true,       // Watch for text content changes
-                    attributeOldValue: true,   // Include old attribute values
-                    characterDataOldValue: true // Include old text values
-                })
-            }
-        }
-
-        // Cleanup
-        return () => {
-            window.removeEventListener('resize', calculateDimensions)
-            if (resizeObserver) {
-                resizeObserver.disconnect()
-            }
-            if (mutationObserver) {
-                mutationObserver.disconnect()
-            }
-        }
-    }, [elementId, updateElement, editorRef, node.textContent])
-
-    // Cleanup: remove element when component unmounts
-    useEffect(() => {
-        return () => {
-            if (ref.current) {
-                const slideBody = ref.current.closest('.slide-body')
-                const slide_number = slideBody?.getAttribute('n') || '0'
-                removeElement(elementId, slide_number)
-            }
-        }
-    }, [elementId, removeElement])
-
+    const { ref, elementId, parentContainerWidth } = useElementTracking({
+        elementType: 'heading',
+        node,
+        getElementData: (elementId, slideNumber, coordinates) => ({
+            content: node.textContent || ''
+        })
+    })
+    // console.log("parentContainerWidth from header", parentContainerWidth)
     const selectHeader = () => {
         const from = getPos()
         console.log("getting starting position", from)
@@ -124,6 +32,19 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     const level = node.attrs.level || 1
     const headerTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
+    // Calculate responsive font sizes based on header level
+    const getHeaderFontSize = (level: number): string => {
+        const baseSizes = {
+            1: 48,  // h1: 2em equivalent at 24px base
+            2: 36,  // h2: 1.5em equivalent
+            3: 31,  // h3: 1.3em equivalent
+            4: 26,  // h4: 1.1em equivalent
+            5: 24,  // h5: 1em equivalent
+            6: 22   // h6: 0.9em equivalent
+        }
+        return getResponsiveFontSize(baseSizes[level as keyof typeof baseSizes] || 24, parentContainerWidth)
+    }
+
     return (
         <NodeViewWrapper ref={ref} className="relative group pl-6">
             {/* 3-dots button */}
@@ -136,14 +57,10 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
             {/* Actual editable header */}
             <NodeViewContent
                 as={headerTag}
-                className="focus:outline-none font-bold"
+                className="focus:outline-none text-center font-bold"
                 style={{
-                    fontSize: level === 1 ? '2em' :
-                        level === 2 ? '1.5em' :
-                            level === 3 ? '1.3em' :
-                                level === 4 ? '1.1em' :
-                                    level === 5 ? '1em' : '0.9em',
-                    marginBottom: '0.5em'
+                    fontSize: getHeaderFontSize(level),
+                    marginBottom: getResponsiveStrokeWidth(12, parentContainerWidth)
                 }}
             />
         </NodeViewWrapper>

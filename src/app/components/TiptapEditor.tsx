@@ -16,6 +16,7 @@ import { SmartLayout, SmartLayoutItem, Icon } from '@/utils/SmartLayoutNode'
 import { EditorDomContext, getAllSlidesData } from '@/context/EditorContext'
 import { DivNode } from '@/utils/divNode'
 import HeaderView from './HeaderView'
+import { TitleSlide } from '@/utils/TitleSlideNode'
 const CustomParagraph = Paragraph.extend({
     addNodeView() {
         return ReactNodeViewRenderer(ParagraphView)
@@ -36,79 +37,13 @@ data: <section n="2" image-layout="blank" id="4s6w2m7cvog2cjn">
 data:   
 data:   
 data: <div class="slide-body" n="1">
-data: <h1>What Defines Us: Cognitive &amp; Cultural Uniqueness</h1>
-data: <smart-layout variant="iconText"  shapesize="lg" imageposition="top" imagePosition="top">
-data:     <smart-layout-item>
-data:       <icon query="brain" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;brain&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;EBsGr&quot;}"></icon>
-data:       <h4>Advanced Cognition</h4>
-data:       <p>
-data:         Humans possess the largest neocortex relative to body size, enabling abstract thought, planning, and imagination beyond other species.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="language" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;language&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;ZfsJZ&quot;}"></icon>
-data:       <h4>Complex Language</h4>
-data:       <p>
-data:         Unique vocal anatomy and brain regions such as Broca's and Wernicke's areas empower diverse spoken, written, and signed languages.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="palette" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;palette&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;a3hLU&quot;}"></icon>
-data:       <h4>Symbolic Culture</h4>
-data:       <p>
-data:         The ability to create art, practice religion, and establish intricate social structures is key to human identity.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="tools" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;tools&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;WMLrp&quot;}"></icon>
-data:       <h4>Tool Use</h4>
-data:       <p>
-data:         Earliest stone tools date back 3.3 million years, e.g., Lomekwi 3 in Kenya, highlighting a long history of innovation.
-data:       </p>
-data:     </smart-layout-item>
-data:   </smart-layout>
+<title-slide variant="imageTop">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+<h1 style="font-color: red;">this is the Title header</h1>
+<p>credit line</p>
+<p>date</p>
+</title-slide>
 data: </div>
-data: </section>
-data:
-   id: 2
-data: <section n="2" image-layout="blank" id="4s6w2m7cvog2cjn">
-data:   
-data:   
-data: <div class="slide-body" n="2">
-data: <h1>What Defines Us: Cognitive &amp; Cultural Uniqueness</h1>
-data: <smart-layout variant="imageText" shapesize="lg" imageposition="top" imagePosition="top">
-data:     <smart-layout-item>
-data:       <icon query="brain" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;brain&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;EBsGr&quot;}"></icon>
-data:       <h4>Advanced Cognition</h4>
-data:       <p>
-data:         Humans possess the largest neocortex relative to body size, enabling abstract thought, planning, and imagination beyond other species.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="language" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;language&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;ZfsJZ&quot;}"></icon>
-data:       <h4>Complex Language</h4>
-data:       <p>
-data:         Unique vocal anatomy and brain regions such as Broca's and Wernicke's areas empower diverse spoken, written, and signed languages.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="palette" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;palette&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;a3hLU&quot;}"></icon>
-data:       <h4>Symbolic Culture</h4>
-data:       <p>
-data:         The ability to create art, practice religion, and establish intricate social structures is key to human identity.
-data:       </p>
-data:     </smart-layout-item>
-data:     <smart-layout-item>
-data:       <icon query="tools" ai-parsed-attrs="{&quot;loadImageParams&quot;:{&quot;provider&quot;:&quot;fontawesome&quot;,&quot;query&quot;:&quot;tools&quot;,&quot;options&quot;:{&quot;license&quot;:&quot;All&quot;}},&quot;source&quot;:&quot;image.icon&quot;,&quot;loadImageStatus&quot;:&quot;queued&quot;,&quot;loadImageId&quot;:&quot;WMLrp&quot;}"></icon>
-data:       <h4>Tool Use</h4>
-data:       <p>
-data:         Earliest stone tools date back 3.3 million years, e.g., Lomekwi 3 in Kenya, highlighting a long history of innovation.
-data:       </p>
-data:     </smart-layout-item>
-data:   </smart-layout>
-data: </div>
-data: </section>
-data:
 `);
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const editor = useEditor({
@@ -118,11 +53,7 @@ data:
             FontFamily.configure({ types: ['textStyle'] }),
             FontSize,
             Image.configure({
-                inline: true,
-                allowBase64: true,
-                HTMLAttributes: {
-                    class: 'max-w-full h-auto rounded-lg shadow-sm',
-                },
+                inline: false,
             }),
             CustomParagraph,
             CustomHeader,
@@ -133,6 +64,7 @@ data:
             SmartLayoutItem,
             Icon,
             DivNode,
+            TitleSlide,
         ],
         content: ``,
         editorProps: {
@@ -194,10 +126,10 @@ data:
 
     return (
         <EditorDomContext.Provider value={editorRef}>
-            <button onClick={() => {
+            {/* <button onClick={() => {
                 const slides = getAllSlidesData(editorRef, editor);
-            }}>Get Slides</button>
-            <div ref={editorRef} className="w-full max-w-6xl mx-auto  bg-gray-50 min-h-screen">
+            }}>Get Slides</button> */}
+            <div ref={editorRef} className="w-full  mx-auto  bg-gray-50 min-h-screen border-2 border-pink-200 rounded-lg">
                 {
                     editor && (
                         <BubbleMenu
@@ -254,6 +186,7 @@ data:
                                     <option value="Courier New">Courier New</option>
                                     <option value="Helvetica">Helvetica</option>
                                     <option value="Inter">Inter</option>
+                                    <option value="Poppins">Poppins</option>
                                 </select>
                             </div>
                         </BubbleMenu>
