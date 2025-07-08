@@ -17,13 +17,117 @@ import { EditorDomContext, getAllSlidesData } from '@/context/EditorContext'
 import { DivNode } from '@/utils/divNode'
 import HeaderView from './HeaderView'
 import { TitleSlide } from '@/utils/TitleSlideNode'
+import { renderHTML } from '@/variants/variants'
 const CustomParagraph = Paragraph.extend({
+    addAttributes() {
+        return {
+            ...this.parent?.(),
+            color: {
+                default: null,
+                parseHTML: element => element.style.color || null,
+            },
+            textAlign: {
+                default: 'center',
+                parseHTML: element => element.style.textAlign || 'center',
+            },
+            fontWeight: {
+                default: 'bold',
+                parseHTML: element => element.style.fontWeight || 'bold',
+            },
+            alignSelf: {
+                default: 'center',
+                parseHTML: element => element.style.alignSelf || 'center',
+            },
+            justifySelf: {
+                default: 'center',
+                parseHTML: element => element.style.justifySelf || 'center',
+            },
+            marginLeft: {
+                default: '0',
+                parseHTML: element => element.style.marginLeft || '0',
+            },
+            marginRight: {
+                default: '0',
+                parseHTML: element => element.style.marginRight || '0',
+            },
+        }
+    },
+    renderHTML({ HTMLAttributes }) {
+        const styles = [];
+        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
+        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
+        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
+        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
+        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
+        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
+        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
+        return [
+            `p`,
+            {
+                ...HTMLAttributes,
+                style: styles.length > 0 ? styles.join('; ') : undefined,
+            },
+            0,
+        ];
+    },
     addNodeView() {
         return ReactNodeViewRenderer(ParagraphView)
     },
 })
 
 const CustomHeader = Heading.extend({
+    addAttributes() {
+        return {
+            ...this.parent?.(),
+            color: {
+                default: null,
+                parseHTML: element => element.style.color || null,
+            },
+            textAlign: {
+                default: 'center',
+                parseHTML: element => element.style.textAlign || 'center',
+            },
+            fontWeight: {
+                default: 'bold',
+                parseHTML: element => element.style.fontWeight || 'bold',
+            },
+            alignSelf: {
+                default: 'center',
+                parseHTML: element => element.style.alignSelf || 'center',
+            },
+            justifySelf: {
+                default: 'center',
+                parseHTML: element => element.style.justifySelf || 'center',
+            },
+            marginLeft: {
+                default: '0',
+                parseHTML: element => element.style.marginLeft || '0',
+            },
+            marginRight: {
+                default: '0',
+                parseHTML: element => element.style.marginRight || '0',
+            },
+        }
+    },
+    renderHTML({ HTMLAttributes }) {
+        const styles = [];
+        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
+        if (HTMLAttributes.gridArea) styles.push(`grid-area: ${HTMLAttributes.gridArea}`);
+        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
+        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
+        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
+        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
+        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
+        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
+        return [
+            `h${this.options.levels[0]}`,
+            {
+                ...HTMLAttributes,
+                style: styles.length > 0 ? styles.join('; ') : undefined,
+            },
+            0,
+        ];
+    },
     addNodeView() {
         return ReactNodeViewRenderer(HeaderView)
     },
@@ -31,17 +135,14 @@ const CustomHeader = Heading.extend({
 
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
-    const [backendHTMLContent, setBackendHTMLContent] = useState(`
-        id: 2
-data: <section n="2" image-layout="blank" id="4s6w2m7cvog2cjn">
-data:   
-data:   
+    const [titleSlideVariant, setTitleSlideVariant] = useState('imageTop')
+    const [backendHTMLContent, setBackendHTMLContent] = useState(` 
 data: <div class="slide-body" n="1">
 <title-slide variant="imageTop">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-<h1 style="font-color: red;">this is the Title header</h1>
-<p>credit line</p>
-<p>date</p>
+<h1 style="color: blue; text-align: center; font-weight: bold; align-self: center;">this is the Title header</h1>
+<p style="margin-left: 10%; align-self: center; text-align: left;">credit line</p>
+<p style="margin-right: 10%; align-self: center; text-align: right;">date</p>
 </title-slide>
 data: </div>
 `);
@@ -73,6 +174,16 @@ data: </div>
             },
         },
     });
+    editor?.on('transaction', ({ transaction }) => {
+        transaction.doc.descendants((node, pos) => {
+            if (node.type.name === 'titleSlide') {
+                const currentVariant = node.attrs.variant
+                setTitleSlideVariant(currentVariant)
+                setBackendHTMLContent(renderHTML(currentVariant))
+            }
+        })
+    })
+
 
     useEffect(() => {
         if (editor && backendHTMLContent) {
@@ -212,4 +323,5 @@ data: </div>
                 <span className="text-sm text-gray-500">
                     Click to add an image via URL, or select text to use the bubble menu
                 </span>
-            </div> */}
+            </div> */
+}

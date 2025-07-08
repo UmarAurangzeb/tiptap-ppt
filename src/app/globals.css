@@ -73,8 +73,7 @@
 /* Title/Heading */
 .title-slide-grid.imageTop>[data-node-view-content-react] .node-heading {
     grid-area: title;
-    text-align: center;
-    font-weight: bold;
+    justify-self: center;
     align-self: center;
 }
 
@@ -82,18 +81,18 @@
 .title-slide-grid.imageTop>[data-node-view-content-react] .node-paragraph:first-of-type {
     grid-column: span 1;
     grid-row: 3;
-    margin-left: 10%;
+    /* margin-left: 10%;
     align-self: center;
     text-align: left;
-    margin-left: 10%;
+    margin-left: 10%; */
 }
 
 /* Second and subsequent paragraphs - move to date area (right) */
 .title-slide-grid.imageTop>[data-node-view-content-react] .node-paragraph:last-of-type {
     grid-area: date;
-    text-align: right;
+    /* text-align: right;
     margin-right: 10%;
-    margin-left: 0;
+    margin-left: 0; */
 }
 
 /* ===== IMAGE BOTTOM LAYOUT ===== */
@@ -110,27 +109,25 @@
 /* Title/Heading - spans 2 columns, row 1 */
 .title-slide-grid.imageBottom>[data-node-view-content-react] .node-heading {
     grid-area: title;
-    text-align: center;
-    font-weight: bold;
     align-self: center;
 }
 
 /* All paragraphs - put first in credit area (left) */
 .title-slide-grid.imageBottom>[data-node-view-content-react] .node-paragraph:first-of-type {
     grid-area: credit;
-    align-self: center;
+    /* align-self: center;
     text-align: left;
-    margin-left: 5%;
+    margin-left: 5%; */
 }
 
 /* Second paragraph - move to date area (right) */
 .title-slide-grid.imageBottom>[data-node-view-content-react] .node-paragraph:last-of-type {
     grid-area: date;
-    text-align: center;
+    /* text-align: center;
     margin-right: 5%;
     margin-left: 0;
     justify-self: end;
-    align-self: center;
+    align-self: center; */
 }
 
 /* Image - spans 2 columns, row 3 */
@@ -164,23 +161,69 @@
     text-align: center;
     justify-self: center;
     align-self: end;
-    margin: 0;
 }
 
 .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph {
     grid-area: credit;
-    align-self: top;
+    /* align-self: top;
     text-align: right;
-    margin-left: 10%;
+    margin-left: 10%; */
 }
 
 .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:last-of-type {
     grid-area: date;
-    align-self: top;
-    text-align: left;
-    margin-left: 5%;
+}
+
+
+/* ===== FULL IMAGE LAYOUT ===== */
+.title-slide-grid.FullImage>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "title title"
+        "credit date"
+}
+
+/* Hide images in center title layout */
+.title-slide-grid.FullImage>[data-node-view-content-react]>*:first-child,
+.title-slide-grid.FullImage>[data-node-view-content-react] img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 
 }
+
+/* Main heading - large and bold */
+.title-slide-grid.FullImage>[data-node-view-content-react] .node-heading {
+    grid-area: title;
+    text-align: center;
+    justify-self: center;
+    align-self: end;
+}
+
+.title-slide-grid.FullImage>[data-node-view-content-react] .node-paragraph {
+    grid-area: credit;
+    /* align-self: top;
+    text-align: right;
+    margin-left: 10%; */
+}
+
+.title-slide-grid.FullImage>[data-node-view-content-react] .node-paragraph:last-of-type {
+    grid-area: date;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 /* .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:first-of-type {
     grid-area: credit;

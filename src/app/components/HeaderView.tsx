@@ -46,21 +46,29 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     }
 
     return (
-        <NodeViewWrapper ref={ref} className="relative group pl-6">
-            {/* 3-dots button */}
+        <NodeViewWrapper
+            ref={ref}
+            className="relative group pl-6"
+        >
+            {/* 3-dots button - Outside the heading */}
             <div
                 className="absolute left-1 bg-gray-200 top-[1px] opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded"
                 onClick={selectHeader}
             >
                 ⋮
             </div>
+
             {/* Actual editable header */}
             <NodeViewContent
                 as={headerTag}
-                className="focus:outline-none text-center font-bold"
+                className=""
                 style={{
                     fontSize: getHeaderFontSize(level),
-                    marginBottom: getResponsiveStrokeWidth(12, parentContainerWidth)
+                    marginBottom: getResponsiveStrokeWidth(12, parentContainerWidth),
+                    color: node.attrs.color || 'black',
+                    textAlign: node.attrs.textAlign || '',
+                    fontWeight: node.attrs.fontWeight || '',
+                    alignSelf: node.attrs.alignSelf || '',
                 }}
             />
         </NodeViewWrapper>

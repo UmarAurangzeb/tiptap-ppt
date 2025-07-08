@@ -14,15 +14,6 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
         })
     })
 
-
-
-    const paragraphStyle: React.CSSProperties = {
-        fontSize: getResponsiveFontSize(32, parentContainerWidth),
-        paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
-        paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
-        lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
-    };
-
     const selectParagraph = () => {
         const from = getPos()
         console.log("getting starting position", from)
@@ -40,7 +31,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
 
     return (
         <NodeViewWrapper ref={ref} className="relative group pl-6">
-            {/* 3-dots button */}
+            {/* 3-dots button - outside the paragraph */}
             <div
                 className="absolute left-1 bg-gray-200 top-[1px] opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded"
                 onClick={selectParagraph}
@@ -48,7 +39,21 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                 ⋮
             </div>
             {/* Actual editable paragraph */}
-            <NodeViewContent as="p" className="focus:outline-none" style={paragraphStyle} />
+            <NodeViewContent
+                as="p"
+                className="focus:outline-none"
+                style={{
+                    fontSize: getResponsiveFontSize(32, parentContainerWidth),
+                    paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
+                    paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
+                    lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
+                    textAlign: node.attrs.textAlign || '',
+                    fontWeight: node.attrs.fontWeight || '',
+                    alignSelf: node.attrs.alignSelf || '',
+                    marginLeft: node.attrs.marginLeft || '',
+                    marginRight: node.attrs.marginRight || '',
+                }}
+            />
         </NodeViewWrapper>
     )
 }
