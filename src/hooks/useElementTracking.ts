@@ -3,7 +3,7 @@ import { useEditorDom } from '@/context/EditorContext'
 import { useSlideElements, SlideElement } from '@/context/SlideElementsContext'
 
 interface UseElementTrackingProps {
-    elementType: 'paragraph' | 'heading' | 'shape'
+    elementType: 'paragraph' | 'heading' | 'shape' | 'image'
     node: any
     getElementData: (elementId: string, slideNumber: string, coordinates: {
         x: number
@@ -33,7 +33,7 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                     if (parentRect.width > 0 && parentRect.height > 0 && parentRect.x >= 0 && parentRect.y >= 0) {
                         // Update parent container width for responsive styling
                         setParentContainerWidth(prev => {
-                            console.log("parentRect.width", prev)
+                            // console.log("parentRect.width", prev)
                             return parentRect.width
                         })
 
@@ -47,7 +47,6 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                                 width: nodeRect.width,
                                 height: nodeRect.height
                             }
-
                             const elementData = getElementData(elementId, slide_number, coordinates)
                             updateElement({
                                 id: elementId,

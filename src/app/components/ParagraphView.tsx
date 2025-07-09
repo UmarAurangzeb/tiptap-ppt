@@ -30,7 +30,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
     }
 
     return (
-        <NodeViewWrapper ref={ref} className="relative group pl-6">
+        <NodeViewWrapper ref={ref} className="relative group">
             {/* 3-dots button - outside the paragraph */}
             <div
                 className="absolute left-1 bg-gray-200 top-[1px] opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded"
@@ -52,6 +52,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                     alignSelf: node.attrs.alignSelf || '',
                     marginLeft: node.attrs.marginLeft || '',
                     marginRight: node.attrs.marginRight || '',
+                    color: node.attrs.color || '',
                 }}
             />
         </NodeViewWrapper>

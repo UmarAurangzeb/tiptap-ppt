@@ -65,9 +65,9 @@
 .title-slide-grid.imageTop>[data-node-view-content-react]>*:first-child,
 .title-slide-grid.imageTop>[data-node-view-content-react] img {
     grid-area: image;
-    width: 100%;
+    /* width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; */
 }
 
 /* Title/Heading */
@@ -134,9 +134,9 @@
 .title-slide-grid.imageBottom>[data-node-view-content-react]>*:first-child,
 .title-slide-grid.imageBottom>[data-node-view-content-react] img {
     grid-area: image;
-    width: 100%;
+    /* width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; */
 }
 
 /* ===== CENTER TITLE LAYOUT ===== */
@@ -178,20 +178,26 @@
 /* ===== FULL IMAGE LAYOUT ===== */
 .title-slide-grid.FullImage>[data-node-view-content-react] {
     @apply grid h-full w-full;
+    position: relative;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-template-areas:
         "title title"
-        "credit date"
+        "credit date";
+
 }
 
 /* Hide images in center title layout */
 .title-slide-grid.FullImage>[data-node-view-content-react]>*:first-child,
 .title-slide-grid.FullImage>[data-node-view-content-react] img {
-    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 0;
+    filter: brightness(0.6);
 
 }
 
@@ -205,6 +211,7 @@
 
 .title-slide-grid.FullImage>[data-node-view-content-react] .node-paragraph {
     grid-area: credit;
+    z-index: 1;
     /* align-self: top;
     text-align: right;
     margin-left: 10%; */
@@ -212,17 +219,91 @@
 
 .title-slide-grid.FullImage>[data-node-view-content-react] .node-paragraph:last-of-type {
     grid-area: date;
+    z-index: 1;
+}
+
+
+/* ACCENTIMAGELAYOUT */
+
+.node-accentImage {
+    @apply w-full h-full;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.accentimage-grid {
+    @apply w-full h-full;
+}
+
+.accentimage-grid.leftImage>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: minmax(0px, 30%) minmax(0px, 70%);
+    grid-template-rows: 30% minmax(min-content, auto);
+}
+
+
+/* Image styling - spans 1 column and 2 rows on left side */
+.accentimage-grid.leftImage>[data-node-view-content-react]>*:first-child,
+.accentimage-grid.leftImage>[data-node-view-content-react] img {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+}
+
+.accentimage-grid.leftImage>[data-node-view-content-react] .node-accentImageContent {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+
+}
+
+
+.accentimage-grid.leftImage>[data-node-view-content-react] .node-heading {
+    font-weight: bold;
+    margin-left: 5%;
+    /* text-align: left; */
+}
+
+/* RIGHTIMAGE LAYOUT */
+
+.accentimage-grid.rightImage>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: minmax(0px, 70%) minmax(0px, 30%);
+    grid-template-rows: 30% minmax(min-content, auto);
+}
+
+.accentimage-grid.rightImage>[data-node-view-content-react]>*:first-child,
+.accentimage-grid.rightImage>[data-node-view-content-react] img {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+}
+
+.accentimage-grid.rightImage>[data-node-view-content-react] .node-accentImageContent {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    margin-right: 2%;
+
+
+}
+
+.accentimage-grid.rightImage>[data-node-view-content-react] .node-heading {
+    font-weight: bold;
+    margin-left: 5%;
+    /* text-align: left; */
 }
 
 
 
-
-
-
-
-
-
-
+/* Content styling - spans 1 column and 1 row on bottom right */
+/* .accentimage-grid.leftImage>[data-node-view-content-react] .node-paragraph {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    font-size: 24px;
+    text-align: left;
+} */
 
 
 /* .title-slide-grid.centerTitle>[data-node-view-content-react] .node-paragraph:first-of-type {

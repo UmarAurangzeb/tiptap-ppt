@@ -48,7 +48,7 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     return (
         <NodeViewWrapper
             ref={ref}
-            className="relative group pl-6"
+            className="relative group"
         >
             {/* 3-dots button - Outside the heading */}
             <div
@@ -64,6 +64,9 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
                 className=""
                 style={{
                     fontSize: getHeaderFontSize(level),
+                    paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
+                    paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
+                    lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
                     marginBottom: getResponsiveStrokeWidth(12, parentContainerWidth),
                     color: node.attrs.color || 'black',
                     textAlign: node.attrs.textAlign || '',

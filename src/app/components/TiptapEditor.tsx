@@ -18,6 +18,8 @@ import { DivNode } from '@/utils/divNode'
 import HeaderView from './HeaderView'
 import { TitleSlide } from '@/utils/TitleSlideNode'
 import { renderHTML } from '@/variants/variants'
+import ImageView from './ImageView'
+import { AccentImageNode, AccentImageContentNode } from '@/utils/AccentImageNode'
 const CustomParagraph = Paragraph.extend({
     addAttributes() {
         return {
@@ -28,19 +30,19 @@ const CustomParagraph = Paragraph.extend({
             },
             textAlign: {
                 default: 'center',
-                parseHTML: element => element.style.textAlign || 'center',
+                parseHTML: element => element.style.textAlign || '',
             },
             fontWeight: {
                 default: 'bold',
-                parseHTML: element => element.style.fontWeight || 'bold',
+                parseHTML: element => element.style.fontWeight || '',
             },
             alignSelf: {
                 default: 'center',
-                parseHTML: element => element.style.alignSelf || 'center',
+                parseHTML: element => element.style.alignSelf || '',
             },
             justifySelf: {
                 default: 'center',
-                parseHTML: element => element.style.justifySelf || 'center',
+                parseHTML: element => element.style.justifySelf || '',
             },
             marginLeft: {
                 default: '0',
@@ -85,19 +87,19 @@ const CustomHeader = Heading.extend({
             },
             textAlign: {
                 default: 'center',
-                parseHTML: element => element.style.textAlign || 'center',
+                parseHTML: element => element.style.textAlign || '',
             },
             fontWeight: {
                 default: 'bold',
-                parseHTML: element => element.style.fontWeight || 'bold',
+                parseHTML: element => element.style.fontWeight || '',
             },
             alignSelf: {
                 default: 'center',
-                parseHTML: element => element.style.alignSelf || 'center',
+                parseHTML: element => element.style.alignSelf || '',
             },
             justifySelf: {
                 default: 'center',
-                parseHTML: element => element.style.justifySelf || 'center',
+                parseHTML: element => element.style.justifySelf || '',
             },
             marginLeft: {
                 default: '0',
@@ -133,9 +135,19 @@ const CustomHeader = Heading.extend({
     },
 })
 
+
+const customImage = Image.extend({
+    addAttributes() {
+        return {
+            ...this.parent?.(),
+        }
+    },
+    addNodeView() {
+        return ReactNodeViewRenderer(ImageView)
+    }
+})
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
-    const [titleSlideVariant, setTitleSlideVariant] = useState('imageTop')
     const [backendHTMLContent, setBackendHTMLContent] = useState(` 
 data: <div class="slide-body" n="1">
 <title-slide variant="imageTop">
@@ -145,27 +157,48 @@ data: <div class="slide-body" n="1">
 <p style="margin-right: 10%; align-self: center; text-align: right;">date</p>
 </title-slide>
 data: </div>
+
+
+data: <div class="slide-body" n="2">
+<accentimage-layout variant="rightImage" slideNumber="2">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+<accentimage-content>
+<h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
+<p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
+</p>
+</accentimage-content>
+</accentimage-layout>
+data: </div>
 `);
+
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
+    const previousVariantRef = useRef<{
+        titleSlide: string | null,
+        accentImage: string | null,
+    }>({
+        titleSlide: null,
+        accentImage: null,
+    });
+
     const editor = useEditor({
         extensions: [
             StarterKit, // includes Document, Paragraph, Text
             TextStyle,
             FontFamily.configure({ types: ['textStyle'] }),
             FontSize,
-            Image.configure({
-                inline: false,
-            }),
             CustomParagraph,
             CustomHeader,
             CustomHeader.configure({
                 levels: [1, 2, 3, 4],
             }),
+            customImage,
             SmartLayout,
             SmartLayoutItem,
             Icon,
             DivNode,
             TitleSlide,
+            AccentImageNode,
+            AccentImageContentNode,
         ],
         content: ``,
         editorProps: {
@@ -174,15 +207,59 @@ data: </div>
             },
         },
     });
-    editor?.on('transaction', ({ transaction }) => {
-        transaction.doc.descendants((node, pos) => {
+
+    editor?.on('update', ({ editor }) => {
+        editor.state.doc.descendants((node, pos) => {
             if (node.type.name === 'titleSlide') {
-                const currentVariant = node.attrs.variant
-                setTitleSlideVariant(currentVariant)
-                setBackendHTMLContent(renderHTML(currentVariant))
+                const currentVariant = node.attrs.variant;
+                if (previousVariantRef.current.titleSlide !== currentVariant) {
+                    // const contentObj: { [key: string]: any } = {};
+                    // Array.from(node.content.content).forEach((childNode: any) => {
+                    //     if (childNode.type.name === 'heading') {
+                    //         contentObj[childNode.type.name] = {
+                    //             content: childNode.textContent,
+                    //             level: node.attrs.level
+                    //         };
+                    //     }
+                    //     if (childNode.type.name === 'paragraph') {
+                    //         if (!contentObj[childNode.type.name]) {
+                    //             contentObj[childNode.type.name] = [];
+                    //         }
+                    //         contentObj[childNode.type.name].push({
+                    //             content: childNode.textContent,
+                    //         });
+                    //     }
+                    //     if (childNode.type.name === 'image') {
+                    //         contentObj[childNode.type.name] = {
+                    //             content: childNode.attrs.src,
+                    //         };
+                    //     }
+                    // });
+                    // const content = [contentObj];
+                    // console.log("content", content)
+                    previousVariantRef.current.titleSlide = currentVariant;
+                    const newSlideHTML = renderHTML(currentVariant, 'titleSlide', '1');
+                    setBackendHTMLContent(prevContent => {
+                        const slideRegex = new RegExp(`<div class="slide-body" n="1">[\s\S]*?<\/div>`);
+                        return prevContent.replace(slideRegex, newSlideHTML ?? '');
+                    });
+                }
             }
-        })
-    })
+            if (node.type.name === 'accentImage') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                if (previousVariantRef.current.accentImage !== currentVariant) {
+                    previousVariantRef.current.accentImage = currentVariant;
+                    const newSlideHTML = renderHTML(currentVariant, 'accentImage', currentSlideNumber);
+                    setBackendHTMLContent(prevContent => {
+                        // console.log("replacing previous content with:", newSlideHTML)
+                        const slideRegex = new RegExp(`<div class="slide-body" n="${currentSlideNumber}">[\\s\\S]*?<\\/div>`);
+                        return prevContent.replace(slideRegex, newSlideHTML ?? '');
+                    });
+                }
+            }
+        });
+    });
 
 
     useEffect(() => {
@@ -202,7 +279,7 @@ data: </div>
                 .replace(/&#39;/g, "'")
 
             editor.commands.setContent(decodedHTML, false)
-            console.log('Decoded HTML:', decodedHTML)
+            // console.log('Decoded HTML:', decodedHTML)
         }
     }, [editor, backendHTMLContent])
 

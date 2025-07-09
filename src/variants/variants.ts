@@ -1,217 +1,320 @@
-export const TitleSlideVariants = [
+type VariantElement = {
+    type: 'image' | 'heading' | 'paragraph' | 'shape'
+    content: string
+    name?: string
+    attributes?: {
+        color?: string
+        'text-align'?: string
+        'font-weight'?: string
+        'align-self'?: string
+        'justify-self'?: string
+        'margin-left'?: string
+        'margin-right'?: string
+    }
+}
+
+// type SlideVariant = {
+//     type: 'titleSlide'
+//     name: string
+//     elements: VariantElement[]
+// }
+
+export const SlideVariants = [
     {
-        name: 'imageTop',
-        elements: [
+        type: 'titleSlide',
+        variants: [
             {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                name: 'imageTop',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Title header',
+                        attributes: {
+                            color: 'blue',
+                            'text-align': 'center',
+                            'font-weight': 'bold',
+                            'align-self': 'center'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'credit line',
+                        content: 'credit line',
+                        attributes: {
+                            'margin-left': '10%',
+                            'align-self': 'center',
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'date',
+                        content: 'date',
+                        attributes: {
+                            'margin-right': '10%',
+                            'align-self': 'center',
+                            'text-align': 'right'
+                        }
+                    }
+                ]
             },
             {
-                type: 'heading',
-                name: 'title',
-                content: 'this is the Title header',
-                attributes: {
-                    color: 'blue',
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    alignSelf: 'center'
-                }
+                name: 'imageBottom',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Title header',
+                        attributes: {
+                            color: 'blue',
+                            'text-align': 'center',
+                            'font-weight': 'bold',
+                            'align-self': 'center'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'credit line',
+                        content: 'credit line',
+                        attributes: {
+                            'margin-left': '5%',
+                            'align-self': 'center',
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'date',
+                        content: 'date',
+                        attributes: {
+                            'margin-right': '5%',
+                            'align-self': 'center',
+                            'text-align': 'right'
+                        }
+                    }
+                ]
             },
             {
-                type: 'paragraph',
-                name: 'credit line',
-                content: 'credit line',
-                attributes: {
-                    marginLeft: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'left'
-                }
+                name: 'centerTitle',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Title header',
+                        attributes: {
+                            color: 'blue',
+                            'text-align': 'center',
+                            'font-weight': 'bold',
+                            'align-self': 'center',
+                            'justify-self': 'center'
+
+                        }
+
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'credit line',
+                        content: 'credit line',
+                        attributes: {
+                            'margin-left': '10%',
+                            'align-self': 'center',
+                            'text-align': 'right'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'date',
+                        content: 'date',
+                        attributes: {
+                            'margin-left': '10%',
+                            'align-self': 'center',
+                            'text-align': 'left'
+                        }
+                    }
+                ]
             },
             {
-                type: 'paragraph',
-                name: 'date',
-                content: 'date',
-                attributes: {
-                    marginRight: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'right'
-                }
+                name: 'FullImage',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Title header',
+                        attributes: {
+                            color: 'white',
+                            'text-align': 'center',
+                            'font-weight': 'bold',
+                            'align-self': 'center',
+                            'justify-self': 'center'
+
+                        }
+
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'credit line',
+                        content: 'credit line',
+                        attributes: {
+                            color: 'white',
+                            'margin-left': '10%',
+                            'align-self': 'center',
+                            'text-align': 'right'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'date',
+                        content: 'date',
+                        attributes: {
+                            color: 'white',
+                            'margin-left': '10%',
+                            'align-self': 'center',
+                            'text-align': 'left'
+                        }
+                    }
+                ]
             }
         ]
     },
     {
-        name: 'imageBottom',
-        elements: [
+        type: 'accentImage',
+        variants: [
             {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                name: 'rightImage',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Accent Image header',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'paragraph',
+                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left'
+                        }
+                    }
+                ]
             },
             {
-                type: 'heading',
-                name: 'title',
-                content: 'this is the Title header',
-                attributes: {
-                    color: 'blue',
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    alignSelf: 'center'
-                }
-            },
-            {
-                type: 'paragraph',
-                name: 'credit line',
-                content: 'credit line',
-                attributes: {
-                    marginLeft: '5%',
-                    alignSelf: 'center',
-                    textAlign: 'left'
-                }
-            },
-            {
-                type: 'paragraph',
-                name: 'date',
-                content: 'date',
-                attributes: {
-                    marginRight: '5%',
-                    alignSelf: 'center',
-                    textAlign: 'right'
-                }
-            },
-        ]
-    },
-    {
-        name: 'centerTitle',
-        elements: [
-            {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
-            },
-            {
-                type: 'heading',
-                name: 'title',
-                content: 'this is the Title header',
-                attributes: {
-                    color: 'blue',
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    alignSelf: 'center',
-                    justifySelf: 'center'
-
-                }
-
-            },
-            {
-                type: 'paragraph',
-                name: 'credit line',
-                content: 'credit line',
-                attributes: {
-                    marginLeft: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'right'
-                }
-            },
-            {
-                type: 'paragraph',
-                name: 'date',
-                content: 'date',
-                attributes: {
-                    marginLeft: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'left'
-                }
+                name: 'leftImage',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the Accent Image header',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'paragraph',
+                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left'
+                        }
+                    }
+                ]
             },
         ]
-    },
-    {
-        name: 'FullImage',
-        elements: [
-            {
-                type: 'image',
-                content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
-            },
-            {
-                type: 'heading',
-                name: 'title',
-                content: 'this is the Title header',
-                attributes: {
-                    color: 'blue',
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    alignSelf: 'center',
-                    justifySelf: 'center'
-
-                }
-
-            },
-            {
-                type: 'paragraph',
-                name: 'credit line',
-                content: 'credit line',
-                attributes: {
-                    marginLeft: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'right'
-                }
-            },
-            {
-                type: 'paragraph',
-                name: 'date',
-                content: 'date',
-                attributes: {
-                    marginLeft: '10%',
-                    alignSelf: 'center',
-                    textAlign: 'left'
-                }
-            },
-        ]
-    },
+    }
 ]
 
+export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
+    const slideVariants = SlideVariants.find(v => v.type === slideType)
+    if (!slideVariants) return ''
 
-export const renderHTML = (Updatedvariant: string) => {
-    const variant = TitleSlideVariants.find(v => v.name === Updatedvariant)
+    const variant = slideVariants.variants.find(v => v.name === Updatedvariant)
     if (!variant) return ''
+    let html: { [key: string]: string } = {};
+    variant?.elements?.forEach((element: any) => {
+        let styles: string[] = [];
+        for (const attribute in element.attributes) {
+            styles.push(`${attribute}: ${element.attributes[attribute as keyof typeof element.attributes]}`);
+        }
 
-    const html = variant?.elements?.map(element => {
         if (element.type === 'image') {
-            return `<img src="${element.content}" alt="${element.content}" />`
+            html['image'] = `<img src="${element.content}" alt="${element.content}" style="${styles.join('; ')}" />`;
         }
         if (element.type === 'heading') {
-            const styles = [];
-            if (element.attributes?.color) styles.push(`color: ${element.attributes.color}`);
-            if (element.attributes?.textAlign) styles.push(`text-align: ${element.attributes.textAlign}`);
-            if (element.attributes?.fontWeight) styles.push(`font-weight: ${element.attributes.fontWeight}`);
-            if (element.attributes?.alignSelf) styles.push(`align-self: ${element.attributes.alignSelf}`);
-            if (element.attributes?.justifySelf) styles.push(`justify-self: ${element.attributes.justifySelf}`);
-
-            return `<h1 style="${styles.join('; ')}">${element.content}</h1>`
+            html['heading'] = `<h1 style="${styles.join('; ')}">${element.content}</h1>`;
         }
-        if (element.type === 'paragraph' && element.name === 'credit line') {
-            const styles = [];
-            if (element.attributes?.marginLeft) styles.push(`margin-left: ${element.attributes.marginLeft}`);
-            if (element.attributes?.alignSelf) styles.push(`align-self: ${element.attributes.alignSelf}`);
-            if (element.attributes?.textAlign) styles.push(`text-align: ${element.attributes.textAlign}`);
-            if (element.attributes?.color) styles.push(`color: ${element.attributes.color}`);
-
-            return `<p style="${styles.join('; ')}">${element.content}</p>`
+        if (element.type === 'paragraph') {
+            // Allow for multiple paragraphs (e.g., credit line, date)
+            if (!html['paragraph']) {
+                html['paragraph'] = '';
+            }
+            html['paragraph'] += `<p style="${styles.join('; ')}">${element.content}</p>`;
         }
-        if (element.type === 'paragraph' && element.name === 'date') {
-            const styles = [];
-            if (element.attributes?.marginRight) styles.push(`margin-right: ${element.attributes.marginRight}`);
-            if (element.attributes?.marginLeft) styles.push(`margin-left: ${element.attributes.marginLeft}`);
-            if (element.attributes?.alignSelf) styles.push(`align-self: ${element.attributes.alignSelf}`);
-            if (element.attributes?.textAlign) styles.push(`text-align: ${element.attributes.textAlign}`);
-            if (element.attributes?.color) styles.push(`color: ${element.attributes.color}`);
+    });
 
-            return `<p style="${styles.join('; ')}">${element.content}</p>`
-        }
-    }).join('')
-    console.log(`<div class="slide-body" n="1">
-        <title-slide variant="${Updatedvariant}">${html}</title-slide>
-    </div>`)
-    return `
-   <div class="slide-body" n="1">
-    <title-slide variant="${Updatedvariant}">${html}</title-slide>
+    if (slideType === 'titleSlide') {
+        return `
+    <div class="slide-body" n="${slideNumber}">
+    <title-slide variant="${Updatedvariant}">
+    ${html.image}
+    ${html.heading}
+    ${html.paragraph}
+    </title-slide>
     </div>
     `
+    }
+    else if (slideType === 'accentImage') {
+        return `
+    <div class="slide-body" n="${slideNumber}">
+    <accentimage-layout variant="${Updatedvariant}">
+    ${html.image}
+    <accentimage-content>
+    ${html.heading}
+    ${html.paragraph}
+    </accentimage-content>
+    </accentimage-layout>
+    </div>
+    `
+    }
 }
+
+// data: <div class="slide-body" n="2">
+// <accentimage-layout variant="rightImage">
+// <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+// <accentimage-content>
+// <h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
+// <p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
+// </p>
+// </accentimage-content>
+// </accentimage-layout>
+// data: </div>
