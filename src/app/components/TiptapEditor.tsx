@@ -213,6 +213,7 @@ data: </div>
             if (node.type.name === 'titleSlide') {
                 const currentVariant = node.attrs.variant;
                 if (previousVariantRef.current.titleSlide !== currentVariant) {
+                    console.log("currentVariant", currentVariant)
                     // const contentObj: { [key: string]: any } = {};
                     // Array.from(node.content.content).forEach((childNode: any) => {
                     //     if (childNode.type.name === 'heading') {
@@ -239,8 +240,10 @@ data: </div>
                     // console.log("content", content)
                     previousVariantRef.current.titleSlide = currentVariant;
                     const newSlideHTML = renderHTML(currentVariant, 'titleSlide', '1');
+                    console.log("newSlideHTML", newSlideHTML)
                     setBackendHTMLContent(prevContent => {
-                        const slideRegex = new RegExp(`<div class="slide-body" n="1">[\s\S]*?<\/div>`);
+                        // console.log("prevContent", prevContent)
+                        const slideRegex = new RegExp(`<div class="slide-body" n="${1}">[\\s\\S]*?<\\/div>`);
                         return prevContent.replace(slideRegex, newSlideHTML ?? '');
                     });
                 }
@@ -252,6 +255,7 @@ data: </div>
                     previousVariantRef.current.accentImage = currentVariant;
                     const newSlideHTML = renderHTML(currentVariant, 'accentImage', currentSlideNumber);
                     setBackendHTMLContent(prevContent => {
+                        console.log("prevContent", prevContent)
                         // console.log("replacing previous content with:", newSlideHTML)
                         const slideRegex = new RegExp(`<div class="slide-body" n="${currentSlideNumber}">[\\s\\S]*?<\\/div>`);
                         return prevContent.replace(slideRegex, newSlideHTML ?? '');

@@ -9,6 +9,7 @@ export const TitleSlide = Node.create({
     addAttributes() {
         return {
             variant: { default: 'imageTop' },
+            slideNumber: { default: '1' },
         }
     },
     parseHTML() {
@@ -17,6 +18,7 @@ export const TitleSlide = Node.create({
                 tag: 'title-slide',
                 getAttrs: node => ({
                     variant: node.getAttribute('variant'),
+                    slideNumber: node.getAttribute('slideNumber'),
                 }),
             },
         ]

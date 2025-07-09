@@ -257,7 +257,7 @@ export const SlideVariants = [
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
     const slideVariants = SlideVariants.find(v => v.type === slideType)
     if (!slideVariants) return ''
-
+    console.log("updatedVariant", Updatedvariant)
     const variant = slideVariants.variants.find(v => v.name === Updatedvariant)
     if (!variant) return ''
     let html: { [key: string]: string } = {};
@@ -278,14 +278,14 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             if (!html['paragraph']) {
                 html['paragraph'] = '';
             }
-            html['paragraph'] += `<p style="${styles.join('; ')}">${element.content}</p>`;
+            html['paragraph'] += `\n<p style="${styles.join('; ')}">${element.content}</p>`;
         }
     });
 
     if (slideType === 'titleSlide') {
         return `
-    <div class="slide-body" n="${slideNumber}">
-    <title-slide variant="${Updatedvariant}">
+    <div class="slide-body" n="1">
+    <title-slide variant="${Updatedvariant}" slideNumber="1">
     ${html.image}
     ${html.heading}
     ${html.paragraph}
@@ -296,7 +296,7 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
     else if (slideType === 'accentImage') {
         return `
     <div class="slide-body" n="${slideNumber}">
-    <accentimage-layout variant="${Updatedvariant}">
+    <accentimage-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">
     ${html.image}
     <accentimage-content>
     ${html.heading}
