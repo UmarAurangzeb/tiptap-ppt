@@ -5,7 +5,7 @@ import HeaderTextView from '@/app/components/HeaderTextNodeViews/HeaderTextViews
 export const HeaderText = Node.create({
     name: 'headerText',
     group: 'block',
-    content: 'heading? paragraph*',
+    content: 'blockContainerNode paragraph*',
     addAttributes() {
         return {
             variant: { default: 'leftHeader' },

@@ -374,18 +374,10 @@
     align-self: center;
 }
 
-.header-text-grid.leftHeader>[data-node-view-content-react]::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 50%;
-    /* Since grid is 1fr 1fr */
-    background-color: #D9D9D9;
-    /* Tailwind gray-100 */
-    z-index: 0;
-    pointer-events: none;
+.header-text-grid.leftHeader [data-node-view-content-react] .node-blockContainerNode>.block-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-text-grid.leftHeader>[data-node-view-content-react] .node-paragraph {
@@ -400,7 +392,7 @@
     @apply w-full h-full flex flex-col items-center justify-center;
 }
 
-.header-text-grid.centerHeader>[data-node-view-content-react] .node-heading {
+.header-text-grid.centerHeader>[data-node-view-content-react] .node-blockContainerNode {
     max-width: 70%;
     text-align: center;
 }

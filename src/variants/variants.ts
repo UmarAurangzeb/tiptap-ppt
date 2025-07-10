@@ -1,5 +1,5 @@
 type VariantElement = {
-    type: 'image' | 'heading' | 'paragraph' | 'shape'
+    type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container'
     content: string
     name?: string
     attributes?: {
@@ -10,7 +10,11 @@ type VariantElement = {
         'justify-self'?: string
         'margin-left'?: string
         'margin-right'?: string
+        'background-color'?: string
+        'width'?: string
+        'height'?: string
     }
+    children?: VariantElement[]
 }
 
 // type SlideVariant = {
@@ -260,37 +264,58 @@ export const SlideVariants = [
                 name: 'leftHeader',
                 elements: [
                     {
-                        type: 'heading',
-                        name: 'title',
-                        content: 'this is the header',
+                        type: 'block-container',
+                        name: 'block-container',
+                        content: '',
                         attributes: {
-                            'margin-left': '5%',
-                            'text-align': 'left',
+                            'background-color': '#D9D9D9',
+                            'width': '100%',
+                            'height': '100%'
                         },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
                     },
                     {
                         type: 'paragraph',
                         name: 'paragraph',
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
                         attributes: {
-                            'margin-left': '5%',
                             'text-align': 'left',
-                            'color': 'blue'
-
+                            'margin-left': '5%'
                         }
                     }
                 ]
+
             },
             {
                 name: 'centerHeader',
                 elements: [
                     {
-                        type: 'heading',
-                        name: 'title',
-                        content: 'this is the header',
+                        type: 'block-container',
+                        name: 'block-container',
+                        content: '',
                         attributes: {
-                            'text-align': 'center'
-                        }
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
                     },
                     {
                         type: 'paragraph',
@@ -307,76 +332,41 @@ export const SlideVariants = [
 ]
 
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
-    const slideVariants = SlideVariants.find(v => v.type === slideType)
-    if (!slideVariants) return ''
-    console.log("updatedVariant", Updatedvariant)
-    const variant = slideVariants.variants.find(v => v.name === Updatedvariant)
-    if (!variant) return ''
-    let html: { [key: string]: string } = {};
-    variant?.elements?.forEach((element: any) => {
-        let styles: string[] = [];
-        for (const attribute in element.attributes) {
-            styles.push(`${attribute}: ${element.attributes[attribute as keyof typeof element.attributes]}`);
-        }
+    const variant = SlideVariants.find(v => v.type === slideType)?.variants.find(v => v.name === Updatedvariant);
+    if (!variant) return '';
 
-        if (element.type === 'image') {
-            html['image'] = `<img src="${element.content}" alt="${element.content}" style="${styles.join('; ')}" />`;
-        }
-        if (element.type === 'heading') {
-            html['heading'] = `<h1 style="${styles.join('; ')}">${element.content}</h1>`;
-        }
-        if (element.type === 'paragraph') {
-            // Allow for multiple paragraphs (e.g., credit line, date)
-            if (!html['paragraph']) {
-                html['paragraph'] = '';
-            }
-            html['paragraph'] += `\n<p style="${styles.join('; ')}">${element.content}</p>`;
-        }
-    });
+    const renderElement = (element: VariantElement): string => {
+        const attributes = element.attributes || {};
+        const styleString = Object.entries(attributes)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('; ');
 
-    if (slideType === 'titleSlide') {
-        return `
-    <div class="slide-body" n="${slideNumber}">
-    <title-slide variant="${Updatedvariant}" slideNumber="${slideNumber}">
-    ${html.image}
-    ${html.heading}
-    ${html.paragraph}
-    </title-slide>
-    </div>
-    `
-    }
-    else if (slideType === 'accentImage') {
-        return `
-    <div class="slide-body" n="${slideNumber}">
-    <accentimage-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">
-    ${html.image}
-    <accentimage-content>
-    ${html.heading}
-    ${html.paragraph}
-    </accentimage-content>
-    </accentimage-layout>
-    </div>
-    `
-    }
-    else if (slideType === 'headerText') {
-        return `
-    <div class="slide-body" n="${slideNumber}">
-    <headertext-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">
-    ${html.heading}
-    ${html.paragraph}
-    </headertext-layout>
-    </div>
-    `
-    }
-}
+        switch (element.type) {
+            case 'image':
+                return `<img src="${element.content}" alt="Mountain Landscape" />`;
+            case 'heading':
+                return `<h1 style="${styleString}">${element.content}</h1>`;
+            case 'paragraph':
+                return `<p style="${styleString}">${element.content}</p>`;
+            case 'block-container':
+                const childrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
+                return `<block-container style="${styleString}">${childrenHTML}</block-container>`;
+            default:
+                return '';
+        }
+    };
 
-// data: <div class="slide-body" n="2">
-// <accentimage-layout variant="rightImage">
-// <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-// <accentimage-content>
-// <h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
-// <p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
-// </p>
-// </accentimage-content>
-// </accentimage-layout>
-// data: </div>
+    const elementsHTML = variant.elements.map(element => renderElement(element as VariantElement)).join('\n');
+
+    switch (slideType) {
+        case 'titleSlide':
+            return `<div class="slide-body" n="${slideNumber}"><title-slide variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</title-slide></div>`;
+        case 'accentImage':
+            return `<div class="slide-body" n="${slideNumber}"><accentimage-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}<accentimage-content></accentimage-content></accentimage-layout></div>`;
+        case 'headerText':
+            console.log("elementsHTML", elementsHTML)
+            return `<div class="slide-body" n="${slideNumber}"><headertext-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</headertext-layout></div>`;
+        default:
+            return '';
+    }
+};

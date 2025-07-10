@@ -22,7 +22,7 @@ import HeaderView from '@/app/components/DefaultExtendedViews/HeaderView'
 import ImageView from '@/app/components/DefaultExtendedViews/ImageView'
 import { Agenda, AgendaItem, BulletHeading, AgendaItemParent } from '@/utils/AgendaNode'
 import { HeaderText } from '@/utils/HeaderTextNode'
-
+import { BlockContainerNode } from '@/utils/BlockContainerNode'
 const CustomParagraph = Paragraph.extend({
     addAttributes() {
         return {
@@ -151,17 +151,17 @@ const customImage = Image.extend({
 })
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
-    const [backendHTMLContent, setBackendHTMLContent] = useState(` 
-data: <div class="slide-body" n="1">
+    const [backendHTMLContent, setBackendHTMLContent] = useState(`
+<div class="slide-body" n="1">
 <title-slide variant="imageTop" slideNumber="1">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <h1 style="color: blue; text-align: center; font-weight: bold; align-self: center;">this is the Title header</h1>
 <p style="margin-left: 10%; align-self: center; text-align: left;">credit line</p>
 <p style="margin-right: 10%; align-self: center; text-align: right;">date</p>
 </title-slide>
-data: </div>
+</div>
 
-data: <div class="slide-body" n="2">
+<div class="slide-body" n="2">
 <agenda variant="bulletHeading" slideNumber="2">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <agenda-item-parent>
@@ -171,7 +171,7 @@ data: <div class="slide-body" n="2">
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
-<h2 style=" text-align: left;">this is the header</h2>
+<h2 style="text-align: left;">this is the header</h2>
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
@@ -179,45 +179,42 @@ data: <div class="slide-body" n="2">
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
-<h2 style=" text-align: left;">this is the Accent Image</h2>
+<h2 style="text-align: left;">this is the Accent Image</h2>
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
-<h2 style=" text-align: left;">this is the Accent Image</h2>
+<h2 style="text-align: left;">this is the Accent Image</h2>
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
-<h2 style=" text-align: left;">this is the Accent Image</h2>
+<h2 style="text-align: left;">this is the Accent Image</h2>
 </agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
-<h2 style=" text-align: left;">this is the Accent Image</h2>
+<h2 style="text-align: left;">this is the Accent Image</h2>
 </agenda-item>
 </agenda-item-parent>
-data: </div>
+</agenda>
+</div>
 
-
-data: <div class="slide-body" n="3">
+<div class="slide-body" n="3">
 <accentimage-layout variant="rightImage" slideNumber="3">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <accentimage-content>
 <h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
-<p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
-</p>
+<p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </accentimage-content>
 </accentimage-layout>
-data: </div>
-
-data: <div class="slide-body" n="4">
-<headertext-layout variant="centerHeader" slideNumber="4">
-<div>
-<h1 style="text-align: center;">this is the header</h1>
 </div>
-<p style="text-align: center;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
-</p>
+
+<div class="slide-body" n="4">
+<headertext-layout variant="leftHeader" slideNumber="4">
+<block-container style="background-color: #D9D9D9; width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+</block-container>
+<p style="text-align: left; margin-left: 5%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </headertext-layout>
-data: </div>
-`);
+</div>`);
 
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
@@ -254,6 +251,7 @@ data: </div>
             BulletHeading,
             AgendaItemParent,
             HeaderText,
+            BlockContainerNode,
         ],
         content: ``,
         editorProps: {
@@ -321,28 +319,21 @@ data: </div>
             previousVariantRef.current[VariantType as keyof typeof previousVariantRef.current] = currentVariant;
             const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber);
             setBackendHTMLContent(prevContent => {
-                // First, split the content into lines and find the correct slide
-                const lines = prevContent.split('\n');
-                const startIndex = lines.findIndex(line =>
-                    line.includes(`<div class="slide-body" n="${slideNumber}"`));
+                // Split the content into slides
+                const slides = prevContent.split('</div>').filter(slide => slide.trim());
 
-                if (startIndex === -1) return prevContent;
+                // Find the index of the slide to replace
+                const slideIndex = slides.findIndex(slide =>
+                    slide.includes(`<div class="slide-body" n="${slideNumber}"`)
+                );
 
-                // Find the end of this slide section
-                let endIndex = startIndex;
-                let openDivs = 1;
-                while (endIndex < lines.length && openDivs > 0) {
-                    endIndex++;
-                    if (lines[endIndex]?.includes('<div')) openDivs++;
-                    if (lines[endIndex]?.includes('</div>')) openDivs--;
-                }
+                if (slideIndex === -1) return prevContent;
 
-                // Replace the content
-                const beforeSlide = lines.slice(0, startIndex).join('\n');
-                const afterSlide = lines.slice(endIndex + 1).join('\n');
-                const formattedNewSlide = `data: ${newSlideHTML}\ndata: `;
+                // Replace the slide
+                slides[slideIndex] = newSlideHTML;
 
-                return `${beforeSlide}\n${formattedNewSlide}${afterSlide}`;
+                // Join slides back together
+                return slides.map(slide => slide + '</div>').join('\n\n');
             });
         }
     }

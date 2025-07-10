@@ -3,7 +3,6 @@ import { Node, mergeAttributes } from '@tiptap/core'
 
 export const DivNode = Node.create({
     name: 'divNode',
-
     group: 'block',
     content: 'block+',
 
