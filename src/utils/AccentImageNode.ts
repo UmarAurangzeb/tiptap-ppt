@@ -1,8 +1,8 @@
 // SmartLayoutNode.ts
+import { AccentImageContentView } from '@/app/components/AccentImageNodeViews/AccentImageView'
 import { Node } from '@tiptap/core'
 import { ReactNodeViewRenderer } from '@tiptap/react'
-import AccentImageView from '@/app/components/AccentImageView'
-import { AccentImageContentView } from '@/app/components/AccentImageView'
+import AccentImageView from '@/app/components/AccentImageNodeViews/AccentImageView'
 export const AccentImageNode = Node.create({
     name: 'accentImage',
     group: 'block',

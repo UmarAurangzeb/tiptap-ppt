@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 export type SlideElement = {
     id: string // unique identifier for each element
     slide_number: string
-    type: 'paragraph' | 'heading' | 'shape' | 'image'
+    type: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet'
     x: number
     y: number
     width: number

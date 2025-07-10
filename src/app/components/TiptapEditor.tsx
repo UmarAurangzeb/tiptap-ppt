@@ -10,16 +10,19 @@ import FontFamily from '@tiptap/extension-font-family'
 import { FontSize } from 'tiptap-extension-font-size';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image'
-import ParagraphView from './ParagraphView';
 import Heading from '@tiptap/extension-heading'
 import { SmartLayout, SmartLayoutItem, Icon } from '@/utils/SmartLayoutNode'
 import { EditorDomContext, getAllSlidesData } from '@/context/EditorContext'
 import { DivNode } from '@/utils/divNode'
-import HeaderView from './HeaderView'
 import { TitleSlide } from '@/utils/TitleSlideNode'
 import { renderHTML } from '@/variants/variants'
-import ImageView from './ImageView'
 import { AccentImageNode, AccentImageContentNode } from '@/utils/AccentImageNode'
+import ParagraphView from '@/app/components/DefaultExtendedViews/ParagraphView'
+import HeaderView from '@/app/components/DefaultExtendedViews/HeaderView'
+import ImageView from '@/app/components/DefaultExtendedViews/ImageView'
+import { Agenda, AgendaItem, BulletHeading, AgendaItemParent } from '@/utils/AgendaNode'
+import { HeaderText } from '@/utils/HeaderTextNode'
+
 const CustomParagraph = Paragraph.extend({
     addAttributes() {
         return {
@@ -150,7 +153,7 @@ export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(` 
 data: <div class="slide-body" n="1">
-<title-slide variant="imageTop">
+<title-slide variant="imageTop" slideNumber="1">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <h1 style="color: blue; text-align: center; font-weight: bold; align-self: center;">this is the Title header</h1>
 <p style="margin-left: 10%; align-self: center; text-align: left;">credit line</p>
@@ -158,9 +161,44 @@ data: <div class="slide-body" n="1">
 </title-slide>
 data: </div>
 
-
 data: <div class="slide-body" n="2">
-<accentimage-layout variant="rightImage" slideNumber="2">
+<agenda variant="bulletHeading" slideNumber="2">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+<agenda-item-parent>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style="text-align: left;">this is</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style=" text-align: left;">this is the header</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style="text-align: left;">this is the Accent header</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style=" text-align: left;">this is the Accent Image</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style=" text-align: left;">this is the Accent Image</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style=" text-align: left;">this is the Accent Image</h2>
+</agenda-item>
+<agenda-item>
+<bullet-heading></bullet-heading>
+<h2 style=" text-align: left;">this is the Accent Image</h2>
+</agenda-item>
+</agenda-item-parent>
+data: </div>
+
+
+data: <div class="slide-body" n="3">
+<accentimage-layout variant="rightImage" slideNumber="3">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <accentimage-content>
 <h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
@@ -169,15 +207,27 @@ data: <div class="slide-body" n="2">
 </accentimage-content>
 </accentimage-layout>
 data: </div>
+
+data: <div class="slide-body" n="4">
+<headertext-layout variant="centerHeader" slideNumber="4">
+<div>
+<h1 style="text-align: center;">this is the header</h1>
+</div>
+<p style="text-align: center;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.
+</p>
+</headertext-layout>
+data: </div>
 `);
 
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
         titleSlide: string | null,
         accentImage: string | null,
+        headerText: string | null,
     }>({
         titleSlide: null,
         accentImage: null,
+        headerText: null,
     });
 
     const editor = useEditor({
@@ -199,6 +249,11 @@ data: </div>
             TitleSlide,
             AccentImageNode,
             AccentImageContentNode,
+            Agenda,
+            AgendaItem,
+            BulletHeading,
+            AgendaItemParent,
+            HeaderText,
         ],
         content: ``,
         editorProps: {
@@ -212,58 +267,85 @@ data: </div>
         editor.state.doc.descendants((node, pos) => {
             if (node.type.name === 'titleSlide') {
                 const currentVariant = node.attrs.variant;
-                if (previousVariantRef.current.titleSlide !== currentVariant) {
-                    console.log("currentVariant", currentVariant)
-                    // const contentObj: { [key: string]: any } = {};
-                    // Array.from(node.content.content).forEach((childNode: any) => {
-                    //     if (childNode.type.name === 'heading') {
-                    //         contentObj[childNode.type.name] = {
-                    //             content: childNode.textContent,
-                    //             level: node.attrs.level
-                    //         };
-                    //     }
-                    //     if (childNode.type.name === 'paragraph') {
-                    //         if (!contentObj[childNode.type.name]) {
-                    //             contentObj[childNode.type.name] = [];
-                    //         }
-                    //         contentObj[childNode.type.name].push({
-                    //             content: childNode.textContent,
-                    //         });
-                    //     }
-                    //     if (childNode.type.name === 'image') {
-                    //         contentObj[childNode.type.name] = {
-                    //             content: childNode.attrs.src,
-                    //         };
-                    //     }
-                    // });
-                    // const content = [contentObj];
-                    // console.log("content", content)
-                    previousVariantRef.current.titleSlide = currentVariant;
-                    const newSlideHTML = renderHTML(currentVariant, 'titleSlide', '1');
-                    console.log("newSlideHTML", newSlideHTML)
-                    setBackendHTMLContent(prevContent => {
-                        // console.log("prevContent", prevContent)
-                        const slideRegex = new RegExp(`<div class="slide-body" n="${1}">[\\s\\S]*?<\\/div>`);
-                        return prevContent.replace(slideRegex, newSlideHTML ?? '');
-                    });
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.titleSlide;
+                if (previousVariant !== currentVariant) {
+                    ReplaceHTML(currentVariant, previousVariant, 'titleSlide', currentSlideNumber);
                 }
+                // const contentObj: { [key: string]: any } = {};
+                // Array.from(node.content.content).forEach((childNode: any) => {
+                //     if (childNode.type.name === 'heading') {
+                //         contentObj[childNode.type.name] = {
+                //             content: childNode.textContent,
+                //             level: node.attrs.level
+                //         };
+                //     }
+                //     if (childNode.type.name === 'paragraph') {
+                //         if (!contentObj[childNode.type.name]) {
+                //             contentObj[childNode.type.name] = [];
+                //         }
+                //         contentObj[childNode.type.name].push({
+                //             content: childNode.textContent,
+                //         });
+                //     }
+                //     if (childNode.type.name === 'image') {
+                //         contentObj[childNode.type.name] = {
+                //             content: childNode.attrs.src,
+                //         };
+                //     }
+                // });
+                // const content = [contentObj];
+                // console.log("content", content)
             }
             if (node.type.name === 'accentImage') {
                 const currentVariant = node.attrs.variant;
                 const currentSlideNumber = node.attrs.slideNumber;
-                if (previousVariantRef.current.accentImage !== currentVariant) {
-                    previousVariantRef.current.accentImage = currentVariant;
-                    const newSlideHTML = renderHTML(currentVariant, 'accentImage', currentSlideNumber);
-                    setBackendHTMLContent(prevContent => {
-                        console.log("prevContent", prevContent)
-                        // console.log("replacing previous content with:", newSlideHTML)
-                        const slideRegex = new RegExp(`<div class="slide-body" n="${currentSlideNumber}">[\\s\\S]*?<\\/div>`);
-                        return prevContent.replace(slideRegex, newSlideHTML ?? '');
-                    });
+                let previousVariant = previousVariantRef.current.accentImage;
+                if (previousVariant !== currentVariant) {
+                    ReplaceHTML(currentVariant, previousVariant, 'accentImage', currentSlideNumber);
+                }
+            }
+            if (node.type.name === 'headerText') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.headerText;
+                if (previousVariant !== currentVariant) {
+                    ReplaceHTML(currentVariant, previousVariant, 'headerText', currentSlideNumber);
                 }
             }
         });
     });
+
+    const ReplaceHTML = (currentVariant: string, previousVariant: string | null, VariantType: string, slideNumber: string) => {
+        if (previousVariant !== currentVariant) {
+            previousVariantRef.current[VariantType as keyof typeof previousVariantRef.current] = currentVariant;
+            const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber);
+            setBackendHTMLContent(prevContent => {
+                // First, split the content into lines and find the correct slide
+                const lines = prevContent.split('\n');
+                const startIndex = lines.findIndex(line =>
+                    line.includes(`<div class="slide-body" n="${slideNumber}"`));
+
+                if (startIndex === -1) return prevContent;
+
+                // Find the end of this slide section
+                let endIndex = startIndex;
+                let openDivs = 1;
+                while (endIndex < lines.length && openDivs > 0) {
+                    endIndex++;
+                    if (lines[endIndex]?.includes('<div')) openDivs++;
+                    if (lines[endIndex]?.includes('</div>')) openDivs--;
+                }
+
+                // Replace the content
+                const beforeSlide = lines.slice(0, startIndex).join('\n');
+                const afterSlide = lines.slice(endIndex + 1).join('\n');
+                const formattedNewSlide = `data: ${newSlideHTML}\ndata: `;
+
+                return `${beforeSlide}\n${formattedNewSlide}${afterSlide}`;
+            });
+        }
+    }
 
 
     useEffect(() => {

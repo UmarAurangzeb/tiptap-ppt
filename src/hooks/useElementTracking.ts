@@ -3,7 +3,7 @@ import { useEditorDom } from '@/context/EditorContext'
 import { useSlideElements, SlideElement } from '@/context/SlideElementsContext'
 
 interface UseElementTrackingProps {
-    elementType: 'paragraph' | 'heading' | 'shape' | 'image'
+    elementType: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet'
     node: any
     getElementData: (elementId: string, slideNumber: string, coordinates: {
         x: number

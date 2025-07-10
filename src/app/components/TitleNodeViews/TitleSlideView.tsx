@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { NodeViewWrapper, NodeViewContent, ReactNodeViewProps } from '@tiptap/react';
 import clsx from 'clsx';
 export default function TitleSlideView({ node, updateAttributes }: ReactNodeViewProps) {
-    let { variant } = node.attrs;
-    // console.log(variant, shapeSize, imagePosition);
+    let { variant, slideNumber } = node.attrs;
     const variants = [
         { value: 'imageTop', label: 'Image Top', icon: '⊞' },
         { value: 'imageBottom', label: 'Image Bottom', icon: '⊡' },

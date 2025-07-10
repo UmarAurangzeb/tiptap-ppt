@@ -1,7 +1,6 @@
-// SmartLayoutNode.ts
+import TitleSlideView from '@/app/components/TitleNodeViews/TitleSlideView'
 import { Node } from '@tiptap/core'
 import { ReactNodeViewRenderer } from '@tiptap/react'
-import TitleSlideView from '@/app/components/TitleSlideView'
 export const TitleSlide = Node.create({
     name: 'titleSlide',
     group: 'block',
@@ -9,7 +8,18 @@ export const TitleSlide = Node.create({
     addAttributes() {
         return {
             variant: { default: 'imageTop' },
-            slideNumber: { default: '1' },
+            slideNumber: {
+                default: null,
+                parseHTML: element => element.getAttribute('slideNumber'),
+                renderHTML: attributes => {
+                    if (!attributes.slideNumber) {
+                        return {}
+                    }
+                    return {
+                        slideNumber: attributes.slideNumber
+                    }
+                }
+            }
         }
     },
     parseHTML() {

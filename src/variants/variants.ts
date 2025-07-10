@@ -245,11 +245,63 @@ export const SlideVariants = [
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
                         attributes: {
                             'margin-left': '5%',
-                            'text-align': 'left'
+                            'text-align': 'left',
+                            'color': 'blue'
                         }
                     }
                 ]
             },
+        ]
+    },
+    {
+        type: 'headerText',
+        variants: [
+            {
+                name: 'leftHeader',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left',
+                        },
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'paragraph',
+                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        attributes: {
+                            'margin-left': '5%',
+                            'text-align': 'left',
+                            'color': 'blue'
+
+                        }
+                    }
+                ]
+            },
+            {
+                name: 'centerHeader',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    },
+                    {
+                        type: 'paragraph',
+                        name: 'paragraph',
+                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    }
+                ]
+            }
         ]
     }
 ]
@@ -284,8 +336,8 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
 
     if (slideType === 'titleSlide') {
         return `
-    <div class="slide-body" n="1">
-    <title-slide variant="${Updatedvariant}" slideNumber="1">
+    <div class="slide-body" n="${slideNumber}">
+    <title-slide variant="${Updatedvariant}" slideNumber="${slideNumber}">
     ${html.image}
     ${html.heading}
     ${html.paragraph}
@@ -303,6 +355,16 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
     ${html.paragraph}
     </accentimage-content>
     </accentimage-layout>
+    </div>
+    `
+    }
+    else if (slideType === 'headerText') {
+        return `
+    <div class="slide-body" n="${slideNumber}">
+    <headertext-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">
+    ${html.heading}
+    ${html.paragraph}
+    </headertext-layout>
     </div>
     `
     }

@@ -40,6 +40,7 @@
     @apply outline-none;
 }
 
+/* ***************TITLESLIDE******************** */
 .node-titleSlide {
     @apply w-full h-full;
     flex: 1;
@@ -51,6 +52,7 @@
     @apply w-full h-full;
 }
 
+/* IMAGE TOP LAYOUT */
 .title-slide-grid.imageTop>[data-node-view-content-react] {
     @apply grid h-full w-full;
     grid-template-columns: 1fr 1fr;
@@ -223,7 +225,7 @@
 }
 
 
-/* ACCENTIMAGELAYOUT */
+/* ***************ACCENTIMAGELAYOUT******************** */
 
 .node-accentImage {
     @apply w-full h-full;
@@ -236,10 +238,11 @@
     @apply w-full h-full;
 }
 
+/* LEFTIMAGE LAYOUT */
 .accentimage-grid.leftImage>[data-node-view-content-react] {
     @apply grid h-full w-full;
     grid-template-columns: minmax(0px, 30%) minmax(0px, 70%);
-    grid-template-rows: 30% minmax(min-content, auto);
+    grid-template-rows: minmax(30%, min-content) minmax(min-content, auto);
 }
 
 
@@ -270,7 +273,7 @@
 .accentimage-grid.rightImage>[data-node-view-content-react] {
     @apply grid h-full w-full;
     grid-template-columns: minmax(0px, 70%) minmax(0px, 30%);
-    grid-template-rows: 30% minmax(min-content, auto);
+    grid-template-rows: minmax(30%, min-content) minmax(min-content, auto);
 }
 
 .accentimage-grid.rightImage>[data-node-view-content-react]>*:first-child,
@@ -290,12 +293,122 @@
 }
 
 .accentimage-grid.rightImage>[data-node-view-content-react] .node-heading {
-    font-weight: bold;
     margin-left: 5%;
     /* text-align: left; */
 }
 
 
+
+
+
+
+
+
+
+/* ***************AGENDA LAYOUT******************** */
+.node-agenda {
+    @apply w-full h-full;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.agenda-grid {
+    @apply w-full h-full;
+}
+
+.agenda-grid.bulletHeading>[data-node-view-content-react] {
+    @apply grid h-full w-full;
+    grid-template-columns: minmax(0px, 30%) minmax(0px, 70%);
+    grid-template-rows: minmax(10%, min-content) minmax(min-content, auto);
+}
+
+.agenda-grid.bulletHeading>[data-node-view-content-react]>*:first-child,
+.agenda-grid.bulletHeading>[data-node-view-content-react] img {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+}
+
+.node-agendaItemParent {
+    grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-left: 15%;
+}
+
+
+
+.agenda-grid.bulletHeading .node-agendaItem [data-node-view-content-react][data-node-view-wrapper]:first-of-type {
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+/* ***************HEADERTEXT LAYOUT******************** */
+
+.node-headerText {
+    @apply w-full h-full;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text-grid {
+    @apply w-full h-full;
+}
+
+/* LeftHeader LAYOUT */
+.header-text-grid.leftHeader>[data-node-view-content-react] {
+    @apply grid h-full w-full relative;
+    grid-template-columns: 1fr 1fr;
+}
+
+.header-text-grid.leftHeader>[data-node-view-content-react] .node-heading {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+    justify-self: center;
+    align-self: center;
+}
+
+.header-text-grid.leftHeader>[data-node-view-content-react]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    /* Since grid is 1fr 1fr */
+    background-color: #D9D9D9;
+    /* Tailwind gray-100 */
+    z-index: 0;
+    pointer-events: none;
+}
+
+.header-text-grid.leftHeader>[data-node-view-content-react] .node-paragraph {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 1;
+    justify-self: center;
+    align-self: center;
+}
+
+/* CenterHeader LAYOUT */
+.header-text-grid.centerHeader>[data-node-view-content-react] {
+    @apply w-full h-full flex flex-col items-center justify-center;
+}
+
+.header-text-grid.centerHeader>[data-node-view-content-react] .node-heading {
+    max-width: 70%;
+    text-align: center;
+}
+
+.header-text-grid.centerHeader>[data-node-view-content-react] .node-paragraph {
+    max-width: 70%;
+    text-align: center;
+}
 
 /* Content styling - spans 1 column and 1 row on bottom right */
 /* .accentimage-grid.leftImage>[data-node-view-content-react] .node-paragraph {
