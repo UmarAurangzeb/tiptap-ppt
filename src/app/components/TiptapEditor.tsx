@@ -23,38 +23,80 @@ import ImageView from '@/app/components/DefaultExtendedViews/ImageView'
 import { Agenda, AgendaItem, BulletHeading, AgendaItemParent } from '@/utils/AgendaNode'
 import { HeaderText } from '@/utils/HeaderTextNode'
 import { BlockContainerNode } from '@/utils/BlockContainerNode'
+import { TextCardLayout } from '@/utils/TextCardLayoutNode'
+import { ImageFormatNode } from '@/utils/ImageFormatNode'
+export const allStyleAttributes = {
+    color: {
+        default: null,
+        parseHTML: (element: any) => element.style.color || null,
+    },
+    textAlign: {
+        default: 'center',
+        parseHTML: (element: any) => element.style.textAlign || '',
+    },
+    fontWeight: {
+        default: 'bold',
+        parseHTML: (element: any) => element.style.fontWeight || '',
+    },
+    alignSelf: {
+        default: 'center',
+        parseHTML: (element: any) => element.style.alignSelf || '',
+    },
+    justifySelf: {
+        default: 'center',
+        parseHTML: (element: any) => element.style.justifySelf || '',
+    },
+    marginLeft: {
+        default: '0',
+        parseHTML: (element: any) => element.style.marginLeft || '0',
+    },
+    marginRight: {
+        default: '0',
+        parseHTML: (element: any) => element.style.marginRight || '0',
+    },
+    backgroundColor: {
+        default: '',
+        parseHTML: (element: any) => element.style.backgroundColor || '',
+    },
+    width: {
+        default: '',
+        parseHTML: (element: any) => element.style.width || '',
+    },
+    height: {
+        default: '',
+        parseHTML: (element: any) => element.style.height || '',
+    },
+    borderWidth: {
+        default: '',
+        parseHTML: (element: any) => element.style.borderWidth || '',
+    },
+    borderStyle: {
+        default: '',
+        parseHTML: (element: any) => element.style.borderStyle || '',
+    },
+    borderColor: {
+        default: '',
+        parseHTML: (element: any) => element.style.borderColor || '',
+    },
+    borderRadius: {
+        default: '',
+        parseHTML: (element: any) => element.style.borderRadius || '',
+    },
+    marginTop: {
+        default: '',
+        parseHTML: (element: any) => element.style.marginTop || '',
+    },
+    marginBottom: {
+        default: '',
+        parseHTML: (element: any) => element.style.marginBottom || '',
+    },
+};
+
 const CustomParagraph = Paragraph.extend({
     addAttributes() {
         return {
             ...this.parent?.(),
-            color: {
-                default: null,
-                parseHTML: element => element.style.color || null,
-            },
-            textAlign: {
-                default: 'center',
-                parseHTML: element => element.style.textAlign || '',
-            },
-            fontWeight: {
-                default: 'bold',
-                parseHTML: element => element.style.fontWeight || '',
-            },
-            alignSelf: {
-                default: 'center',
-                parseHTML: element => element.style.alignSelf || '',
-            },
-            justifySelf: {
-                default: 'center',
-                parseHTML: element => element.style.justifySelf || '',
-            },
-            marginLeft: {
-                default: '0',
-                parseHTML: element => element.style.marginLeft || '0',
-            },
-            marginRight: {
-                default: '0',
-                parseHTML: element => element.style.marginRight || '0',
-            },
+            ...allStyleAttributes,
         }
     },
     renderHTML({ HTMLAttributes }) {
@@ -66,6 +108,15 @@ const CustomParagraph = Paragraph.extend({
         if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
         if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
         if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
+        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
+        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
+        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
+        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
+        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
+        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
+        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
+        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
+        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
         return [
             `p`,
             {
@@ -84,34 +135,7 @@ const CustomHeader = Heading.extend({
     addAttributes() {
         return {
             ...this.parent?.(),
-            color: {
-                default: null,
-                parseHTML: element => element.style.color || null,
-            },
-            textAlign: {
-                default: 'center',
-                parseHTML: element => element.style.textAlign || '',
-            },
-            fontWeight: {
-                default: 'bold',
-                parseHTML: element => element.style.fontWeight || '',
-            },
-            alignSelf: {
-                default: 'center',
-                parseHTML: element => element.style.alignSelf || '',
-            },
-            justifySelf: {
-                default: 'center',
-                parseHTML: element => element.style.justifySelf || '',
-            },
-            marginLeft: {
-                default: '0',
-                parseHTML: element => element.style.marginLeft || '0',
-            },
-            marginRight: {
-                default: '0',
-                parseHTML: element => element.style.marginRight || '0',
-            },
+            ...allStyleAttributes,
         }
     },
     renderHTML({ HTMLAttributes }) {
@@ -124,6 +148,15 @@ const CustomHeader = Heading.extend({
         if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
         if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
         if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
+        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
+        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
+        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
+        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
+        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
+        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
+        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
+        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
+        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
         return [
             `h${this.options.levels[0]}`,
             {
@@ -143,7 +176,34 @@ const customImage = Image.extend({
     addAttributes() {
         return {
             ...this.parent?.(),
+            ...allStyleAttributes,
         }
+    },
+    renderHTML({ HTMLAttributes }) {
+        const styles = [];
+        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
+        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
+        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
+        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
+        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
+        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
+        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
+        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
+        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
+        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
+        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
+        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
+        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
+        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
+        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
+        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
+        return [
+            'img',
+            {
+                ...HTMLAttributes,
+                style: styles.length > 0 ? styles.join('; ') : undefined,
+            },
+        ];
     },
     addNodeView() {
         return ReactNodeViewRenderer(ImageView)
@@ -165,10 +225,6 @@ export default function TiptapEditor() {
 <agenda variant="bulletHeading" slideNumber="2">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <agenda-item-parent>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is</h2>
-</agenda-item>
 <agenda-item>
 <bullet-heading></bullet-heading>
 <h2 style="text-align: left;">this is the header</h2>
@@ -214,17 +270,93 @@ export default function TiptapEditor() {
 </block-container>
 <p style="text-align: left; margin-left: 5%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </headertext-layout>
-</div>`);
+</div>
 
+
+
+
+<div class="slide-body" n="5">
+<text-card-layout variant="columns" slideNumber="5">
+<h1 style="text-align: left; ">this is the header</h1>
+<block-container class="text-card-parent" style="width: 100%; height: 100%;">
+
+<block-container class="text-card-content" style=" margin-right: 1%; width: 100%; height: 100%; ;">
+<h2 style="text-align: left; ">text card header</h2>
+<p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+</p>
+</block-container>
+
+<block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
+<h2 style="text-align: left;">text card header</h2>
+    <p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+    </p>
+</block-container>
+
+<block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
+<h2 style="text-align: left;">text card header</h2>
+<p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+
+.</p>
+</block-container>
+</block-container>
+</text-card-layout>
+</div>
+
+<div class="slide-body" n="6">
+<image-format variant="imageFormat" slideNumber="6">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
+<block-container style= width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style= width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+</image-format>
+</div>
+
+
+
+
+
+
+// <div class="slide-body" n="6">
+// <bullet-list-layout variant="bulletList" slideNumber="6">
+// <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+// <block-container class="bullet-para">
+// <bullet-heading></bullet-heading>
+// <h1 style="text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id pariatur porro vitae ex magni est facere, in minima commodi libero?
+// </h1>
+// </block-container>
+
+// <block-container class="bullet-para">
+// <bullet-heading></bullet-heading>
+// <h1 style="text-align: left;">Lorem ipsum dolor sit ametId pariatur porro vitae ex magni est facere, in minima commodi libero?
+// </h1>
+// </block-container>
+
+// </bullet-list-layout>
+// </div>
+`
+    );
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
         titleSlide: string | null,
         accentImage: string | null,
         headerText: string | null,
+        textCardLayout: string | null,
     }>({
         titleSlide: null,
         accentImage: null,
         headerText: null,
+        textCardLayout: null,
     });
 
     const editor = useEditor({
@@ -239,6 +371,7 @@ export default function TiptapEditor() {
                 levels: [1, 2, 3, 4],
             }),
             customImage,
+            ImageFormatNode,
             SmartLayout,
             SmartLayoutItem,
             Icon,
@@ -252,6 +385,7 @@ export default function TiptapEditor() {
             AgendaItemParent,
             HeaderText,
             BlockContainerNode,
+            TextCardLayout,
         ],
         content: ``,
         editorProps: {
@@ -268,6 +402,8 @@ export default function TiptapEditor() {
                 const currentSlideNumber = node.attrs.slideNumber;
                 let previousVariant = previousVariantRef.current.titleSlide;
                 if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+                    console.log("content_level", content_level)
                     ReplaceHTML(currentVariant, previousVariant, 'titleSlide', currentSlideNumber);
                 }
                 // const contentObj: { [key: string]: any } = {};
@@ -300,6 +436,9 @@ export default function TiptapEditor() {
                 const currentSlideNumber = node.attrs.slideNumber;
                 let previousVariant = previousVariantRef.current.accentImage;
                 if (previousVariant !== currentVariant) {
+                    // console.log("node of accentImage", node.content.content)
+                    let content_level = getCurrentContent(node);
+                    // console.log("content_level in accentImage", content_level)
                     ReplaceHTML(currentVariant, previousVariant, 'accentImage', currentSlideNumber);
                 }
             }
@@ -308,11 +447,59 @@ export default function TiptapEditor() {
                 const currentSlideNumber = node.attrs.slideNumber;
                 let previousVariant = previousVariantRef.current.headerText;
                 if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+
+                    // console.log("content_level in headerText", content_level)
                     ReplaceHTML(currentVariant, previousVariant, 'headerText', currentSlideNumber);
+                }
+            }
+            if (node.type.name === 'textCardLayout') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.textCardLayout;
+                if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+                    // console.log("content_level in accentIm", content_level)
+                    ReplaceHTML(currentVariant, previousVariant, 'textCardLayout', currentSlideNumber);
                 }
             }
         });
     });
+
+    const getCurrentContent = (node: any) => {
+        const contentArr: any = [];
+
+        // Helper function to recursively process nodes
+        const processNode = (n: any) => {
+            if (!n) return;
+            if (n.type && n.type.name) {
+                if (n.type.name === 'heading') {
+                    contentArr.push({
+                        type: 'heading',
+                        content: n.textContent,
+                        level: n.attrs.level
+                    });
+                } else if (n.type.name === 'paragraph') {
+                    contentArr.push({
+                        type: 'paragraph',
+                        content: n.textContent
+                    });
+                } else if (n.type.name === 'image') {
+                    contentArr.push({
+                        type: 'image',
+                        content: n.attrs.src
+                    });
+                }
+            }
+            // If this node has children, process them recursively
+            if (n.content && n.content.content && Array.isArray(n.content.content)) {
+                n.content.content.forEach(processNode);
+            }
+        };
+
+        processNode(node);
+        return contentArr;
+    };
 
     const ReplaceHTML = (currentVariant: string, previousVariant: string | null, VariantType: string, slideNumber: string) => {
         if (previousVariant !== currentVariant) {

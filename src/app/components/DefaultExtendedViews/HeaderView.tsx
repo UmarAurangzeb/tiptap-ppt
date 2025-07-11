@@ -2,14 +2,15 @@
 import React from 'react'
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
-import { getResponsiveFontSize, getResponsiveStrokeWidth } from '@/utils/responsive'
+import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
 
 export default function HeaderView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'heading',
         node,
         getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || ''
+            content: node.textContent || '',
+            style: node.attrs || ''
         })
     })
     // console.log("parentContainerWidth from header", parentContainerWidth)
@@ -42,7 +43,7 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
             5: 24,  // h5: 1em equivalent
             6: 22   // h6: 0.9em equivalent
         }
-        return getResponsiveFontSize(baseSizes[level as keyof typeof baseSizes] || 24, parentContainerWidth)
+        return useResponsiveFontSize(baseSizes[level as keyof typeof baseSizes] || 24)
     }
 
     return (
@@ -64,10 +65,7 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
                 className=""
                 style={{
                     fontSize: getHeaderFontSize(level),
-                    paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
-                    paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
-                    lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
-                    marginBottom: getResponsiveStrokeWidth(12, parentContainerWidth),
+                    paddingTop: useResponsiveStrokeWidth(16),
                     color: node.attrs.color || 'black',
                     textAlign: node.attrs.textAlign || '',
                     fontWeight: node.attrs.fontWeight || '',

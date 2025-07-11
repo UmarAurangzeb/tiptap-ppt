@@ -49,4 +49,26 @@ export const getResponsiveValueWithBase = (
     baseWidth: number = BASE_WIDTH
 ): number => {
     return baseValue / (baseWidth / containerWidth);
-}; 
+};
+
+// Add these imports for hooks
+import { useSlideDimensions } from '@/context/SlideDimensionsContext';
+import { useMemo } from 'react';
+
+export { BASE_WIDTH };
+
+/**
+ * React hook for responsive font size using SlideDimensionsContext
+ */
+export function useResponsiveFontSize(baseSize: number): string {
+    const { containerWidth } = useSlideDimensions();
+    return useMemo(() => getResponsiveFontSize(baseSize, containerWidth), [baseSize, containerWidth]);
+}
+
+/**
+ * React hook for responsive stroke width using SlideDimensionsContext
+ */
+export function useResponsiveStrokeWidth(baseValue: number): string {
+    const { containerWidth } = useSlideDimensions();
+    return useMemo(() => getResponsiveStrokeWidth(baseValue, containerWidth), [baseValue, containerWidth]);
+} 

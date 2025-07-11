@@ -13,7 +13,6 @@ export default function ImageView({ editor, node, getPos }: { editor: any, node:
         })
     })
 
-
     return (
         <NodeViewWrapper
             ref={ref}
@@ -28,6 +27,7 @@ export default function ImageView({ editor, node, getPos }: { editor: any, node:
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
+                    borderRadius: node.attrs.borderRadius,
                 }}
             />
         </NodeViewWrapper>

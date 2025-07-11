@@ -3,7 +3,7 @@ import { NodeViewWrapper, NodeViewContent, ReactNodeViewProps } from '@tiptap/re
 import clsx from 'clsx';
 import { useElementTracking } from '@/hooks/useElementTracking';
 import Image from 'next/image';
-import { getResponsiveFontSize, getResponsiveStrokeWidth } from '@/utils/responsive';
+import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
 
 export function AgendaView({ node, updateAttributes }: ReactNodeViewProps) {
     let { variant } = node.attrs;
@@ -70,7 +70,8 @@ export function BulletHeadingView({ node, getPos }: any) {
         elementType: 'bullet',
         node,
         getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || ''
+            content: node.textContent || '',
+            style: node.attrs || ''
         }),
     })
     return (

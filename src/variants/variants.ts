@@ -2,6 +2,7 @@ type VariantElement = {
     type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container'
     content: string
     name?: string
+    class?: string
     attributes?: {
         color?: string
         'text-align'?: string
@@ -38,6 +39,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Title header',
+                        class: '',
                         attributes: {
                             color: 'blue',
                             'text-align': 'center',
@@ -49,6 +51,8 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'credit line',
                         content: 'credit line',
+                        class: '',
+
                         attributes: {
                             'margin-left': '10%',
                             'align-self': 'center',
@@ -59,6 +63,8 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'date',
                         content: 'date',
+                        class: '',
+
                         attributes: {
                             'margin-right': '10%',
                             'align-self': 'center',
@@ -78,6 +84,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Title header',
+                        class: '',
                         attributes: {
                             color: 'blue',
                             'text-align': 'center',
@@ -89,6 +96,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'credit line',
                         content: 'credit line',
+                        class: '',
                         attributes: {
                             'margin-left': '5%',
                             'align-self': 'center',
@@ -99,6 +107,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'date',
                         content: 'date',
+                        class: '',
                         attributes: {
                             'margin-right': '5%',
                             'align-self': 'center',
@@ -118,6 +127,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Title header',
+                        class: '',
                         attributes: {
                             color: 'blue',
                             'text-align': 'center',
@@ -132,6 +142,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'credit line',
                         content: 'credit line',
+                        class: '',
                         attributes: {
                             'margin-left': '10%',
                             'align-self': 'center',
@@ -142,6 +153,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'date',
                         content: 'date',
+                        class: '',
                         attributes: {
                             'margin-left': '10%',
                             'align-self': 'center',
@@ -161,6 +173,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Title header',
+                        class: '',
                         attributes: {
                             color: 'white',
                             'text-align': 'center',
@@ -175,6 +188,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'credit line',
                         content: 'credit line',
+                        class: '',
                         attributes: {
                             color: 'white',
                             'margin-left': '10%',
@@ -186,6 +200,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'date',
                         content: 'date',
+                        class: '',
                         attributes: {
                             color: 'white',
                             'margin-left': '10%',
@@ -211,6 +226,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Accent Image header',
+                        class: '',
                         attributes: {
                             'margin-left': '5%',
                             'text-align': 'left'
@@ -220,6 +236,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'paragraph',
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        class: '',
                         attributes: {
                             'margin-left': '5%',
                             'text-align': 'left'
@@ -238,6 +255,7 @@ export const SlideVariants = [
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Accent Image header',
+                        class: '',
                         attributes: {
                             'margin-left': '5%',
                             'text-align': 'left'
@@ -247,6 +265,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'paragraph',
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        class: '',
                         attributes: {
                             'margin-left': '5%',
                             'text-align': 'left',
@@ -267,6 +286,7 @@ export const SlideVariants = [
                         type: 'block-container',
                         name: 'block-container',
                         content: '',
+                        class: '',
                         attributes: {
                             'background-color': '#D9D9D9',
                             'width': '100%',
@@ -287,6 +307,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'paragraph',
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        class: '',
                         attributes: {
                             'text-align': 'left',
                             'margin-left': '5%'
@@ -302,6 +323,7 @@ export const SlideVariants = [
                         type: 'block-container',
                         name: 'block-container',
                         content: '',
+
                         attributes: {
                             'width': '100%',
                             'height': '100%'
@@ -311,6 +333,7 @@ export const SlideVariants = [
                                 type: 'heading',
                                 name: 'title',
                                 content: 'this is the header',
+                                class: '',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -321,6 +344,7 @@ export const SlideVariants = [
                         type: 'paragraph',
                         name: 'paragraph',
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        class: '',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -328,7 +352,365 @@ export const SlideVariants = [
                 ]
             }
         ]
-    }
+    },
+    {
+        type: 'textCardLayout',
+        variants: [
+            {
+                name: 'vertical',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        class: '',
+                        attributes: {
+                            'text-align': 'left',
+                            'font-weight': 'bold'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'text-card-parent',
+                        content: '',
+                        class: 'text-card-parent',
+                        children: [
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-top': '1%',
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'center'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-top': '1%',
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'center'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque . loeremasd sdks asdfn s skdan skfekfms skm',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-top': '1%',
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'center'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'horizontal',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        class: '',
+                        attributes: {
+                            'text-align': 'left',
+                            'font-weight': 'bold'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'text-card-parent',
+                        content: '',
+                        class: 'text-card-parent',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left',
+                                            'margin-left': '2%'
+
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adip',
+                                        attributes: {
+                                            'text-align': 'left',
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-right': '1%',
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left',
+                                            'margin-left': '2%'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit',
+                                        attributes: {
+                                            'text-align': 'left',
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-right': '1%',
+                                    'background-color': '#D9D9D9',
+                                    'width': '100%',
+                                    'height': '100%',
+                                    'border-radius': '20px'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left',
+                                            'margin-left': '2%'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor',
+                                        attributes: {
+                                            'text-align': 'left',
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'columns',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        class: '',
+                        attributes: {
+                            'text-align': 'left',
+                            'font-weight': 'bold'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'text-card-parent',
+                        content: '',
+                        class: 'text-card-parent',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-right': '1%',
+                                    'width': '100%',
+                                    'height': '100%'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-right': '1%',
+                                    'width': '100%',
+                                    'height': '100%'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'block-container',
+                                name: 'text-card-content',
+                                content: '',
+                                class: 'text-card-content',
+                                attributes: {
+                                    'margin-right': '1%',
+                                    'width': '100%',
+                                    'height': '100%'
+                                },
+                                children: [
+                                    {
+                                        type: 'heading',
+                                        name: 'card-header',
+                                        content: 'text card header',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    },
+                                    {
+                                        type: 'paragraph',
+                                        name: 'card-content',
+                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing\n. ',
+                                        attributes: {
+                                            'text-align': 'left'
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
 ]
 
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
@@ -341,6 +723,8 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             .map(([key, value]) => `${key}: ${value}`)
             .join('; ');
 
+        const classAttr = element.class ? ` class="${element.class}"` : '';
+
         switch (element.type) {
             case 'image':
                 return `<img src="${element.content}" alt="Mountain Landscape" />`;
@@ -350,7 +734,7 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
                 return `<p style="${styleString}">${element.content}</p>`;
             case 'block-container':
                 const childrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
-                return `<block-container style="${styleString}">${childrenHTML}</block-container>`;
+                return `<block-container${classAttr} style="${styleString}">${childrenHTML}</block-container>`;
             default:
                 return '';
         }
@@ -366,6 +750,9 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
         case 'headerText':
             console.log("elementsHTML", elementsHTML)
             return `<div class="slide-body" n="${slideNumber}"><headertext-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</headertext-layout></div>`;
+        case 'textCardLayout':
+            console.log("elementsHTML", elementsHTML)
+            return `<div class="slide-body" n="${slideNumber}"><text-card-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</text-card-layout></div>`;
         default:
             return '';
     }

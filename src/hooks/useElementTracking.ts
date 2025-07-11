@@ -10,6 +10,7 @@ interface UseElementTrackingProps {
         y: number
         width: number
         height: number
+        style?: string
     }) => Partial<SlideElement>
 }
 
@@ -57,7 +58,7 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                                 width: nodeRect.width,
                                 height: nodeRect.height,
                                 content: '',
-                                ...elementData
+                                ...elementData,
                             })
                         }
                     }

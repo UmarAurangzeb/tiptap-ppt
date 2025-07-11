@@ -3,14 +3,15 @@
 import React from 'react'
 import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
-import { getResponsiveFontSize, getResponsiveStrokeWidth } from '@/utils/responsive'
+import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
 
 export default function ParagraphView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: node.type.name,
         node,
         getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || ''
+            content: node.textContent || '',
+            style: node.attrs || ''
         })
     })
 
@@ -43,10 +44,10 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                 as="p"
                 className="focus:outline-none"
                 style={{
-                    fontSize: getResponsiveFontSize(32, parentContainerWidth),
-                    paddingTop: getResponsiveStrokeWidth(16, parentContainerWidth),
-                    paddingBottom: getResponsiveStrokeWidth(16, parentContainerWidth),
-                    lineHeight: getResponsiveStrokeWidth(40, parentContainerWidth),
+                    fontSize: useResponsiveFontSize(32),
+                    paddingTop: useResponsiveStrokeWidth(16),
+                    paddingBottom: useResponsiveStrokeWidth(16),
+                    lineHeight: useResponsiveStrokeWidth(40),
                     textAlign: node.attrs.textAlign || '',
                     fontWeight: node.attrs.fontWeight || '',
                     alignSelf: node.attrs.alignSelf || '',
