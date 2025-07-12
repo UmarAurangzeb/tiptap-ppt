@@ -272,11 +272,29 @@ export default function TiptapEditor() {
 </headertext-layout>
 </div>
 
-
-
-
 <div class="slide-body" n="5">
-<text-card-layout variant="columns" slideNumber="5">
+<image-format variant="imageFormat-rounded" slideNumber="5">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: left;">this is the header</h1>
+<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+</image-format>
+</div>
+
+
+<div class="slide-body" n="6">
+<text-card-layout variant="columns" slideNumber="6">
 <h1 style="text-align: left; ">this is the header</h1>
 <block-container class="text-card-parent" style="width: 100%; height: 100%;">
 
@@ -285,66 +303,42 @@ export default function TiptapEditor() {
 <p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
-
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
 <h2 style="text-align: left;">text card header</h2>
     <p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
     </p>
 </block-container>
-
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
 <h2 style="text-align: left;">text card header</h2>
 <p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
-
-.</p>
+</p>
 </block-container>
 </block-container>
 </text-card-layout>
 </div>
 
-<div class="slide-body" n="6">
-<image-format variant="imageFormat" slideNumber="6">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 15px;' alt="Mountain Landscape" />
-<block-container style= width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-<block-container style= width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-</image-format>
-</div>
 
 
-
-
-
-
-// <div class="slide-body" n="6">
-// <bullet-list-layout variant="bulletList" slideNumber="6">
-// <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-// <block-container class="bullet-para">
-// <bullet-heading></bullet-heading>
-// <h1 style="text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id pariatur porro vitae ex magni est facere, in minima commodi libero?
-// </h1>
-// </block-container>
-
-// <block-container class="bullet-para">
-// <bullet-heading></bullet-heading>
-// <h1 style="text-align: left;">Lorem ipsum dolor sit ametId pariatur porro vitae ex magni est facere, in minima commodi libero?
-// </h1>
-// </block-container>
-
-// </bullet-list-layout>
-// </div>
 `
+
+
+        // <div class="slide-body" n="6">
+        // <bullet-list-layout variant="bulletList" slideNumber="6">
+        // <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+        // <block-container class="bullet-para">
+        // <bullet-heading></bullet-heading>
+        // <h1 style="text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id pariatur porro vitae ex magni est facere, in minima commodi libero?
+        // </h1>
+        // </block-container>
+
+        // <block-container class="bullet-para">
+        // <bullet-heading></bullet-heading>
+        // <h1 style="text-align: left;">Lorem ipsum dolor sit ametId pariatur porro vitae ex magni est facere, in minima commodi libero?
+        // </h1>
+        // </block-container>
+
+        // </bullet-list-layout>
+        // </div>
     );
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
@@ -352,11 +346,13 @@ export default function TiptapEditor() {
         accentImage: string | null,
         headerText: string | null,
         textCardLayout: string | null,
+        imageFormat: string | null,  // Add imageFormat tracking
     }>({
         titleSlide: null,
         accentImage: null,
         headerText: null,
         textCardLayout: null,
+        imageFormat: null,  // Initialize imageFormat tracking
     });
 
     const editor = useEditor({
@@ -461,6 +457,15 @@ export default function TiptapEditor() {
                     let content_level = getCurrentContent(node);
                     // console.log("content_level in accentIm", content_level)
                     ReplaceHTML(currentVariant, previousVariant, 'textCardLayout', currentSlideNumber);
+                }
+            }
+            if (node.type.name === 'imageFormat') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.imageFormat;
+                if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+                    ReplaceHTML(currentVariant, previousVariant, 'imageFormat', currentSlideNumber);
                 }
             }
         });

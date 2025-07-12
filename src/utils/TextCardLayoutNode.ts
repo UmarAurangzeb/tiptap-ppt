@@ -5,7 +5,7 @@ import TextCardLayoutView from '@/app/components/textCardNodeView/TextCardNodeVi
 export const TextCardLayout = Node.create({
     name: 'textCardLayout',
     group: 'block',
-    content: ' heading? blockContainerNode*',
+    content: ' heading? blockContainerNode{1}',
     addAttributes() {
         return {
             variant: { default: 'vertical' },

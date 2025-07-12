@@ -711,6 +711,216 @@ export const SlideVariants = [
             }
         ]
     },
+    {
+        type: 'imageFormat',
+        variants: [
+            {
+                name: 'imageFormat-squared',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'imageFormat-rounded',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        attributes: {
+                            'border-radius': '200px'
+                        }
+                    },
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        attributes: {
+                            'border-radius': '200px'
+                        }
+                    },
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        attributes: {
+                            'border-radius': '200px'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'title',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'content',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'left'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
 ]
 
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
@@ -727,7 +937,7 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
 
         switch (element.type) {
             case 'image':
-                return `<img src="${element.content}" alt="Mountain Landscape" />`;
+                return `<img src="${element.content}" style="${styleString}" alt="Mountain Landscape" />`;
             case 'heading':
                 return `<h1 style="${styleString}">${element.content}</h1>`;
             case 'paragraph':
@@ -753,6 +963,8 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
         case 'textCardLayout':
             console.log("elementsHTML", elementsHTML)
             return `<div class="slide-body" n="${slideNumber}"><text-card-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</text-card-layout></div>`;
+        case 'imageFormat':
+            return `<div class="slide-body" n="${slideNumber}"><image-format variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</image-format></div>`;
         default:
             return '';
     }
