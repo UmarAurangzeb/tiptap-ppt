@@ -3,12 +3,12 @@ import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
 
 export default function BlockContainerNodeView({ node }: { node: any }) {
-    const { width, height, backgroundColor, borderWidth, borderStyle, borderColor, borderRadius, marginTop, marginBottom, marginLeft, marginRight } = node.attrs;
+    const { width, height, backgroundColor, borderWidth, borderStyle, borderColor, borderRadius, marginTop, marginBottom, marginLeft, marginRight, text } = node.attrs;
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'shape',
         node,
         getElementData: (elementId, slideNumber, coordinates) => ({
-            content: '',
+            content: node.attrs.text || '',
             style: node.attrs || ''
         })
     });
@@ -34,6 +34,7 @@ export default function BlockContainerNodeView({ node }: { node: any }) {
             className={`block-container ${node.attrs.class || ''}`}
             style={containerStyle}
         >
+            {node.attrs.text && <span>{node.attrs.text}</span>}
             <NodeViewContent />
         </NodeViewWrapper>
     );

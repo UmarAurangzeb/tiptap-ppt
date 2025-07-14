@@ -1,8 +1,9 @@
 type VariantElement = {
-    type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container'
+    type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container' | 'li'
     content: string
     name?: string
     class?: string
+    bulletColor?: string
     attributes?: {
         color?: string
         'text-align'?: string
@@ -14,6 +15,7 @@ type VariantElement = {
         'background-color'?: string
         'width'?: string
         'height'?: string
+        display?: string
     }
     children?: VariantElement[]
 }
@@ -366,7 +368,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             'text-align': 'left',
-                            'font-weight': 'bold'
                         }
                     },
                     {
@@ -482,7 +483,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             'text-align': 'left',
-                            'font-weight': 'bold'
                         }
                     },
                     {
@@ -605,7 +605,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             'text-align': 'left',
-                            'font-weight': 'bold'
                         }
                     },
                     {
@@ -921,6 +920,161 @@ export const SlideVariants = [
             }
         ]
     },
+    {
+        type: 'bulletList',
+        variants: [
+            {
+                name: 'rightImage',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'left',
+                        },
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'unordered-list',
+                        content: '',
+                        class: 'unordered-list',
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item1',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                bulletColor: '#D9D9D9',
+
+                                attributes: {
+                                    // bulletColor: '#D9D9D9',
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p1',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'li',
+                                name: 'item2',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                bulletColor: '#D9D9D9',
+
+                                attributes: {
+                                    // bulletColor: '#D9D9D9',
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p2',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'li',
+                                name: 'item3',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                bulletColor: '#D9D9D9',
+                                attributes: {
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p3',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                    }
+                                ]
+                            },
+                        ],
+                    },
+                ],
+            },
+            {
+                name: 'noImage',
+                elements: [
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        attributes: {
+                            display: 'none',
+                        },
+                    },
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'left',
+                        },
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'unordered-list',
+                        content: '',
+                        class: 'unordered-list',
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item1',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                bulletColor: '#D9D9D9',
+                                attributes: {
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p1',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'li',
+                                name: 'item2',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                bulletColor: '#D9D9D9',
+
+                                attributes: {
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p2',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                    }
+                                ]
+                            },
+                            {
+                                type: 'li',
+                                name: 'item3',
+                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                bulletColor: '#D9D9D9',
+                                attributes: {
+                                    bulletColor: '#D9D9D9',
+                                },
+                                children: [
+                                    {
+                                        type: 'paragraph',
+                                        name: 'p3',
+                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                    }
+                                ]
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+    },
 ]
 
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
@@ -934,6 +1088,7 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             .join('; ');
 
         const classAttr = element.class ? ` class="${element.class}"` : '';
+        const bulletColorAttr = element.bulletColor ? ` bulletColor="${element.bulletColor}"` : '';
 
         switch (element.type) {
             case 'image':
@@ -942,6 +1097,9 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
                 return `<h1 style="${styleString}">${element.content}</h1>`;
             case 'paragraph':
                 return `<p style="${styleString}">${element.content}</p>`;
+            case 'li':
+                const liChildrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
+                return `<li${bulletColorAttr}>${liChildrenHTML}</li>`;
             case 'block-container':
                 const childrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
                 return `<block-container${classAttr} style="${styleString}">${childrenHTML}</block-container>`;
@@ -965,6 +1123,8 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             return `<div class="slide-body" n="${slideNumber}"><text-card-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</text-card-layout></div>`;
         case 'imageFormat':
             return `<div class="slide-body" n="${slideNumber}"><image-format variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</image-format></div>`;
+        case 'bulletList':
+            return `<div class="slide-body" n="${slideNumber}"><bullet-list variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</bullet-list></div>`;
         default:
             return '';
     }

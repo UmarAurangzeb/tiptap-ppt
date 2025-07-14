@@ -2,11 +2,11 @@
 import { Node, mergeAttributes } from '@tiptap/core'
 import { ReactNodeViewRenderer } from '@tiptap/react'
 import BlockContainerNodeView from '@/app/components/BlockContainerNode/BlockNodeView'
-import { allStyleAttributes } from '@/app/components/TiptapEditor'
+import { allStyleAttributes } from '@/utils/styles'
 export const BlockContainerNode = Node.create({
     name: 'blockContainerNode',
     group: 'block',
-    content: 'block+',
+    content: 'block*',
 
     addAttributes() {
         return {
@@ -34,6 +34,7 @@ export const BlockContainerNode = Node.create({
                     marginBottom: (node as HTMLElement).style.marginBottom || '',
                     marginLeft: (node as HTMLElement).style.marginLeft || '',
                     marginRight: (node as HTMLElement).style.marginRight || '',
+
                 }),
             },
         ]

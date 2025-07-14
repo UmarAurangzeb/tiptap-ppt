@@ -1,26 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { NodeViewWrapper, NodeViewContent, ReactNodeViewProps } from '@tiptap/react';
-import clsx from 'clsx';
-import { useElementTracking } from '@/hooks/useElementTracking';
-import Image from 'next/image';
-import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
+import { Node, mergeAttributes } from '@tiptap/core'
+import { ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
+import React, { useEffect, useRef } from 'react'
 
-
-import { Node } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '@tiptap/react'
-import { mergeAttributes } from '@tiptap/core'
-
-export const Agenda = Node.create({
-    name: 'agenda',
+export const InfoCollectionNode = Node.create({
+    name: 'infoCollection',
     group: 'block',
-    content: 'image? blockContainerNode',
+    content: 'heading* blockContainerNode*',
     addAttributes() {
         return {
             variant: {
-                default: 'bulletHeading',
-                parseHTML: (element: any) => element.getAttribute('variant') || 'bulletHeading',
-            },
+                default: 'vertical',
+                parseHTML: element => element.getAttribute('variant') || 'vertical'
 
+            },
             slideNumber: {
                 default: null,
                 parseHTML: (element: any) => element.getAttribute('slideNumber'),
@@ -38,34 +30,36 @@ export const Agenda = Node.create({
     parseHTML() {
         return [
             {
-                tag: 'agenda',
-                getAttrs: node => ({
-                    variant: node.getAttribute('variant') || 'bulletHeading',
+                tag: 'info-collection',
+                getAttrs: (node: any) => ({
+                    variant: node.getAttribute('variant') || 'vertical',
                     slideNumber: node.getAttribute('slideNumber'),
                 }),
             },
         ]
     },
     renderHTML({ HTMLAttributes }) {
-        return ['agenda', mergeAttributes(HTMLAttributes, {
-            'data-variant': HTMLAttributes.variant || 'bulletHeading',
-        }), 0]
+        return [
+            'info-collection',
+            {
+                ...mergeAttributes(HTMLAttributes, {
+                    'info-collection': HTMLAttributes.variant || 'vertical',
+                }),
+            },
+            0
+        ]
     },
     addNodeView() {
-        return ReactNodeViewRenderer(AgendaView)
+        return ReactNodeViewRenderer(InfoCollectionNodeView)
     },
 })
 
-
-
-
-
-
-const AgendaView = (props: any) => {
+const InfoCollectionNodeView = (props: any) => {
     const { slideNumber, variant, ...rest } = props.node.attrs  // Change from props.HTMLAttributes to props.node.attrs
     const wrapperRef = useRef<HTMLDivElement>(null);
     const variants = [
-        { value: 'bulletHeading', label: 'Bullet Heading', icon: '⊞' },
+        { value: 'vertical', label: 'Vertical', icon: '⊞' },
+        { value: 'horizontal', label: 'Horizontal', icon: '⊡' },
     ]
     const changeVariant = (newVariant: string) => {
         if (newVariant !== variant) {
@@ -88,7 +82,7 @@ const AgendaView = (props: any) => {
         if (wrapperRef.current) {
             // Find the parent .react-renderer.node-bulletList
             let parent = wrapperRef.current.parentElement;
-            while (parent && !parent.classList.contains('node-agenda')) {
+            while (parent && !parent.classList.contains('node-infoCollection')) {
                 parent = parent.parentElement;
             }
             if (parent) {
@@ -118,8 +112,6 @@ const AgendaView = (props: any) => {
         </NodeViewWrapper>
     )
 }
-
-
 
 
 

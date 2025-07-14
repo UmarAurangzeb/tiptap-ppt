@@ -4,20 +4,22 @@ import React from 'react'
 
 const ImageFormatNodeView = (props: any) => {
     const { slideNumber, variant, ...rest } = props.node.attrs  // Change from props.HTMLAttributes to props.node.attrs
-
     const variants = [
         { value: 'imageFormat-squared', label: 'Image Format', icon: '⊞' },
         { value: 'imageFormat-rounded', label: 'Rounded Format', icon: '⊡' },
     ]
 
     const changeVariant = (newVariant: string) => {
-        props.updateAttributes({ variant: newVariant });
+        if (newVariant !== variant) {
+            let oldVariant = variant;
+            props.updateAttributes({ variant: newVariant });
+            // props.onVariantChange?.(newVariant, oldVariant, props.node.type.name, slideNumber)
+        }
     }
 
     const getCurrentVariantIndex = () => {
         return variants.findIndex(v => v.value === variant) || 0;
     }
-
     const getNextVariant = () => {
         const currentIndex = getCurrentVariantIndex();
         const nextIndex = (currentIndex + 1) % variants.length;
@@ -36,10 +38,6 @@ const ImageFormatNodeView = (props: any) => {
             >
                 {variants.find(v => v.value === variant)?.label || variants[0].label}
             </button>
-            {/* Children will be rendered here, inside the wrapper */}
-            <div className="w-full h-full relative z-0">
-                {props.children}
-            </div>
         </NodeViewWrapper>
     )
 }
@@ -85,4 +83,5 @@ export const ImageFormatNode = Node.create({
     addNodeView() {
         return ReactNodeViewRenderer(ImageFormatNodeView)
     },
-}) 
+})
+

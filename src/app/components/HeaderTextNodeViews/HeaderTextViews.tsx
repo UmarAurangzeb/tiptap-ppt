@@ -1,6 +1,41 @@
 import React, { useState } from 'react';
 import { NodeViewWrapper, NodeViewContent, ReactNodeViewProps } from '@tiptap/react';
 import clsx from 'clsx';
+
+import { Node } from '@tiptap/core'
+import { ReactNodeViewRenderer } from '@tiptap/react'
+export const HeaderText = Node.create({
+    name: 'headerText',
+    group: 'block',
+    content: 'blockContainerNode paragraph*',
+    addAttributes() {
+        return {
+            variant: { default: 'leftHeader' },
+            slideNumber: { default: '4' },
+        }
+    },
+    parseHTML() {
+        return [
+            {
+                tag: 'headertext-layout',
+                getAttrs: node => ({
+                    variant: node.getAttribute('variant'),
+                    slideNumber: node.getAttribute('slideNumber'),
+                }),
+            },
+        ]
+    },
+    renderHTML({ HTMLAttributes }) {
+        return ['headertext-layout', HTMLAttributes, 0]
+    },
+    addNodeView() {
+        return ReactNodeViewRenderer(HeaderTextView)
+    },
+})
+
+
+
+
 export default function HeaderTextView({ node, updateAttributes }: ReactNodeViewProps) {
     let { variant, slideNumber } = node.attrs;
     const variants = [

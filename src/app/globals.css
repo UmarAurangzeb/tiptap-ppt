@@ -44,6 +44,7 @@
     @apply w-full h-full;
 }
 
+
 /* ***************TITLESLIDE******************** */
 .node-titleSlide {
     @apply w-full h-full;
@@ -317,40 +318,42 @@
     flex-direction: column;
 }
 
-.agenda-grid {
-    @apply w-full h-full;
+
+.node-agenda .node-blockContainerNode .node-listItem {
+    @apply my-[6%];
 }
 
-.agenda-grid.bulletHeading>[data-node-view-content-react] {
-    @apply grid h-full w-full;
+.node-agenda .node-blockContainerNode .node-listItem .node-heading {
+    @apply -mt-[5%];
+}
+
+.node-agenda.variant-bulletHeading>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
     grid-template-columns: minmax(0px, 30%) minmax(0px, 70%);
-    grid-template-rows: minmax(10%, min-content) minmax(min-content, auto);
+    grid-template-rows: minmax(15%, min-content) minmax(85%, min-content);
 }
 
-.agenda-grid.bulletHeading>[data-node-view-content-react]>*:first-child,
-.agenda-grid.bulletHeading>[data-node-view-content-react] img {
+.node-agenda.variant-bulletHeading>[data-node-view-content-react][data-node-view-wrapper] .node-image {
     grid-column: 1 / span 1;
     grid-row: 1 / span 2;
     width: 100%;
     height: 100%;
 }
 
-.node-agendaItemParent {
+.node-agenda.variant-bulletHeading>[data-node-view-content-react][data-node-view-wrapper] .node-blockContainerNode {
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
     display: flex;
     flex-direction: column;
-    gap: 1px;
-    margin-left: 15%;
-}
-
-
-
-.agenda-grid.bulletHeading .node-agendaItem [data-node-view-content-react][data-node-view-wrapper]:first-of-type {
-    display: flex;
     width: 100%;
-    align-items: center;
+    height: 100%;
+    margin-left: 10%;
+
 }
+
+
 
 /* ***************HEADERTEXT LAYOUT******************** */
 
@@ -629,14 +632,89 @@
 /* .node-imageFormat>[data-node-view-content-react][data-node-view-wrapper] .node-image {} */
 
 
+/* ***************BULLET LIST LAYOUT******************** */
+
+
+.node-bulletList {
+    @apply w-full h-full;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.node-bulletList .node-blockContainerNode .node-listItem {
+    @apply my-4;
+}
+
+.node-bulletList .node-blockContainerNode .node-listItem .node-paragraph {
+    @apply -mt-[0.2rem];
+}
+
+/* RightImage Layout */
+
+.node-bulletList.variant-rightImage>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: minmax(0px, 70%) minmax(0px, 30%);
+    grid-template-rows: minmax(20%, min-content) minmax(80%, min-content);
+}
+
+.node-bulletList.variant-rightImage>[data-node-view-content-react][data-node-view-wrapper] .node-image {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+    width: 100%;
+    height: 100%;
+}
+
+.node-bulletList.variant-rightImage>[data-node-view-content-react][data-node-view-wrapper] .node-blockContainerNode {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* NoImage Layout */
+
+.node-bulletList.variant-noImage>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: minmax(20%, min-content) minmax(80%, min-content);
+    grid-template-columns: 1fr;
+}
+
+.node-bulletList.variant-noImage>[data-node-view-content-react][data-node-view-wrapper] .node-image {
+    display: none;
+}
+
+.node-bulletList.variant-noImage>[data-node-view-content-react][data-node-view-wrapper] .node-heading {
+    grid-row: 1 / span 1;
+
+}
+
+.node-bulletList.variant-noImage>[data-node-view-content-react][data-node-view-wrapper] .node-blockContainerNode {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
 
 
 
 
+/* ***************INFOCOLLECTION LAYOUT******************** */
 
-
-
-
+.node-infoCollection {
+    @apply w-full h-full;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
 
 
 

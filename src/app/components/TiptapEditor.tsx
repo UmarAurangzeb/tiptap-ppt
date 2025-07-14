@@ -1,5 +1,5 @@
 'use client';
-import { useEditor, EditorContent, BubbleMenu, ReactNodeViewRenderer } from '@tiptap/react';
+import { useEditor, EditorContent, BubbleMenu, ReactNodeViewRenderer, NodeViewWrapper, NodeViewContent } from '@tiptap/react';
 import { Text } from '@tiptap/extension-text';
 import { Document } from '@tiptap/extension-document';
 import { Paragraph } from '@tiptap/extension-paragraph';
@@ -10,205 +10,31 @@ import FontFamily from '@tiptap/extension-font-family'
 import { FontSize } from 'tiptap-extension-font-size';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image'
+import NextImage from 'next/image'
 import Heading from '@tiptap/extension-heading'
-import { SmartLayout, SmartLayoutItem, Icon } from '@/utils/SmartLayoutNode'
+import { BulletList } from '@tiptap/extension-list'
+import { ListItem } from '@tiptap/extension-list-item'
+import { SmartLayout, SmartLayoutItem, Icon } from '@/app/components/SmartLayoutView'
 import { EditorDomContext, getAllSlidesData } from '@/context/EditorContext'
 import { DivNode } from '@/utils/divNode'
-import { TitleSlide } from '@/utils/TitleSlideNode'
+import { TitleSlide } from '@/app/components/TitleNodeViews/TitleSlideView'
 import { renderHTML } from '@/variants/variants'
-import { AccentImageNode, AccentImageContentNode } from '@/utils/AccentImageNode'
+import { AccentImageNode, AccentImageContentNode } from '@/app/components/AccentImageNodeViews/AccentImageView'
 import ParagraphView from '@/app/components/DefaultExtendedViews/ParagraphView'
 import HeaderView from '@/app/components/DefaultExtendedViews/HeaderView'
 import ImageView from '@/app/components/DefaultExtendedViews/ImageView'
-import { Agenda, AgendaItem, BulletHeading, AgendaItemParent } from '@/utils/AgendaNode'
-import { HeaderText } from '@/utils/HeaderTextNode'
+import { Agenda } from '@/app/components/AgendaNodeViews/AgendaViews'
+import { HeaderText } from '@/app/components/HeaderTextNodeViews/HeaderTextViews'
 import { BlockContainerNode } from '@/utils/BlockContainerNode'
-import { TextCardLayout } from '@/utils/TextCardLayoutNode'
-import { ImageFormatNode } from '@/utils/ImageFormatNode'
-export const allStyleAttributes = {
-    color: {
-        default: null,
-        parseHTML: (element: any) => element.style.color || null,
-    },
-    textAlign: {
-        default: 'center',
-        parseHTML: (element: any) => element.style.textAlign || '',
-    },
-    fontWeight: {
-        default: 'bold',
-        parseHTML: (element: any) => element.style.fontWeight || '',
-    },
-    alignSelf: {
-        default: 'center',
-        parseHTML: (element: any) => element.style.alignSelf || '',
-    },
-    justifySelf: {
-        default: 'center',
-        parseHTML: (element: any) => element.style.justifySelf || '',
-    },
-    marginLeft: {
-        default: '0',
-        parseHTML: (element: any) => element.style.marginLeft || '0',
-    },
-    marginRight: {
-        default: '0',
-        parseHTML: (element: any) => element.style.marginRight || '0',
-    },
-    backgroundColor: {
-        default: '',
-        parseHTML: (element: any) => element.style.backgroundColor || '',
-    },
-    width: {
-        default: '',
-        parseHTML: (element: any) => element.style.width || '',
-    },
-    height: {
-        default: '',
-        parseHTML: (element: any) => element.style.height || '',
-    },
-    borderWidth: {
-        default: '',
-        parseHTML: (element: any) => element.style.borderWidth || '',
-    },
-    borderStyle: {
-        default: '',
-        parseHTML: (element: any) => element.style.borderStyle || '',
-    },
-    borderColor: {
-        default: '',
-        parseHTML: (element: any) => element.style.borderColor || '',
-    },
-    borderRadius: {
-        default: '',
-        parseHTML: (element: any) => element.style.borderRadius || '',
-    },
-    marginTop: {
-        default: '',
-        parseHTML: (element: any) => element.style.marginTop || '',
-    },
-    marginBottom: {
-        default: '',
-        parseHTML: (element: any) => element.style.marginBottom || '',
-    },
-};
-
-const CustomParagraph = Paragraph.extend({
-    addAttributes() {
-        return {
-            ...this.parent?.(),
-            ...allStyleAttributes,
-        }
-    },
-    renderHTML({ HTMLAttributes }) {
-        const styles = [];
-        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
-        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
-        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
-        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
-        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
-        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
-        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
-        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
-        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
-        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
-        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
-        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
-        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
-        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
-        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
-        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
-        return [
-            `p`,
-            {
-                ...HTMLAttributes,
-                style: styles.length > 0 ? styles.join('; ') : undefined,
-            },
-            0,
-        ];
-    },
-    addNodeView() {
-        return ReactNodeViewRenderer(ParagraphView)
-    },
-})
-
-const CustomHeader = Heading.extend({
-    addAttributes() {
-        return {
-            ...this.parent?.(),
-            ...allStyleAttributes,
-        }
-    },
-    renderHTML({ HTMLAttributes }) {
-        const styles = [];
-        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
-        if (HTMLAttributes.gridArea) styles.push(`grid-area: ${HTMLAttributes.gridArea}`);
-        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
-        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
-        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
-        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
-        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
-        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
-        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
-        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
-        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
-        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
-        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
-        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
-        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
-        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
-        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
-        return [
-            `h${this.options.levels[0]}`,
-            {
-                ...HTMLAttributes,
-                style: styles.length > 0 ? styles.join('; ') : undefined,
-            },
-            0,
-        ];
-    },
-    addNodeView() {
-        return ReactNodeViewRenderer(HeaderView)
-    },
-})
-
-
-const customImage = Image.extend({
-    addAttributes() {
-        return {
-            ...this.parent?.(),
-            ...allStyleAttributes,
-        }
-    },
-    renderHTML({ HTMLAttributes }) {
-        const styles = [];
-        if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
-        if (HTMLAttributes.textAlign) styles.push(`text-align: ${HTMLAttributes.textAlign}`);
-        if (HTMLAttributes.fontWeight) styles.push(`font-weight: ${HTMLAttributes.fontWeight}`);
-        if (HTMLAttributes.alignSelf) styles.push(`align-self: ${HTMLAttributes.alignSelf}`);
-        if (HTMLAttributes.marginLeft) styles.push(`margin-left: ${HTMLAttributes.marginLeft}`);
-        if (HTMLAttributes.marginRight) styles.push(`margin-right: ${HTMLAttributes.marginRight}`);
-        if (HTMLAttributes.justifySelf) styles.push(`justify-self: ${HTMLAttributes.justifySelf}`);
-        if (HTMLAttributes.backgroundColor) styles.push(`background-color: ${HTMLAttributes.backgroundColor}`);
-        if (HTMLAttributes.width) styles.push(`width: ${HTMLAttributes.width}`);
-        if (HTMLAttributes.height) styles.push(`height: ${HTMLAttributes.height}`);
-        if (HTMLAttributes.borderWidth) styles.push(`border-width: ${HTMLAttributes.borderWidth}`);
-        if (HTMLAttributes.borderStyle) styles.push(`border-style: ${HTMLAttributes.borderStyle}`);
-        if (HTMLAttributes.borderColor) styles.push(`border-color: ${HTMLAttributes.borderColor}`);
-        if (HTMLAttributes.borderRadius) styles.push(`border-radius: ${HTMLAttributes.borderRadius}`);
-        if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
-        if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
-        return [
-            'img',
-            {
-                ...HTMLAttributes,
-                style: styles.length > 0 ? styles.join('; ') : undefined,
-            },
-        ];
-    },
-    addNodeView() {
-        return ReactNodeViewRenderer(ImageView)
-    }
-})
+import { TextCardLayout } from '@/app/components/textCardNodeView/TextCardNodeView'
+import { mergeAttributes } from '@tiptap/core'
+import { CustomListItem } from '@/app/components/CustomListItemNodeView/CustomListItem'
+import { ImageFormatNode } from './ImageFormatNodeView/imageformatNodeView';
+import { CustomParagraph } from './DefaultExtendedViews/ParagraphView'
+import { CustomHeader } from './DefaultExtendedViews/HeaderView'
+import { customImage } from './DefaultExtendedViews/ImageView'
+import { BulletListNode } from './BulletList/BulletListNodeView'
+import { InfoCollectionNode } from './InfoCollectionNodeView/InfoCollectionNodeView'
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
@@ -224,33 +50,23 @@ export default function TiptapEditor() {
 <div class="slide-body" n="2">
 <agenda variant="bulletHeading" slideNumber="2">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-<agenda-item-parent>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the header</h2>
-</agenda-item>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the Accent header</h2>
-</agenda-item>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the Accent Image</h2>
-</agenda-item>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the Accent Image</h2>
-</agenda-item>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the Accent Image</h2>
-</agenda-item>
-<agenda-item>
-<bullet-heading></bullet-heading>
-<h2 style="text-align: left;">this is the Accent Image</h2>
-</agenda-item>
-</agenda-item-parent>
-</agenda>
+<block-container>
+    <li bulletColor="#D9D9D9">
+    <h1>this is the header</h1>
+    </li>
+    <li bulletColor="#D9D9D9">
+    <h1>this is the header</h1>
+    </li>
+    <li bulletColor="#D9D9D9">
+    <h1>this is the header</h1>
+    </li>
+     <li bulletColor="#D9D9D9">
+    <h1>this is thr</h1>
+    </li>
+     <li bulletColor="#D9D9D9">
+    <h1>this is the header</h1>
+    </li>
+</block-container>
 </div>
 
 <div class="slide-body" n="3">
@@ -293,8 +109,39 @@ export default function TiptapEditor() {
 </div>
 
 
-<div class="slide-body" n="6">
-<text-card-layout variant="columns" slideNumber="6">
+
+<div class="slide-body" n="6" >
+<bullet-list variant="noImage" slideNumber="6">
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style="display: none;" alt="Mountain Landscape" />
+<h1 style="text-align: left;">this is the header</h1>
+<block-container class="unordered-list">
+<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p></li>
+<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!</p></li>
+<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!</p></li>
+</block-container>
+</bullet-list>
+</div>
+
+<div class="slide-body" n="7">
+<info-collection variant="vertical" slideNumber="7">
+<h1 style="text-align: left;">this is the header</h1>
+
+<block-container class="info-collection-item style" style="width: 1px; height:100%; background-color: #D9D9D9; position: absolute; top: 0; left: 0;"></block-container>
+<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; ">
+<h1 style="text-align: center;">1</h1>
+</block-container>
+<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; justify-content: center;">
+<h1 style="text-align: center;">2</h1>
+</block-container>
+
+<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; justify-content: center;">
+<h1 style="text-align: center;">3</h1>
+</block-container>
+</info-collection>
+</div>
+
+<div class="slide-body" n="8">
+<text-card-layout variant="columns" slideNumber="8">
 <h1 style="text-align: left; ">this is the header</h1>
 <block-container class="text-card-parent" style="width: 100%; height: 100%;">
 
@@ -316,29 +163,7 @@ export default function TiptapEditor() {
 </block-container>
 </text-card-layout>
 </div>
-
-
-
 `
-
-
-        // <div class="slide-body" n="6">
-        // <bullet-list-layout variant="bulletList" slideNumber="6">
-        // <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-        // <block-container class="bullet-para">
-        // <bullet-heading></bullet-heading>
-        // <h1 style="text-align: left;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Id pariatur porro vitae ex magni est facere, in minima commodi libero?
-        // </h1>
-        // </block-container>
-
-        // <block-container class="bullet-para">
-        // <bullet-heading></bullet-heading>
-        // <h1 style="text-align: left;">Lorem ipsum dolor sit ametId pariatur porro vitae ex magni est facere, in minima commodi libero?
-        // </h1>
-        // </block-container>
-
-        // </bullet-list-layout>
-        // </div>
     );
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
@@ -347,17 +172,22 @@ export default function TiptapEditor() {
         headerText: string | null,
         textCardLayout: string | null,
         imageFormat: string | null,  // Add imageFormat tracking
+        bulletList: string | null,
     }>({
         titleSlide: null,
         accentImage: null,
         headerText: null,
         textCardLayout: null,
         imageFormat: null,  // Initialize imageFormat tracking
+        bulletList: null,
     });
 
     const editor = useEditor({
         extensions: [
-            StarterKit, // includes Document, Paragraph, Text
+            StarterKit.configure({
+                bulletList: false, // Disable the built-in bulletList to use our custom one
+                listItem: false, // Disable the built-in listItem
+            }),
             TextStyle,
             FontFamily.configure({ types: ['textStyle'] }),
             FontSize,
@@ -366,6 +196,12 @@ export default function TiptapEditor() {
             CustomHeader.configure({
                 levels: [1, 2, 3, 4],
             }),
+            BulletList.configure({
+                HTMLAttributes: {
+                    class: 'flex flex-col gap-1 list-none', // Remove default bullets since we're using custom ones
+                },
+            }),
+            CustomListItem,
             customImage,
             ImageFormatNode,
             SmartLayout,
@@ -376,12 +212,11 @@ export default function TiptapEditor() {
             AccentImageNode,
             AccentImageContentNode,
             Agenda,
-            AgendaItem,
-            BulletHeading,
-            AgendaItemParent,
             HeaderText,
             BlockContainerNode,
             TextCardLayout,
+            BulletListNode,
+            InfoCollectionNode,
         ],
         content: ``,
         editorProps: {
@@ -466,6 +301,15 @@ export default function TiptapEditor() {
                 if (previousVariant !== currentVariant) {
                     let content_level = getCurrentContent(node);
                     ReplaceHTML(currentVariant, previousVariant, 'imageFormat', currentSlideNumber);
+                }
+            }
+            if (node.type.name === 'bulletList') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.bulletList;
+                if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+                    ReplaceHTML(currentVariant, previousVariant, 'bulletList', currentSlideNumber);
                 }
             }
         });
