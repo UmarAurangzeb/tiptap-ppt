@@ -5,13 +5,12 @@ import React, { useEffect, useRef } from 'react'
 export const InfoCollectionNode = Node.create({
     name: 'infoCollection',
     group: 'block',
-    content: 'heading* blockContainerNode*',
+    content: 'heading* shape* blockContainerNode* ',
     addAttributes() {
         return {
             variant: {
-                default: 'vertical',
-                parseHTML: element => element.getAttribute('variant') || 'vertical'
-
+                default: 'largeBulletList',
+                parseHTML: element => element.getAttribute('variant') || 'largeBulletList'
             },
             slideNumber: {
                 default: null,
@@ -32,7 +31,7 @@ export const InfoCollectionNode = Node.create({
             {
                 tag: 'info-collection',
                 getAttrs: (node: any) => ({
-                    variant: node.getAttribute('variant') || 'vertical',
+                    variant: node.getAttribute('variant') || 'largeBulletList',
                     slideNumber: node.getAttribute('slideNumber'),
                 }),
             },
@@ -43,7 +42,7 @@ export const InfoCollectionNode = Node.create({
             'info-collection',
             {
                 ...mergeAttributes(HTMLAttributes, {
-                    'info-collection': HTMLAttributes.variant || 'vertical',
+                    'info-collection': HTMLAttributes.variant || 'largeBulletList',
                 }),
             },
             0
@@ -59,7 +58,8 @@ const InfoCollectionNodeView = (props: any) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
     const variants = [
         { value: 'vertical', label: 'Vertical', icon: '⊞' },
-        { value: 'horizontal', label: 'Horizontal', icon: '⊡' },
+        { value: 'largeBulletList', label: 'Large Bullet List', icon: '⊞' },
+        { value: 'smallBulletList', label: 'Small Bullet List', icon: '⊡' },
     ]
     const changeVariant = (newVariant: string) => {
         if (newVariant !== variant) {

@@ -35,6 +35,7 @@ import { CustomHeader } from './DefaultExtendedViews/HeaderView'
 import { customImage } from './DefaultExtendedViews/ImageView'
 import { BulletListNode } from './BulletList/BulletListNodeView'
 import { InfoCollectionNode } from './InfoCollectionNodeView/InfoCollectionNodeView'
+import { ShapeNode } from './ShapeNodeView/ShapeNodeView'
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
@@ -90,9 +91,9 @@ export default function TiptapEditor() {
 
 <div class="slide-body" n="5">
 <image-format variant="imageFormat-rounded" slideNumber="5">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 200px;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
+<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
 <block-container style="width: 100%; height: 100%;">
 <h1 style="text-align: left;">this is the header</h1>
 <p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
@@ -125,18 +126,45 @@ export default function TiptapEditor() {
 <div class="slide-body" n="7">
 <info-collection variant="vertical" slideNumber="7">
 <h1 style="text-align: left;">this is the header</h1>
+<shape style="width: 100%; height: 100%; background-color: #D9D9D9;"></shape>
 
-<block-container class="info-collection-item style" style="width: 1px; height:100%; background-color: #D9D9D9; position: absolute; top: 0; left: 0;"></block-container>
-<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; ">
-<h1 style="text-align: center;">1</h1>
+<block-container class="info-collection-item-1" style="margin-top: 2%;">
+<li bulletColor="#D9D9D9" bulletText="1">
+<block-container style="margin-top: -1%;">
+<h1>this is the header</h1>
+<p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
 </block-container>
-<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; justify-content: center;">
-<h1 style="text-align: center;">2</h1>
+</li>
 </block-container>
 
-<block-container class="info-collection-item" style="background-color: #D9D9D9; margin-bottom: 5%; width: 8%; height: 8%; border-radius: 50%; text-align: center; align-items: center; justify-content: center;">
-<h1 style="text-align: center;">3</h1>
+<block-container class="info-collection-item-2" style="margin-top: 2%;">
+<li bulletColor="#D9D9D9" bulletText="2">
+<block-container style="margin-top: -1%;">
+<h1>this is the header</h1>
+<p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
 </block-container>
+</li>
+</block-container>
+
+<block-container class="info-collection-item-3" style="margin-top: 2%;">
+<li bulletColor="#D9D9D9" bulletText="3">
+<block-container style="margin-top: -1%;">
+<h1>this is the header</h1>
+<p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
+</block-container>
+</li>
+</block-container>
+
+<block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
+<li bulletColor="#D9D9D9" bulletText="4">
+<block-container style="margin-top: -1%;">
+<h1>this is the header</h1>
+<p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
+</block-container>
+</li>
+</block-container>
+
+
 </info-collection>
 </div>
 
@@ -147,7 +175,7 @@ export default function TiptapEditor() {
 
 <block-container class="text-card-content" style=" margin-right: 1%; width: 100%; height: 100%; ;">
 <h2 style="text-align: left; ">text card header</h2>
-<p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+<p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sitamet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
@@ -165,6 +193,101 @@ export default function TiptapEditor() {
 </div>
 `
     );
+
+
+    // <div class="slide-body" n="7">
+    // <info-collection variant="largeBulletList" slideNumber="7">
+
+    // <h1 style="text-align: left;">this is the header</h1>
+
+    // <block-container class="info-collection-item-1">
+
+    // <li bulletColor="#D9D9D9" bulletText="1">
+    // <block-container style="margin-top: -3%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-2">
+    // <li bulletColor="#D9D9D9" bulletText="2">
+    // <block-container style="margin-top: -3%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-3" style="margin-top: 4%;">
+    // <li bulletColor="#D9D9D9" bulletText="3">
+    // <block-container style="margin-top: -3%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-4" style="margin-top: 4%;">
+    // <li bulletColor="#D9D9D9" bulletText="4">
+    // <block-container style="margin-top: -3%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+
+    // </info-collection>
+    // </div>
+
+
+    // <div class="slide-body" n="7">
+    // <info-collection variant="vertical" slideNumber="7">
+    // <h1 style="text-align: left;">this is the header</h1>
+    // <shape style="width: 100%; height: 100%; background-color: #D9D9D9;"></shape>
+
+    // <block-container class="info-collection-item-1" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="1">
+    // <block-container style="margin-top: -1%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-2" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="2">
+    // <block-container style="margin-top: -1%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-3" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="3">
+    // <block-container style="margin-top: -1%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
+    // <li bulletColor="#D9D9D9" bulletText="4">
+    // <block-container style="margin-top: -1%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+
+    // </info-collection>
+    // </div>
+
+
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
     const previousVariantRef = useRef<{
         titleSlide: string | null,
@@ -217,6 +340,7 @@ export default function TiptapEditor() {
             TextCardLayout,
             BulletListNode,
             InfoCollectionNode,
+            ShapeNode,
         ],
         content: ``,
         editorProps: {

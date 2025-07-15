@@ -67,4 +67,8 @@ export const allStyleAttributes = {
         default: 'block',
         parseHTML: (element: any) => element.style.display || 'block',
     },
+    position: {
+        default: '',
+        parseHTML: (element: any) => element.style.position || '',
+    },
 }; 
