@@ -45,6 +45,8 @@
 }
 
 
+
+
 /* ***************TITLESLIDE******************** */
 .node-titleSlide {
     @apply w-full h-full;
@@ -374,6 +376,24 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.header-text-grid.leftHeader [data-node-view-content-react] .node-blockContainerNode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-text-grid.leftHeader .node-blockContainerNode .block-container [data-node-view-content] {
+    @apply w-full h-full;
+
+}
+
+.header-text-grid.leftHeader .node-blockContainerNode .block-container [data-node-view-content-react][data-node-view-wrapper] {
+    @apply w-full h-full;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header-text-grid.leftHeader>[data-node-view-content-react] .node-heading {
     grid-column: 1 / span 1;
     grid-row: 1 / span 1;
@@ -381,11 +401,7 @@
     align-self: center;
 }
 
-.header-text-grid.leftHeader [data-node-view-content-react] .node-blockContainerNode>.block-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 .header-text-grid.leftHeader>[data-node-view-content-react] .node-paragraph {
     grid-column: 2 / span 1;
@@ -766,6 +782,124 @@
     overflow-y: hidden;
     z-index: -1;
 }
+
+.node-infoCollection.variant-horizontal {
+    position: relative;
+    z-index: 0;
+    /* or any number > -1 */
+}
+
+.node-infoCollection.variant-horizontal>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(20%, min-content) 1fr;
+}
+
+.node-infoCollection.variant-horizontal>[data-node-view-content-react][data-node-view-wrapper] .node-svg {
+    position: absolute;
+    top: 23.7%;
+    left: 2%;
+    z-index: -1;
+}
+
+.node-infoCollection.variant-horizontal>[data-node-view-content-react][data-node-view-wrapper] .node-heading {
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 1;
+}
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(20%, min-content) 1fr 1fr;
+    gap: 0.2rem;
+}
+
+.node-infoCollection.variant-icon-text [data-node-view-content] {
+    @apply w-full h-full;
+}
+
+.node-infoCollection.variant-icon-text [data-node-view-content-react][data-node-view-wrapper] {
+    @apply w-full h-full;
+}
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] .node-heading {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 3;
+}
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] .node-blockContainerNode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] .node-icon {
+    @apply w-full h-full;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] .node-icon:nth-of-type(1) {
+    grid-row: 2 / span 1;
+    grid-column: 1 / span 1;
+
+}
+
+.node-infoCollection.variant-icon-text>[data-node-view-content-react][data-node-view-wrapper] .node-icon:nth-of-type(2) {
+    grid-row: 2 / span 1;
+    grid-column: 2 / span 1;
+}
+
+
+
+
+/* ***************SECTION BREAK LAYOUT******************** */
+
+
+.node-sectionBreak {
+    @apply w-full h-full;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* SectionBreak1 */
+/* 
+.node-sectionBreak.variant-SectionBreak1>[data-node-view-content-react][data-node-view-wrapper] {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.node-sectionBreak.variant-SectionBreak1>[data-node-view-content-react][data-node-view-wrapper]>.node-blockContainerNode {
+    height: 40%;
+}
+
+.node-sectionBreak.variant-SectionBreak1 .section-break-container>[data-node-view-content] {
+    width: 100%;
+    height: 100%;
+}
+
+
+.node-sectionBreak.variant-SectionBreak1 .section-break-container>[data-node-view-content]>[data-node-view-content-react][data-node-view-wrapper] {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "item";
+} */
+
+
+
 
 
 

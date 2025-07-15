@@ -36,6 +36,9 @@ import { customImage } from './DefaultExtendedViews/ImageView'
 import { BulletListNode } from './BulletList/BulletListNodeView'
 import { InfoCollectionNode } from './InfoCollectionNodeView/InfoCollectionNodeView'
 import { ShapeNode } from './ShapeNodeView/ShapeNodeView'
+import { SvgNode } from './SvgNodeView/SvgNodeView'
+import { SectionBreakNode } from './SectionBreakNodeView/SectionBreakNodeView'
+import { IconNode } from './IconNodeView/IconNode'
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
@@ -70,8 +73,20 @@ export default function TiptapEditor() {
 </block-container>
 </div>
 
-<div class="slide-body" n="3">
-<accentimage-layout variant="rightImage" slideNumber="3">
+// <div class="slide-body" n="3">
+// <section-break>
+// <block-container class="section-break-container" style="border: 1px solid #D9D9D9; width: 100%; height: 100%; display: flex;">
+// <block-container class="section-break-item" style="background-color: #D9D9D9; width: 100%; height: 100%; border-radius: 50%;  ">
+// <h1 style="text-align: center;">#1</h1>
+// </block-container>
+// <h1>Section Title #1</h1>
+
+// </block-container>
+// </section-break>
+// </div>
+
+<div class="slide-body" n="4">
+<accentimage-layout variant="rightImage" slideNumber="4">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <accentimage-content>
 <h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
@@ -80,8 +95,8 @@ export default function TiptapEditor() {
 </accentimage-layout>
 </div>
 
-<div class="slide-body" n="4">
-<headertext-layout variant="leftHeader" slideNumber="4">
+<div class="slide-body" n="5">
+<headertext-layout variant="leftHeader" slideNumber="5">
 <block-container style="background-color: #D9D9D9; width: 100%; height: 100%;">
 <h1 style="text-align: left;">this is the header</h1>
 </block-container>
@@ -89,8 +104,8 @@ export default function TiptapEditor() {
 </headertext-layout>
 </div>
 
-<div class="slide-body" n="5">
-<image-format variant="imageFormat-rounded" slideNumber="5">
+<div class="slide-body" n="6">
+<image-format variant="imageFormat-rounded" slideNumber="6">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
@@ -111,8 +126,8 @@ export default function TiptapEditor() {
 
 
 
-<div class="slide-body" n="6" >
-<bullet-list variant="noImage" slideNumber="6">
+<div class="slide-body" n="7" >
+<bullet-list variant="noImage" slideNumber="7">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style="display: none;" alt="Mountain Landscape" />
 <h1 style="text-align: left;">this is the header</h1>
 <block-container class="unordered-list">
@@ -123,53 +138,37 @@ export default function TiptapEditor() {
 </bullet-list>
 </div>
 
-<div class="slide-body" n="7">
-<info-collection variant="vertical" slideNumber="7">
-<h1 style="text-align: left;">this is the header</h1>
-<shape style="width: 100%; height: 100%; background-color: #D9D9D9;"></shape>
 
-<block-container class="info-collection-item-1" style="margin-top: 2%;">
-<li bulletColor="#D9D9D9" bulletText="1">
-<block-container style="margin-top: -1%;">
-<h1>this is the header</h1>
-<p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
+<div class="slide-body" n="8">
+<info-collection variant="icon-text" slideNumber="8">
+<h1 style="text-align: center;">this is the header</h1>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
 </block-container>
-</li>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
 </block-container>
-
-<block-container class="info-collection-item-2" style="margin-top: 2%;">
-<li bulletColor="#D9D9D9" bulletText="2">
-<block-container style="margin-top: -1%;">
-<h1>this is the header</h1>
-<p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
-</block-container>
-</li>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
 </block-container>
 
-<block-container class="info-collection-item-3" style="margin-top: 2%;">
-<li bulletColor="#D9D9D9" bulletText="3">
-<block-container style="margin-top: -1%;">
-<h1>this is the header</h1>
-<p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
-</li>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
-
-<block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
-<li bulletColor="#D9D9D9" bulletText="4">
-<block-container style="margin-top: -1%;">
-<h1>this is the header</h1>
-<p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
-</li>
-</block-container>
-
-
 </info-collection>
 </div>
 
-<div class="slide-body" n="8">
-<text-card-layout variant="columns" slideNumber="8">
+<div class="slide-body" n="9">
+<text-card-layout variant="columns" slideNumber="9">
 <h1 style="text-align: left; ">this is the header</h1>
 <block-container class="text-card-parent" style="width: 100%; height: 100%;">
 
@@ -193,6 +192,49 @@ export default function TiptapEditor() {
 </div>
 `
     );
+
+
+    // <div class="slide-body" n="8">
+    // <info-collection variant="horizontal" slideNumber="8">
+    // <h1 style="text-align: center;">this is the header</h1>
+    // <svg-node src="/Arrow.svg" style="width: 100%; height: 100%; color: purple;"></svg-node>
+    // <block-container class="info-collection-item" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="1" style="flex-direction: column;">
+    // <block-container style="margin-top: -1%; margin-left: 2%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="2" style="flex-direction: column;">
+    // <block-container style="margin-top: -1%; margin-left: 2%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item" style="margin-top: 2%;">
+    // <li bulletColor="#D9D9D9" bulletText="3" style="flex-direction: column;">
+    // <block-container style="margin-top: -1%; margin-left: 2%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+
+    // <block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
+    // <li bulletColor="#D9D9D9" bulletText="4">
+    // <block-container style="margin-top: -1%;">
+    // <h1>this is the header</h1>
+    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
+    // </block-container>
+    // </li>
+    // </block-container>
+    // </info-collection>
+    // </div>
 
 
     // <div class="slide-body" n="7">
@@ -296,6 +338,7 @@ export default function TiptapEditor() {
         textCardLayout: string | null,
         imageFormat: string | null,  // Add imageFormat tracking
         bulletList: string | null,
+        infoCollection: string | null,
     }>({
         titleSlide: null,
         accentImage: null,
@@ -303,6 +346,7 @@ export default function TiptapEditor() {
         textCardLayout: null,
         imageFormat: null,  // Initialize imageFormat tracking
         bulletList: null,
+        infoCollection: null,
     });
 
     const editor = useEditor({
@@ -341,6 +385,9 @@ export default function TiptapEditor() {
             BulletListNode,
             InfoCollectionNode,
             ShapeNode,
+            SvgNode,
+            SectionBreakNode,
+            IconNode,
         ],
         content: ``,
         editorProps: {
@@ -434,6 +481,15 @@ export default function TiptapEditor() {
                 if (previousVariant !== currentVariant) {
                     let content_level = getCurrentContent(node);
                     ReplaceHTML(currentVariant, previousVariant, 'bulletList', currentSlideNumber);
+                }
+            }
+            if (node.type.name === 'infoCollection') {
+                const currentVariant = node.attrs.variant;
+                const currentSlideNumber = node.attrs.slideNumber;
+                let previousVariant = previousVariantRef.current.infoCollection;
+                if (previousVariant !== currentVariant) {
+                    let content_level = getCurrentContent(node);
+                    ReplaceHTML(currentVariant, previousVariant, 'infoCollection', currentSlideNumber);
                 }
             }
         });
@@ -554,7 +610,7 @@ export default function TiptapEditor() {
             {/* <button onClick={() => {
                 const slides = getAllSlidesData(editorRef, editor);
             }}>Get Slides</button> */}
-            <div ref={editorRef} className="w-full  mx-auto  bg-gray-50 min-h-screen border-2 border-pink-200 rounded-lg">
+            <div ref={editorRef} className="w-full  mx-auto  bg-gray-50 min-h-screen  rounded-lg">
                 {
                     editor && (
                         <BubbleMenu

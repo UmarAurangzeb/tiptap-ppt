@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@tiptap/extension-document": "^2.24.0",
     "@tiptap/extension-font-family": "^2.24.0",
     "@tiptap/extension-image": "^2.24.0",

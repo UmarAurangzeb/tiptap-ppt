@@ -71,4 +71,8 @@ export const allStyleAttributes = {
         default: '',
         parseHTML: (element: any) => element.style.position || '',
     },
+    flexDirection: {
+        default: '',
+        parseHTML: (element: any) => element.style.flexDirection || '',
+    },
 }; 

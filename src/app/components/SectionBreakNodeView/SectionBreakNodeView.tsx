@@ -2,15 +2,15 @@ import { Node, mergeAttributes } from '@tiptap/core'
 import { ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
 import React, { useEffect, useRef } from 'react'
 
-export const InfoCollectionNode = Node.create({
-    name: 'infoCollection',
+export const SectionBreakNode = Node.create({
+    name: 'sectionBreak',
     group: 'block',
-    content: 'heading* icon* shape* svg* blockContainerNode*',
+    content: 'blockContainerNode*',
     addAttributes() {
         return {
             variant: {
-                default: 'largeBulletList',
-                parseHTML: element => element.getAttribute('variant') || 'largeBulletList'
+                default: 'SectionBreak1',
+                parseHTML: element => element.getAttribute('variant') || 'SectionBreak1'
             },
             slideNumber: {
                 default: null,
@@ -29,9 +29,9 @@ export const InfoCollectionNode = Node.create({
     parseHTML() {
         return [
             {
-                tag: 'info-collection',
+                tag: 'section-break',
                 getAttrs: (node: any) => ({
-                    variant: node.getAttribute('variant') || 'largeBulletList',
+                    variant: node.getAttribute('variant') || 'SectionBreak1',
                     slideNumber: node.getAttribute('slideNumber'),
                 }),
             },
@@ -39,28 +39,25 @@ export const InfoCollectionNode = Node.create({
     },
     renderHTML({ HTMLAttributes }) {
         return [
-            'info-collection',
+            'section-break',
             {
                 ...mergeAttributes(HTMLAttributes, {
-                    'info-collection': HTMLAttributes.variant || 'largeBulletList',
+                    'section-break': HTMLAttributes.variant || 'SectionBreak1',
                 }),
             },
             0
         ]
     },
     addNodeView() {
-        return ReactNodeViewRenderer(InfoCollectionNodeView)
+        return ReactNodeViewRenderer(SectionBreakNodeView)
     },
 })
 
-const InfoCollectionNodeView = (props: any) => {
+const SectionBreakNodeView = (props: any) => {
     const { slideNumber, variant, ...rest } = props.node.attrs  // Change from props.HTMLAttributes to props.node.attrs
     const wrapperRef = useRef<HTMLDivElement>(null);
     const variants = [
-        { value: 'icon-text', label: 'Icon Text', icon: '⊞' },
-        { value: 'horizontal', label: 'Horizontal', icon: '⊞' },
-        { value: 'vertical', label: 'Vertical', icon: '⊞' },
-        { value: 'largeBulletList', label: 'Large Bullet List', icon: '⊞' },
+        { value: 'SectionBreak1', label: 'SectionBreak1', icon: '⊞' },
     ]
     const changeVariant = (newVariant: string) => {
         if (newVariant !== variant) {
@@ -83,7 +80,7 @@ const InfoCollectionNodeView = (props: any) => {
         if (wrapperRef.current) {
             // Find the parent .react-renderer.node-bulletList
             let parent = wrapperRef.current.parentElement;
-            while (parent && !parent.classList.contains('node-infoCollection')) {
+            while (parent && !parent.classList.contains('node-sectionBreak')) {
                 parent = parent.parentElement;
             }
             if (parent) {
@@ -101,7 +98,7 @@ const InfoCollectionNodeView = (props: any) => {
     return (
         <NodeViewWrapper as="div" ref={wrapperRef} className="absolute w-full">
             <button
-                className="bg-blue-500 absolute rights-0 top-[-20px] text-white px-3 py-1 text-sm cursor-pointer rounded-md hover:bg-blue-600 transition-colors z-10"
+                className="bg-blue-500 absolute right-0 top-[-20px] text-white px-3 py-1 text-sm cursor-pointer rounded-md hover:bg-blue-600 transition-colors z-10"
                 onClick={() => {
                     const nextVariant = getNextVariant()
                     changeVariant(nextVariant.value)

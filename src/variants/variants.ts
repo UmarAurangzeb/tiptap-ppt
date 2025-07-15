@@ -1,9 +1,11 @@
 type VariantElement = {
-    type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container' | 'li'
+    type: 'image' | 'heading' | 'paragraph' | 'shape' | 'block-container' | 'li' | 'svg-node' | 'icon'
     content: string
     name?: string
     class?: string
     bulletColor?: string
+    bulletText?: string
+    src?: string
     attributes?: {
         color?: string
         'text-align'?: string
@@ -12,10 +14,16 @@ type VariantElement = {
         'justify-self'?: string
         'margin-left'?: string
         'margin-right'?: string
+        'margin-top'?: string
         'background-color'?: string
         'width'?: string
         'height'?: string
+        'border-radius'?: string
+        'flex-direction'?: string
         display?: string
+        iconName?: string
+        iconSize?: string
+        iconColor?: string
     }
     children?: VariantElement[]
 }
@@ -271,7 +279,6 @@ export const SlideVariants = [
                         attributes: {
                             'margin-left': '5%',
                             'text-align': 'left',
-                            'color': 'blue'
                         }
                     }
                 ]
@@ -1075,6 +1082,758 @@ export const SlideVariants = [
             },
         ],
     },
+    {
+        type: 'infoCollection',
+        variants: [
+            {
+                name: 'horizontal',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    },
+                    {
+                        type: 'svg-node',
+                        name: 'arrow',
+                        content: '',
+                        src: '/Arrow.svg',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%',
+                            'color': 'purple'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item',
+                        content: '',
+                        class: 'info-collection-item',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item1',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '1',
+                                attributes: {
+                                    'flex-direction': 'column'
+                                },
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%',
+                                            'margin-left': '2%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item',
+                        content: '',
+                        class: 'info-collection-item',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item2',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '2',
+                                attributes: {
+                                    'flex-direction': 'column'
+                                },
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%',
+                                            'margin-left': '2%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item',
+                        content: '',
+                        class: 'info-collection-item',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item3',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '3',
+                                attributes: {
+                                    'flex-direction': 'column'
+                                },
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%',
+                                            'margin-left': '2%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-4',
+                        content: '',
+                        class: 'info-collection-item-4',
+                        attributes: {
+                            'margin-top': '4%',
+                            'display': 'none'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item4',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '4',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'largeBulletList',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-1',
+                        content: '',
+                        class: 'info-collection-item-1',
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item1',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '1',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-3%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-2',
+                        content: '',
+                        class: 'info-collection-item-2',
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item2',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '2',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-3%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-3',
+                        content: '',
+                        class: 'info-collection-item-3',
+                        attributes: {
+                            'margin-top': '4%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item3',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '3',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-3%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-4',
+                        content: '',
+                        class: 'info-collection-item-4',
+                        attributes: {
+                            'margin-top': '4%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item4',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '4',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-3%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'vertical',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'left'
+                        }
+                    },
+                    {
+                        type: 'shape',
+                        name: 'background-shape',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%',
+                            'background-color': '#D9D9D9'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-1',
+                        content: '',
+                        class: 'info-collection-item-1',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item1',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '1',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-2',
+                        content: '',
+                        class: 'info-collection-item-2',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item2',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '2',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-3',
+                        content: '',
+                        class: 'info-collection-item-3',
+                        attributes: {
+                            'margin-top': '2%'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item3',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '3',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'info-collection-item-4',
+                        content: '',
+                        class: 'info-collection-item-4',
+                        attributes: {
+                            'margin-top': '4%',
+                            'display': 'none'
+                        },
+                        children: [
+                            {
+                                type: 'li',
+                                name: 'item4',
+                                content: '',
+                                bulletColor: '#D9D9D9',
+                                bulletText: '4',
+                                children: [
+                                    {
+                                        type: 'block-container',
+                                        name: 'content-block',
+                                        content: '',
+                                        attributes: {
+                                            'margin-top': '-1%'
+                                        },
+                                        children: [
+                                            {
+                                                type: 'heading',
+                                                name: 'item-title',
+                                                content: 'this is the header'
+                                            },
+                                            {
+                                                type: 'paragraph',
+                                                name: 'item-content',
+                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                attributes: {
+                                                    'text-align': 'left'
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'icon-text',
+                elements: [
+                    {
+                        type: 'heading',
+                        name: 'title',
+                        content: 'this is the header',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'icon-container-1',
+                        content: '',
+                        attributes: {
+                            'width': '50%',
+                            'height': '80%',
+                            'background-color': '#D9D9D9',
+                            'border-radius': '50%'
+                        },
+                        children: [
+                            {
+                                type: 'icon',
+                                name: 'icon-1',
+                                content: '',
+                                attributes: {
+                                    'iconName': 'fa-solid fa-star',
+                                    'iconSize': '2x',
+                                    'iconColor': 'purple'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'icon-container-2',
+                        content: '',
+                        attributes: {
+                            'width': '50%',
+                            'height': '80%',
+                            'background-color': '#D9D9D9',
+                            'border-radius': '50%'
+                        },
+                        children: [
+                            {
+                                type: 'icon',
+                                name: 'icon-2',
+                                content: '',
+                                attributes: {
+                                    'iconName': 'fa-solid fa-star',
+                                    'iconSize': '2x',
+                                    'iconColor': 'purple'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'icon-container-3',
+                        content: '',
+                        attributes: {
+                            'width': '50%',
+                            'height': '80%',
+                            'background-color': '#D9D9D9',
+                            'border-radius': '50%'
+                        },
+                        children: [
+                            {
+                                type: 'icon',
+                                name: 'icon-3',
+                                content: '',
+                                attributes: {
+                                    'iconName': 'fa-solid fa-star',
+                                    'iconSize': '2x',
+                                    'iconColor': 'purple'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block-1',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'block-title-1',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'block-content-1',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block-2',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'block-title-2',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'block-content-2',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block-3',
+                        content: '',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'block-title-3',
+                                content: 'this is the header',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'block-content-3',
+                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
 ]
 
 export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
@@ -1089,6 +1848,7 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
 
         const classAttr = element.class ? ` class="${element.class}"` : '';
         const bulletColorAttr = element.bulletColor ? ` bulletColor="${element.bulletColor}"` : '';
+        const bulletTextAttr = element.bulletText ? ` bulletText="${element.bulletText}"` : '';
 
         switch (element.type) {
             case 'image':
@@ -1099,10 +1859,20 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
                 return `<p style="${styleString}">${element.content}</p>`;
             case 'li':
                 const liChildrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
-                return `<li${bulletColorAttr}>${liChildrenHTML}</li>`;
+                return `<li${bulletColorAttr}${bulletTextAttr} style="${styleString}">${liChildrenHTML}</li>`;
             case 'block-container':
                 const childrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
                 return `<block-container${classAttr} style="${styleString}">${childrenHTML}</block-container>`;
+            case 'svg-node':
+                const srcAttr = element.src ? ` src="${element.src}"` : '';
+                return `<svg-node${srcAttr} style="${styleString}"></svg-node>`;
+            case 'shape':
+                return `<shape style="${styleString}"></shape>`;
+            case 'icon':
+                const iconNameAttr = attributes.iconName ? ` iconName="${attributes.iconName}"` : '';
+                const iconSizeAttr = attributes.iconSize ? ` iconSize="${attributes.iconSize}"` : '';
+                const iconColorAttr = attributes.iconColor ? ` iconColor="${attributes.iconColor}"` : '';
+                return `<icon ${iconNameAttr} ${iconSizeAttr} ${iconColorAttr}></icon>`;
             default:
                 return '';
         }
@@ -1125,6 +1895,8 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             return `<div class="slide-body" n="${slideNumber}"><image-format variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</image-format></div>`;
         case 'bulletList':
             return `<div class="slide-body" n="${slideNumber}"><bullet-list variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</bullet-list></div>`;
+        case 'infoCollection':
+            return `<div class="slide-body" n="${slideNumber}"><info-collection variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</info-collection></div>`;
         default:
             return '';
     }

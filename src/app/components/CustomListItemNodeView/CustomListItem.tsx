@@ -52,6 +52,7 @@ export const CustomListItem = ListItem.extend({
         if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
         if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
         if (HTMLAttributes.display) styles.push(`display: ${HTMLAttributes.display}`);
+        if (HTMLAttributes.flexDirection) styles.push(`flex-direction: ${HTMLAttributes.flexDirection}`);
         return ['li', mergeAttributes(HTMLAttributes, { style: styles.join(';') }), 0]
     },
     addNodeView() {
@@ -60,8 +61,7 @@ export const CustomListItem = ListItem.extend({
 })
 
 const CustomListItemView = ({ node }: any) => {
-    const { class: className, bulletColor, bulletText, ...rest } = node.attrs;
-    console.log(rest)
+    const { class: className, bulletColor, bulletText, display, flexDirection } = node.attrs;
     console.log(bulletText)
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'bullet',
@@ -71,8 +71,13 @@ const CustomListItemView = ({ node }: any) => {
             style: node.attrs || ''
         })
     })
+    let ListStyle = {
+        gap: useResponsiveStrokeWidth(20),
+        flexDirection: flexDirection || 'row',
+    }
+
     return (
-        <NodeViewWrapper as="li" className={`flex items-start`} style={{ gap: useResponsiveStrokeWidth(20) }}>
+        <NodeViewWrapper as="li" className={`flex items-start`} style={ListStyle}>
             <div className="flex-shrink-0" ref={ref}>
                 <svg width={!bulletText ? useResponsiveStrokeWidth(35) : useResponsiveStrokeWidth(75)} height={!bulletText ? useResponsiveStrokeWidth(35) : useResponsiveStrokeWidth(80)} viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="10" cy="10" r={!bulletText ? "8" : "9"} fill={bulletColor} />
