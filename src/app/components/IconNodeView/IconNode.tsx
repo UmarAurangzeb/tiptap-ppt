@@ -4,7 +4,8 @@ import React, { useEffect, useRef } from 'react'
 import { allStyleAttributes } from '@/utils/styles'
 import { faStar, faCheck, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { useResponsiveFontSize } from '@/utils/responsive'
+import { useElementTracking } from '@/hooks/useElementTracking'
 export const IconNode = Node.create({
     name: 'icon',
     group: 'block',
@@ -15,10 +16,6 @@ export const IconNode = Node.create({
             iconName: {
                 default: '',
                 parseHTML: (element: any) => element.getAttribute('iconName') || 'fa-solid fa-star',
-            },
-            iconSize: {
-                default: '1x',
-                parseHTML: (element: any) => element.getAttribute('iconSize') || '1x',
             },
             iconColor: {
                 default: null,
@@ -32,7 +29,6 @@ export const IconNode = Node.create({
                 tag: 'icon',
                 getAttrs: (node: any) => ({
                     iconName: node.getAttribute('iconName') || 'fa-solid fa-star',
-                    iconSize: node.getAttribute('iconSize') || '1x',
                     iconColor: node.getAttribute('iconColor') || null,
                     color: node.style.color || null,
                     textAlign: node.style.textAlign || 'center',
@@ -91,58 +87,52 @@ export const IconNode = Node.create({
 })
 
 const IconNodeView = (props: any) => {
-    const {
-        iconName,
-        iconSize,
-        iconColor,
-        textAlign,
-        fontWeight,
-        alignSelf,
-        justifySelf,
-        marginLeft,
-        marginRight,
-        backgroundColor,
-        width,
-        height,
-        borderWidth,
-        borderStyle,
-        borderColor,
-        borderRadius,
-        marginTop,
-        marginBottom,
-        display,
-        ...rest
-    } = props.node.attrs
-    const wrapperRef = useRef<HTMLDivElement>(null);
-
-
-    const iconStyle = {
-        width: width || '100%',
-        height: height || '100%',
-        backgroundColor: backgroundColor || '',
-        borderWidth: borderWidth || '',
-        borderStyle: borderStyle || '',
-        borderColor: borderColor || '',
-        borderRadius: borderRadius || '',
-        marginTop: marginTop || '',
-        marginBottom: marginBottom || '',
-        marginLeft: marginLeft || '',
-        marginRight: marginRight || '',
-        display: display || 'block',
-    };
+    const { ref, elementId, parentContainerWidth } = useElementTracking({
+        elementType: 'icon',
+        node: props.node,
+        getElementData: (elementId: string, slideNumber: string, coordinates: any) => {
+            let currentNode = props.editor.state.doc.nodeAt(props.getPos());
+            let { iconName, iconColor, ...styleAttrs } = currentNode?.attrs || {};
+            return {
+                iconName: iconName,
+                style: {
+                    color: iconColor,
+                    ...styleAttrs
+                },
+            }
+        }
+    })
+    const iconRef = useRef<any>(null);
 
     const ICON_MAP: { [key: string]: IconDefinition } = {
         'fa-solid fa-star': faStar,
         'fa-solid fa-check': faCheck,
         'fa-solid fa-times': faTimes,
     }
-    console.log("iconName", iconName)
-    console.log("iconSize", iconSize)
-    console.log("iconColor", iconColor)
+
+
+    const getResponsiveIconSize = (baseSize: number = 60) => {
+        const responsiveSize = useResponsiveFontSize(baseSize);
+        const sizeInPixels = parseInt(responsiveSize.replace('px', ''));
+        if (sizeInPixels <= 12) return 'xs';
+        if (sizeInPixels <= 14) return 'sm';
+        if (sizeInPixels <= 16) return '1x';
+        if (sizeInPixels <= 20) return 'lg';
+        if (sizeInPixels <= 24) return 'xl';
+        if (sizeInPixels <= 32) return '2xl';
+        if (sizeInPixels <= 48) return '3x';
+        if (sizeInPixels <= 64) return '4x';
+        if (sizeInPixels <= 80) return '5x';
+        if (sizeInPixels <= 96) return '6x';
+        if (sizeInPixels <= 112) return '7x';
+        if (sizeInPixels <= 128) return '8x';
+        if (sizeInPixels <= 144) return '9x';
+        return '10x';
+    };
 
     return (
         <NodeViewWrapper as="div" className="inline-block">
-            <FontAwesomeIcon icon={ICON_MAP[iconName]} size={iconSize} color={iconColor || undefined} />
+            <FontAwesomeIcon ref={ref as any} id={elementId} icon={ICON_MAP[props.node.attrs.iconName]} size={getResponsiveIconSize()} color={props.node.attrs.iconColor || undefined} />
         </NodeViewWrapper>
     )
 }

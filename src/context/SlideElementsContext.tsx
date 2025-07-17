@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 export type SlideElement = {
     id: string // unique identifier for each element
     slide_number: string
-    type: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet'
+    type: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet' | 'svg' | 'icon'
     x: number
     y: number
     width: number
@@ -16,7 +16,41 @@ export type SlideElement = {
     borderColor?: string
     borderWidth?: number
     cornerRadius?: number
-    style?: string
+    // Styles object for detailed styling
+    style?: {
+        color?: string
+        textAlign?: string
+        fontWeight?: string
+        fontSize?: string
+        backgroundColor?: string
+        borderColor?: string
+        borderWidth?: string
+        borderRadius?: string
+        borderStyle?: string
+        marginTop?: string
+        marginBottom?: string
+        marginLeft?: string
+        marginRight?: string
+        alignSelf?: string
+        justifySelf?: string
+        display?: string
+        justifyContent?: string
+        alignItems?: string
+        flexDirection?: string
+        position?: string
+        width?: string
+        height?: string
+        // for bullet
+        bulletColor?: string
+    }
+    setDisplayNone?: boolean
+    // for image
+    src?: string
+    alt?: string
+    // for bullet
+    bulletText?: string
+
+
 }
 
 type SlideElementsContextType = {
@@ -25,6 +59,7 @@ type SlideElementsContextType = {
     removeElement: (id: string, slide_number: string) => void
     getAllElements: () => SlideElement[]
     getElementsBySlide: (slide_number: string) => SlideElement[]
+    removeElementsBySlide: (slide_number: string) => void
 }
 
 const SlideElementsContext = createContext<SlideElementsContextType | null>(null)
@@ -59,7 +94,7 @@ export const SlideElementsProvider = ({ children }: { children: ReactNode }) => 
                 // Add new element
                 newState[element.slide_number].push(element)
             }
-            // console.log('Updated slide elements:', newState)
+            // console.log(' updated slide elements:', newState)
             return newState
         })
     }, [])
@@ -70,6 +105,15 @@ export const SlideElementsProvider = ({ children }: { children: ReactNode }) => 
             if (newState[slide_number]) {
                 newState[slide_number] = newState[slide_number].filter(el => el.id !== id)
             }
+            return newState
+        })
+    }, [])
+
+    const removeElementsBySlide = React.useCallback((slide_number: string) => {
+        setSlideElements(prev => {
+            const newState = { ...prev }
+            delete newState[slide_number]
+            console.log("newState after removing slide:", slide_number, newState)
             return newState
         })
     }, [])
@@ -88,7 +132,8 @@ export const SlideElementsProvider = ({ children }: { children: ReactNode }) => 
             updateElement,
             removeElement,
             getAllElements,
-            getElementsBySlide
+            getElementsBySlide,
+            removeElementsBySlide
         }}>
             {children}
         </SlideElementsContext.Provider>

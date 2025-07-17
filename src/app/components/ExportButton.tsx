@@ -2,13 +2,12 @@
 import React, { useState } from 'react'
 import { useSlideElements } from '@/context/SlideElementsContext'
 import { exportToPowerPoint, debugSlideMappings, getSlideStatistics } from '@/utils/pptxExport'
-
+import { useSlideDimensions } from '@/context/SlideDimensionsContext'
 export default function ExportButton() {
     const { slideElements } = useSlideElements()
     const [isExporting, setIsExporting] = useState(false)
     const [exportStatus, setExportStatus] = useState<string | null>(null)
     const [showDebug, setShowDebug] = useState(false)
-
     const handleExport = async () => {
         if (Object.keys(slideElements).length === 0) {
             setExportStatus('No slides to export')

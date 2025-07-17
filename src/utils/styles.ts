@@ -75,4 +75,12 @@ export const allStyleAttributes = {
         default: '',
         parseHTML: (element: any) => element.style.flexDirection || '',
     },
+    justifyContent: {
+        default: '',
+        parseHTML: (element: any) => element.style.justifyContent || '',
+    },
+    alignItems: {
+        default: '',
+        parseHTML: (element: any) => element.style.alignItems || '',
+    },
 }; 

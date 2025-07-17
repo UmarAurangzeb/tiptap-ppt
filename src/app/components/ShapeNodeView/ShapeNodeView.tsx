@@ -2,6 +2,7 @@ import { Node, mergeAttributes } from '@tiptap/core'
 import { ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
 import React, { useEffect, useRef } from 'react'
 import { allStyleAttributes } from '@/utils/styles'
+import { useElementTracking } from '@/hooks/useElementTracking'
 
 export const ShapeNode = Node.create({
     name: 'shape',
@@ -107,7 +108,17 @@ const ShapeNodeView = (props: any) => {
         ...rest
     } = props.node.attrs
     const wrapperRef = useRef<HTMLDivElement>(null);
-
+    const { ref, elementId, parentContainerWidth } = useElementTracking({
+        elementType: 'shape',
+        node: props.node,
+        getElementData: (elementId, slideNumber, coordinates) => {
+            const currentNode = props.editor.state.doc.nodeAt(props.getPos());
+            return {
+                content: '',
+                style: currentNode?.attrs || ''
+            }
+        }
+    });
 
     const shapeStyle = {
         width: width || '100%',
@@ -129,6 +140,7 @@ const ShapeNodeView = (props: any) => {
     return (
         <NodeViewWrapper as="div" ref={wrapperRef} className="relative inline-block w-full h-full overflow-hidden">
             <div
+                ref={ref as any}
                 style={shapeStyle}
                 className="shape-element"
             />

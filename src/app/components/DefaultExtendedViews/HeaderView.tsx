@@ -47,13 +47,37 @@ export const CustomHeader = Heading.extend({
 
 
 export default function HeaderView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
+    const level = node.attrs.level || 1
+    const headerTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+
+    // Calculate responsive font sizes based on header level
+    const getHeaderFontSize = (level: number): string => {
+        const baseSizes = {
+            1: 48,  // h1: 2em equivalent at 24px base
+            2: 36,  // h2: 1.5em equivalent
+            3: 31,  // h3: 1.3em equivalent
+            4: 26,  // h4: 1.1em equivalent
+            5: 24,  // h5: 1em equivalent
+            6: 22   // h6: 0.9em equivalent
+        }
+        return useResponsiveFontSize(baseSizes[level as keyof typeof baseSizes] || 24)
+    }
+    node.attrs.fontSize = getHeaderFontSize(level)
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'heading',
         node,
-        getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || '',
-            style: node.attrs || ''
-        })
+        getElementData: (elementId, slideNumber, coordinates) => {
+            // Get the current node attributes at the time this function is called
+
+            const currentNode = editor.state.doc.nodeAt(getPos());
+            // console.log("currentNode of header", currentNode)
+            const { level, ...styleAttrs } = currentNode?.attrs || {};
+            // console.log("styleAttrs of header", styleAttrs)
+            return {
+                content: currentNode?.textContent || '',
+                style: styleAttrs,
+            }
+        }
     })
     // console.log("parentContainerWidth from header", parentContainerWidth)
     const selectHeader = () => {
@@ -72,21 +96,7 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     }
 
     // Get header level for appropriate styling
-    const level = node.attrs.level || 1
-    const headerTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
-    // Calculate responsive font sizes based on header level
-    const getHeaderFontSize = (level: number): string => {
-        const baseSizes = {
-            1: 48,  // h1: 2em equivalent at 24px base
-            2: 36,  // h2: 1.5em equivalent
-            3: 31,  // h3: 1.3em equivalent
-            4: 26,  // h4: 1.1em equivalent
-            5: 24,  // h5: 1em equivalent
-            6: 22   // h6: 0.9em equivalent
-        }
-        return useResponsiveFontSize(baseSizes[level as keyof typeof baseSizes] || 24)
-    }
 
     return (
         <NodeViewWrapper

@@ -1,7 +1,7 @@
 import { ListItem } from "@tiptap/extension-list-item"
 import { NodeViewWrapper, NodeViewContent, ReactNodeViewRenderer, mergeAttributes } from "@tiptap/react"
 import NextImage from "next/image"
-import { useResponsiveStrokeWidth } from "@/utils/responsive"
+import { useResponsiveFontSize, useResponsiveStrokeWidth } from "@/utils/responsive"
 import { useElementTracking } from "@/hooks/useElementTracking"
 import { useRef } from "react"
 import { allStyleAttributes } from "@/utils/styles"
@@ -60,16 +60,25 @@ export const CustomListItem = ListItem.extend({
     },
 })
 
-const CustomListItemView = ({ node }: any) => {
+const CustomListItemView = ({ editor, node, getPos }: { editor: any, node: any, getPos: any }) => {
     const { class: className, bulletColor, bulletText, display, flexDirection } = node.attrs;
-    console.log(bulletText)
+    // console.log(bulletText)
+    let bulletfontSize = useResponsiveStrokeWidth(12)
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'bullet',
         node,
-        getElementData: (elementId, slideNumber, coordinates) => ({
-            content: '',
-            style: node.attrs || ''
-        })
+        getElementData: (elementId, slideNumber, coordinates) => {
+            // Get the current node attributes at the time this function is called
+            const currentNode = editor.state.doc.nodeAt(getPos());
+            const { bulletText, ...styleAttrs } = currentNode?.attrs || {};
+            return {
+                content: '',
+                style: styleAttrs,
+                bulletText: bulletText,
+                bulletfontSize: bulletfontSize
+
+            }
+        }
     })
     let ListStyle = {
         gap: useResponsiveStrokeWidth(20),
@@ -87,7 +96,7 @@ const CustomListItemView = ({ node }: any) => {
                         textAnchor="middle"
                         dominantBaseline="central"
                         fill="black"
-                        fontSize="8"
+                        fontSize={bulletfontSize}
                         fontFamily="sans-serif"
                     >
                         {bulletText}

@@ -6,6 +6,7 @@ type VariantElement = {
     bulletColor?: string
     bulletText?: string
     src?: string
+    setDisplayNone?: boolean
     attributes?: {
         color?: string
         'text-align'?: string
@@ -20,7 +21,9 @@ type VariantElement = {
         'height'?: string
         'border-radius'?: string
         'flex-direction'?: string
-        display?: string
+        'display'?: string
+        'justify-content'?: string
+        'align-items'?: string
         iconName?: string
         iconSize?: string
         iconColor?: string
@@ -64,7 +67,6 @@ export const SlideVariants = [
                         class: '',
 
                         attributes: {
-                            'margin-left': '10%',
                             'align-self': 'center',
                             'text-align': 'left'
                         }
@@ -76,7 +78,6 @@ export const SlideVariants = [
                         class: '',
 
                         attributes: {
-                            'margin-right': '10%',
                             'align-self': 'center',
                             'text-align': 'right'
                         }
@@ -108,7 +109,6 @@ export const SlideVariants = [
                         content: 'credit line',
                         class: '',
                         attributes: {
-                            'margin-left': '5%',
                             'align-self': 'center',
                             'text-align': 'left'
                         }
@@ -119,7 +119,6 @@ export const SlideVariants = [
                         content: 'date',
                         class: '',
                         attributes: {
-                            'margin-right': '5%',
                             'align-self': 'center',
                             'text-align': 'right'
                         }
@@ -129,17 +128,20 @@ export const SlideVariants = [
             {
                 name: 'centerTitle',
                 elements: [
-                    {
-                        type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
-                    },
+                    // {
+                    //     type: 'image',
+                    //     content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                    //     setDisplayNone: true,
+                    //     attributes: {
+                    //     }
+                    // },
                     {
                         type: 'heading',
                         name: 'title',
                         content: 'this is the Title header',
                         class: '',
                         attributes: {
-                            color: 'blue',
+                            'color': 'pink',
                             'text-align': 'center',
                             'font-weight': 'bold',
                             'align-self': 'center',
@@ -154,7 +156,6 @@ export const SlideVariants = [
                         content: 'credit line',
                         class: '',
                         attributes: {
-                            'margin-left': '10%',
                             'align-self': 'center',
                             'text-align': 'right'
                         }
@@ -165,7 +166,6 @@ export const SlideVariants = [
                         content: 'date',
                         class: '',
                         attributes: {
-                            'margin-left': '10%',
                             'align-self': 'center',
                             'text-align': 'left'
                         }
@@ -201,7 +201,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             color: 'white',
-                            'margin-left': '10%',
                             'align-self': 'center',
                             'text-align': 'right'
                         }
@@ -213,7 +212,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             color: 'white',
-                            'margin-left': '10%',
                             'align-self': 'center',
                             'text-align': 'left'
                         }
@@ -238,7 +236,6 @@ export const SlideVariants = [
                         content: 'this is the Accent Image header',
                         class: '',
                         attributes: {
-                            'margin-left': '5%',
                             'text-align': 'left'
                         }
                     },
@@ -248,7 +245,6 @@ export const SlideVariants = [
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
                         class: '',
                         attributes: {
-                            'margin-left': '5%',
                             'text-align': 'left'
                         }
                     }
@@ -267,7 +263,6 @@ export const SlideVariants = [
                         content: 'this is the Accent Image header',
                         class: '',
                         attributes: {
-                            'margin-left': '5%',
                             'text-align': 'left'
                         }
                     },
@@ -277,7 +272,6 @@ export const SlideVariants = [
                         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
                         class: '',
                         attributes: {
-                            'margin-left': '5%',
                             'text-align': 'left',
                         }
                     }
@@ -319,7 +313,6 @@ export const SlideVariants = [
                         class: '',
                         attributes: {
                             'text-align': 'left',
-                            'margin-left': '5%'
                         }
                     }
                 ]
@@ -611,7 +604,7 @@ export const SlideVariants = [
                         content: 'this is the header',
                         class: '',
                         attributes: {
-                            'text-align': 'left',
+                            'text-align': 'left'
                         }
                     },
                     {
@@ -646,7 +639,7 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        content: 'Lorem, ipsum dolorsectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -704,7 +697,7 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing\n. ',
+                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet ctetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -1008,13 +1001,13 @@ export const SlideVariants = [
             {
                 name: 'noImage',
                 elements: [
-                    {
-                        type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-                        attributes: {
-                            display: 'none',
-                        },
-                    },
+                    // {
+                    //     type: 'image',
+                    //     content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                    //     attributes: {
+                    //         display: 'none'
+                    //     },
+                    // },
                     {
                         type: 'heading',
                         name: 'title',
@@ -1022,6 +1015,11 @@ export const SlideVariants = [
                         attributes: {
                             'text-align': 'left',
                         },
+                    },
+                    {
+                        type: 'image',
+                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        setDisplayNone: true,
                     },
                     {
                         type: 'block-container',
@@ -1100,7 +1098,7 @@ export const SlideVariants = [
                         type: 'svg-node',
                         name: 'arrow',
                         content: '',
-                        src: '/Arrow.svg',
+                        src: '/Arrow4.svg',
                         attributes: {
                             'width': '100%',
                             'height': '100%',
@@ -1697,7 +1695,6 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconSize': '2x',
                                     'iconColor': 'purple'
                                 }
                             }
@@ -1720,7 +1717,6 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconSize': '2x',
                                     'iconColor': 'purple'
                                 }
                             }
@@ -1743,7 +1739,6 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconSize': '2x',
                                     'iconColor': 'purple'
                                 }
                             }
@@ -1833,6 +1828,86 @@ export const SlideVariants = [
                 ]
             }
         ]
+    },
+    {
+        type: 'sectionBreak',
+        variants: [
+            {
+                name: 'SectionBreak1',
+                elements: [
+                    {
+                        type: 'block-container',
+                        name: 'section-break-item',
+                        content: '',
+                        class: 'section-break-item',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%',
+                            'border-radius': '50%',
+                            'background-color': '#D9D9D9',
+                            'display': 'flex',
+                            'justify-content': 'center',
+                            'align-items': 'center'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'section-number',
+                                content: '#1',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'heading',
+                        name: 'section-title',
+                        content: 'Section Title #1',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    }
+                ]
+            },
+            {
+                name: 'SectionBreak2',
+                elements: [
+                    {
+                        type: 'block-container',
+                        name: 'section-break-item',
+                        content: '',
+                        class: 'section-break-item',
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%',
+                            'background-color': '#D9D9D9',
+                            'display': 'flex',
+                            'justify-content': 'center',
+                            'align-items': 'center'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'section-number',
+                                content: '#1',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'heading',
+                        name: 'section-title',
+                        content: 'Section Title #1',
+                        attributes: {
+                            'text-align': 'center'
+                        }
+                    }
+                ]
+            }
+        ]
     }
 ]
 
@@ -1849,10 +1924,10 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
         const classAttr = element.class ? ` class="${element.class}"` : '';
         const bulletColorAttr = element.bulletColor ? ` bulletColor="${element.bulletColor}"` : '';
         const bulletTextAttr = element.bulletText ? ` bulletText="${element.bulletText}"` : '';
-
+        const DisplayNoneAttr = element.setDisplayNone && element.setDisplayNone === true ? 'true' : 'false';
         switch (element.type) {
             case 'image':
-                return `<img src="${element.content}" style="${styleString}" alt="Mountain Landscape" />`;
+                return `<img src="${element.content}" style="${styleString}" alt="Mountain Landscape" setDisplayNone="${DisplayNoneAttr}" />`;
             case 'heading':
                 return `<h1 style="${styleString}">${element.content}</h1>`;
             case 'paragraph':
@@ -1886,17 +1961,19 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
         case 'accentImage':
             return `<div class="slide-body" n="${slideNumber}"><accentimage-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}<accentimage-content></accentimage-content></accentimage-layout></div>`;
         case 'headerText':
-            console.log("elementsHTML", elementsHTML)
             return `<div class="slide-body" n="${slideNumber}"><headertext-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</headertext-layout></div>`;
         case 'textCardLayout':
-            console.log("elementsHTML", elementsHTML)
+            console.log(`elementsHTML of ${Updatedvariant}`, elementsHTML)
             return `<div class="slide-body" n="${slideNumber}"><text-card-layout variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</text-card-layout></div>`;
         case 'imageFormat':
             return `<div class="slide-body" n="${slideNumber}"><image-format variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</image-format></div>`;
         case 'bulletList':
+            console.log(`elementsHTML of ${Updatedvariant}`, elementsHTML)
             return `<div class="slide-body" n="${slideNumber}"><bullet-list variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</bullet-list></div>`;
         case 'infoCollection':
             return `<div class="slide-body" n="${slideNumber}"><info-collection variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</info-collection></div>`;
+        case 'sectionBreak':
+            return `<div class="slide-body" n="${slideNumber}"><section-break variant="${Updatedvariant}" slideNumber="${slideNumber}">${elementsHTML}</section-break></div>`;
         default:
             return '';
     }

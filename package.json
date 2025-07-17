@@ -22,10 +22,12 @@
     "@tiptap/pm": "^2.24.0",
     "@tiptap/react": "^2.24.0",
     "@tiptap/starter-kit": "^2.24.0",
+    "html-to-image": "^1.11.13",
     "next": "15.3.4",
     "pptxgenjs": "^4.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-inlinesvg": "^3.0.0",
     "tiptap-extension-font-size": "^1.2.0"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-inlinesvg": "^0.8.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "tailwindcss": "^4",

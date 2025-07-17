@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useEditorDom } from '@/context/EditorContext'
 import { useSlideElements, SlideElement } from '@/context/SlideElementsContext'
 
+
+
 interface UseElementTrackingProps {
-    elementType: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet'
+    elementType: 'paragraph' | 'heading' | 'shape' | 'image' | 'bullet' | 'svg' | 'icon'
     node: any
     getElementData: (elementId: string, slideNumber: string, coordinates: {
         x: number
@@ -11,6 +13,10 @@ interface UseElementTrackingProps {
         width: number
         height: number
         style?: string
+        // for image
+        src?: string
+        alt?: string
+
     }) => Partial<SlideElement>
 }
 

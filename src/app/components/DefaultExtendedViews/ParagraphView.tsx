@@ -46,15 +46,22 @@ export const CustomParagraph = Paragraph.extend({
 })
 
 export default function ParagraphView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
-    const { ref, elementId, parentContainerWidth } = useElementTracking({
-        elementType: node.type.name,
-        node,
-        getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || '',
-            style: node.attrs || ''
-        })
-    })
-
+    let fontSize = useResponsiveFontSize(32)
+    node.attrs.fontSize = fontSize
+    const { ref, elementId, parentContainerWidth } = useElementTracking(
+        {
+            elementType: node.type.name,
+            node,
+            getElementData: (elementId, slideNumber, coordinates) => {
+                const currentNode = editor.state.doc.nodeAt(getPos());
+                const { ...styleAttrs } = currentNode?.attrs || {};
+                return {
+                    content: currentNode?.textContent || '',
+                    style: styleAttrs,
+                }
+            }
+        }
+    )
     const selectParagraph = () => {
         const from = getPos()
         console.log("getting starting position", from)

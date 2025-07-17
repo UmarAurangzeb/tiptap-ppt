@@ -39,6 +39,7 @@ import { ShapeNode } from './ShapeNodeView/ShapeNodeView'
 import { SvgNode } from './SvgNodeView/SvgNodeView'
 import { SectionBreakNode } from './SectionBreakNodeView/SectionBreakNodeView'
 import { IconNode } from './IconNodeView/IconNode'
+import { useSlideElements } from '@/context/SlideElementsContext'
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
@@ -46,8 +47,8 @@ export default function TiptapEditor() {
 <title-slide variant="imageTop" slideNumber="1">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <h1 style="color: blue; text-align: center; font-weight: bold; align-self: center;">this is the Title header</h1>
-<p style="margin-left: 10%; align-self: center; text-align: left;">credit line</p>
-<p style="margin-right: 10%; align-self: center; text-align: right;">date</p>
+<p style=" align-self: center; text-align: left;">credit line</p>
+<p style=" align-self: center; text-align: right;">date</p>
 </title-slide>
 </div>
 
@@ -73,24 +74,23 @@ export default function TiptapEditor() {
 </block-container>
 </div>
 
-// <div class="slide-body" n="3">
-// <section-break>
-// <block-container class="section-break-container" style="border: 1px solid #D9D9D9; width: 100%; height: 100%; display: flex;">
-// <block-container class="section-break-item" style="background-color: #D9D9D9; width: 100%; height: 100%; border-radius: 50%;  ">
-// <h1 style="text-align: center;">#1</h1>
-// </block-container>
-// <h1>Section Title #1</h1>
+<div class="slide-body" n="3">
+<section-break variant="SectionBreak1" slideNumber="3">
+<block-container class="section-break-item" style="width: 100%; height: 100%; border-radius: 50%; background-color: #D9D9D9; display: flex; justify-content: center; align-items: center;">
+<h1 style="text-align: center;">#1</h1>
+</block-container>
+<h1 style="text-align: center;">Section Title #1</h1>
+</section-break>
+</div>
 
-// </block-container>
-// </section-break>
-// </div>
+
 
 <div class="slide-body" n="4">
 <accentimage-layout variant="rightImage" slideNumber="4">
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <accentimage-content>
-<h1 style="margin-left: 5%; text-align: left;">this is the Accent Image header</h1>
-<p style="margin-left: 5%; text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 style=" text-align: left;">this is the Accent Image header</h1>
+<p style=" text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </accentimage-content>
 </accentimage-layout>
 </div>
@@ -100,7 +100,7 @@ export default function TiptapEditor() {
 <block-container style="background-color: #D9D9D9; width: 100%; height: 100%;">
 <h1 style="text-align: left;">this is the header</h1>
 </block-container>
-<p style="text-align: left; margin-left: 5%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<p style="text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </headertext-layout>
 </div>
 
@@ -124,11 +124,8 @@ export default function TiptapEditor() {
 </image-format>
 </div>
 
-
-
 <div class="slide-body" n="7" >
 <bullet-list variant="noImage" slideNumber="7">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style="display: none;" alt="Mountain Landscape" />
 <h1 style="text-align: left;">this is the header</h1>
 <block-container class="unordered-list">
 <li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p></li>
@@ -138,37 +135,8 @@ export default function TiptapEditor() {
 </bullet-list>
 </div>
 
-
 <div class="slide-body" n="8">
-<info-collection variant="icon-text" slideNumber="8">
-<h1 style="text-align: center;">this is the header</h1>
-<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
-</block-container>
-<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
-</block-container>
-<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconSize="2x" iconColor="purple"></icon>
-</block-container>
-
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-</info-collection>
-</div>
-
-<div class="slide-body" n="9">
-<text-card-layout variant="columns" slideNumber="9">
+<text-card-layout variant="columns" slideNumber="8">
 <h1 style="text-align: left; ">this is the header</h1>
 <block-container class="text-card-parent" style="width: 100%; height: 100%;">
 
@@ -177,177 +145,60 @@ export default function TiptapEditor() {
 <p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sitamet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
-<block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
-<h2 style="text-align: left;">text card header</h2>
-    <p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
-    </p>
-</block-container>
+
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
 <h2 style="text-align: left;">text card header</h2>
 <p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
+
+<block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
+<h2 style="text-align: left;">text card header</h2>
+<p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+</p>
+</block-container>
+
 </block-container>
 </text-card-layout>
 </div>
+
+<div class="slide-body" n="9">
+<info-collection variant="icon-text" slideNumber="9">
+<h1 style="text-align: center;">this is the header</h1>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
+</block-container>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
+</block-container>
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
+</block-container>
+
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+<block-container style="width: 100%; height: 100%;">
+<h1 style="text-align: center;">this is the header</h1>
+<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+
+</block-container>
+</info-collection>
+</div>
+
+
 `
     );
 
 
-    // <div class="slide-body" n="8">
-    // <info-collection variant="horizontal" slideNumber="8">
-    // <h1 style="text-align: center;">this is the header</h1>
-    // <svg-node src="/Arrow.svg" style="width: 100%; height: 100%; color: purple;"></svg-node>
-    // <block-container class="info-collection-item" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="1" style="flex-direction: column;">
-    // <block-container style="margin-top: -1%; margin-left: 2%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="2" style="flex-direction: column;">
-    // <block-container style="margin-top: -1%; margin-left: 2%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="3" style="flex-direction: column;">
-    // <block-container style="margin-top: -1%; margin-left: 2%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
-    // <li bulletColor="#D9D9D9" bulletText="4">
-    // <block-container style="margin-top: -1%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-    // </info-collection>
-    // </div>
-
-
-    // <div class="slide-body" n="7">
-    // <info-collection variant="largeBulletList" slideNumber="7">
-
-    // <h1 style="text-align: left;">this is the header</h1>
-
-    // <block-container class="info-collection-item-1">
-
-    // <li bulletColor="#D9D9D9" bulletText="1">
-    // <block-container style="margin-top: -3%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-2">
-    // <li bulletColor="#D9D9D9" bulletText="2">
-    // <block-container style="margin-top: -3%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-3" style="margin-top: 4%;">
-    // <li bulletColor="#D9D9D9" bulletText="3">
-    // <block-container style="margin-top: -3%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-4" style="margin-top: 4%;">
-    // <li bulletColor="#D9D9D9" bulletText="4">
-    // <block-container style="margin-top: -3%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-
-    // </info-collection>
-    // </div>
-
-
-    // <div class="slide-body" n="7">
-    // <info-collection variant="vertical" slideNumber="7">
-    // <h1 style="text-align: left;">this is the header</h1>
-    // <shape style="width: 100%; height: 100%; background-color: #D9D9D9;"></shape>
-
-    // <block-container class="info-collection-item-1" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="1">
-    // <block-container style="margin-top: -1%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-2" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="2">
-    // <block-container style="margin-top: -1%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-3" style="margin-top: 2%;">
-    // <li bulletColor="#D9D9D9" bulletText="3">
-    // <block-container style="margin-top: -1%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-    // <block-container class="info-collection-item-4" style="margin-top: 4%; display: none;">
-    // <li bulletColor="#D9D9D9" bulletText="4">
-    // <block-container style="margin-top: -1%;">
-    // <h1>this is the header</h1>
-    // <p style="text-align: left;">Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!</p>
-    // </block-container>
-    // </li>
-    // </block-container>
-
-
-    // </info-collection>
-    // </div>
-
-
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
-    const previousVariantRef = useRef<{
-        titleSlide: string | null,
-        accentImage: string | null,
-        headerText: string | null,
-        textCardLayout: string | null,
-        imageFormat: string | null,  // Add imageFormat tracking
-        bulletList: string | null,
-        infoCollection: string | null,
-    }>({
-        titleSlide: null,
-        accentImage: null,
-        headerText: null,
-        textCardLayout: null,
-        imageFormat: null,  // Initialize imageFormat tracking
-        bulletList: null,
-        infoCollection: null,
-    });
+
+    const { removeElementsBySlide } = useSlideElements()
 
     const editor = useEditor({
         extensions: [
@@ -396,104 +247,147 @@ export default function TiptapEditor() {
             },
         },
     });
+    const variantMapRef = useRef<Map<string, string>>(new Map())
+    let allNodes = ['titleSlide', 'accentImage', 'headerText', 'textCardLayout', 'imageFormat', 'bulletList', 'infoCollection', 'sectionBreak']
+    const hasInitializedRef = useRef(false)
+    useEffect(() => {
+        if (!editor) return
+        editor.on('transaction', ({ editor, transaction }) => {
+            if (hasInitializedRef.current) return
+            editor.state.doc.descendants((node, pos) => {
+                const nodeType = node.type.name
+                if (!allNodes.includes(nodeType)) return
+
+                const variant = node.attrs.variant
+                const slideNumber = node.attrs.slideNumber
+                const key = `${nodeType}:${slideNumber}`
+
+                variantMapRef.current.set(key, variant)
+            })
+
+            hasInitializedRef.current = true
+        })
+    }, [editor])
+
 
     editor?.on('update', ({ editor }) => {
-        editor.state.doc.descendants((node, pos) => {
-            if (node.type.name === 'titleSlide') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.titleSlide;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
-                    console.log("content_level", content_level)
-                    ReplaceHTML(currentVariant, previousVariant, 'titleSlide', currentSlideNumber);
-                }
-                // const contentObj: { [key: string]: any } = {};
-                // Array.from(node.content.content).forEach((childNode: any) => {
-                //     if (childNode.type.name === 'heading') {
-                //         contentObj[childNode.type.name] = {
-                //             content: childNode.textContent,
-                //             level: node.attrs.level
-                //         };
-                //     }
-                //     if (childNode.type.name === 'paragraph') {
-                //         if (!contentObj[childNode.type.name]) {
-                //             contentObj[childNode.type.name] = [];
-                //         }
-                //         contentObj[childNode.type.name].push({
-                //             content: childNode.textContent,
-                //         });
-                //     }
-                //     if (childNode.type.name === 'image') {
-                //         contentObj[childNode.type.name] = {
-                //             content: childNode.attrs.src,
-                //         };
-                //     }
-                // });
-                // const content = [contentObj];
-                // console.log("content", content)
-            }
-            if (node.type.name === 'accentImage') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.accentImage;
-                if (previousVariant !== currentVariant) {
-                    // console.log("node of accentImage", node.content.content)
-                    let content_level = getCurrentContent(node);
-                    // console.log("content_level in accentImage", content_level)
-                    ReplaceHTML(currentVariant, previousVariant, 'accentImage', currentSlideNumber);
-                }
-            }
-            if (node.type.name === 'headerText') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.headerText;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
+        const variantMap = variantMapRef.current
 
-                    // console.log("content_level in headerText", content_level)
-                    ReplaceHTML(currentVariant, previousVariant, 'headerText', currentSlideNumber);
-                }
+        editor.state.doc.descendants((node, pos) => {
+            const nodeType = node.type.name
+            if (!allNodes.includes(nodeType)) {
+                return
             }
-            if (node.type.name === 'textCardLayout') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.textCardLayout;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
-                    // console.log("content_level in accentIm", content_level)
-                    ReplaceHTML(currentVariant, previousVariant, 'textCardLayout', currentSlideNumber);
-                }
+            const variant = node.attrs.variant
+            const slideNumber = node.attrs.slideNumber
+            const key = `${nodeType}:${slideNumber}`
+
+            const prevVariant = variantMap.get(key)
+
+            if (prevVariant !== variant) {
+                removeElementsBySlide(slideNumber)
+                let content_level = getCurrentContent(node)
+                console.log("content_level", content_level)
+                ReplaceHTML(variant || '', prevVariant || '', nodeType, slideNumber)
+
+                variantMap.set(key, variant)
             }
-            if (node.type.name === 'imageFormat') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.imageFormat;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
-                    ReplaceHTML(currentVariant, previousVariant, 'imageFormat', currentSlideNumber);
-                }
-            }
-            if (node.type.name === 'bulletList') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.bulletList;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
-                    ReplaceHTML(currentVariant, previousVariant, 'bulletList', currentSlideNumber);
-                }
-            }
-            if (node.type.name === 'infoCollection') {
-                const currentVariant = node.attrs.variant;
-                const currentSlideNumber = node.attrs.slideNumber;
-                let previousVariant = previousVariantRef.current.infoCollection;
-                if (previousVariant !== currentVariant) {
-                    let content_level = getCurrentContent(node);
-                    ReplaceHTML(currentVariant, previousVariant, 'infoCollection', currentSlideNumber);
-                }
-            }
-        });
-    });
+        })
+
+    })
+
+
+
+    // editor?.on('update', ({ editor }) => {
+    //     editor.state.doc.descendants((node, pos) => {
+    //         if (node.type.name === 'titleSlide') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.titleSlide;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 console.log("content_level", content_level)
+    //                 ReplaceHTML(currentVariant, previousVariant, 'titleSlide', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'accentImage') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.accentImage;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 // console.log("node of accentImage", node.content.content)
+    //                 let content_level = getCurrentContent(node);
+    //                 // console.log("content_level in accentImage", content_level)
+    //                 ReplaceHTML(currentVariant, previousVariant, 'accentImage', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'headerText') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.headerText;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+
+    //                 // console.log("content_level in headerText", content_level)
+    //                 ReplaceHTML(currentVariant, previousVariant, 'headerText', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'textCardLayout') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.textCardLayout;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 // console.log("content_level in accentIm", content_level)
+    //                 ReplaceHTML(currentVariant, previousVariant, 'textCardLayout', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'imageFormat') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.imageFormat;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 ReplaceHTML(currentVariant, previousVariant, 'imageFormat', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'bulletList') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.bulletList;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 ReplaceHTML(currentVariant, previousVariant, 'bulletList', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'infoCollection') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.infoCollection;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 ReplaceHTML(currentVariant, previousVariant, 'infoCollection', currentSlideNumber);
+    //             }
+    //         }
+    //         if (node.type.name === 'sectionBreak') {
+    //             const currentVariant = node.attrs.variant;
+    //             const currentSlideNumber = node.attrs.slideNumber;
+    //             let previousVariant = previousVariantRef.current.sectionBreak;
+    //             if (previousVariant !== currentVariant) {
+    //                 removeElementsBySlide(currentSlideNumber)
+    //                 let content_level = getCurrentContent(node);
+    //                 ReplaceHTML(currentVariant, previousVariant, 'sectionBreak', currentSlideNumber);
+    //             }
+    //         }
+    //     });
+    // });
 
     const getCurrentContent = (node: any) => {
         const contentArr: any = [];
@@ -531,27 +425,26 @@ export default function TiptapEditor() {
     };
 
     const ReplaceHTML = (currentVariant: string, previousVariant: string | null, VariantType: string, slideNumber: string) => {
-        if (previousVariant !== currentVariant) {
-            previousVariantRef.current[VariantType as keyof typeof previousVariantRef.current] = currentVariant;
-            const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber);
-            setBackendHTMLContent(prevContent => {
-                // Split the content into slides
-                const slides = prevContent.split('</div>').filter(slide => slide.trim());
 
-                // Find the index of the slide to replace
-                const slideIndex = slides.findIndex(slide =>
-                    slide.includes(`<div class="slide-body" n="${slideNumber}"`)
-                );
+        const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber);
+        setBackendHTMLContent(prevContent => {
+            // Split the content into slides
+            const slides = prevContent.split('</div>').filter(slide => slide.trim());
 
-                if (slideIndex === -1) return prevContent;
+            // Find the index of the slide to replace
+            const slideIndex = slides.findIndex(slide =>
+                slide.includes(`<div class="slide-body" n="${slideNumber}"`)
+            );
 
-                // Replace the slide
-                slides[slideIndex] = newSlideHTML;
+            if (slideIndex === -1) return prevContent;
 
-                // Join slides back together
-                return slides.map(slide => slide + '</div>').join('\n\n');
-            });
-        }
+            // Replace the slide
+            slides[slideIndex] = newSlideHTML;
+
+            // Join slides back together
+            return slides.map(slide => slide + '</div>').join('\n\n');
+        });
+
     }
 
 

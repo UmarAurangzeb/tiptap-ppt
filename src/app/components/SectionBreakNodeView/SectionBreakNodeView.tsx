@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react'
 export const SectionBreakNode = Node.create({
     name: 'sectionBreak',
     group: 'block',
-    content: 'blockContainerNode*',
+    content: 'blockContainerNode* heading*',
     addAttributes() {
         return {
             variant: {
@@ -57,6 +57,7 @@ const SectionBreakNodeView = (props: any) => {
     const { slideNumber, variant, ...rest } = props.node.attrs  // Change from props.HTMLAttributes to props.node.attrs
     const wrapperRef = useRef<HTMLDivElement>(null);
     const variants = [
+        { value: 'SectionBreak2', label: 'SectionBreak2', icon: '⊞' },
         { value: 'SectionBreak1', label: 'SectionBreak1', icon: '⊞' },
     ]
     const changeVariant = (newVariant: string) => {

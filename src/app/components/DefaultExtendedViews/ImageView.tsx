@@ -10,6 +10,9 @@ export const customImage = Image.extend({
         return {
             ...this.parent?.(),
             ...allStyleAttributes,
+            setDisplayNone: {
+                default: false
+            }
         }
     },
     renderHTML({ HTMLAttributes }) {
@@ -39,6 +42,16 @@ export const customImage = Image.extend({
             },
         ];
     },
+    parseHTML() {
+        return [
+            {
+                tag: 'img',
+                getAttrs: node => ({
+                    setDisplayNone: node.getAttribute('setDisplayNone'),
+                }),
+            },
+        ]
+    },
     addNodeView() {
         return ReactNodeViewRenderer(ImageView)
     }
@@ -49,18 +62,30 @@ export default function ImageView({ editor, node, getPos }: { editor: any, node:
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'image',
         node,
-        getElementData: (elementId, slideNumber, coordinates) => ({
-            content: node.textContent || '',
-            style: node.attrs || ''
-        })
+        getElementData: (elementId, slideNumber, coordinates) => {
+            // Exclude src and alt from node.attrs
+            const currentNode = editor.state.doc.nodeAt(getPos());
+            currentNode.attrs.display = currentNode.attrs.setDisplayNone && currentNode.attrs.setDisplayNone === true ? 'none' : 'block';
+            const { src, alt, setDisplayNone, ...styleAttrs } = currentNode?.attrs || {};
+            // console.log("styleAttrs for image", styleAttrs)
+            return {
+                content: currentNode?.textContent || '',
+                style: styleAttrs,
+                src: src,
+                alt: alt,
+                setDisplayNone: setDisplayNone,
+            };
+        }
     })
 
     return (
         <NodeViewWrapper
             ref={ref}
+            id={elementId}
             className="relative group w-full h-full"
         >
             {/* Actual editable header */}
+
             <NodeViewContent
                 as="img"
                 src={node.attrs.src}
@@ -68,9 +93,23 @@ export default function ImageView({ editor, node, getPos }: { editor: any, node:
                 style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    borderRadius: node.attrs.borderRadius,
-                    display: node.attrs.display || 'block', // Add this line to respect display attribute
+                    objectFit: 'cover', /* ✅ Matches PowerPoint's "cover" behavior */
+                    objectPosition: 'center',
+                    borderRadius: node.attrs.borderRadius || '',
+                    display: node.attrs.setDisplayNone && node.attrs.setDisplayNone === true ? 'none' : 'block',
+                    color: node.attrs.color || '',
+                    textAlign: node.attrs.textAlign || '',
+                    fontWeight: node.attrs.fontWeight || '',
+                    alignSelf: node.attrs.alignSelf || '',
+                    marginLeft: node.attrs.marginLeft || '',
+                    marginRight: node.attrs.marginRight || '',
+                    justifySelf: node.attrs.justifySelf || '',
+                    backgroundColor: node.attrs.backgroundColor || '',
+                    borderWidth: node.attrs.borderWidth || '',
+                    borderStyle: node.attrs.borderStyle || '',
+                    borderColor: node.attrs.borderColor || '',
+                    marginTop: node.attrs.marginTop || '',
+                    marginBottom: node.attrs.marginBottom || '',
                 }}
             />
         </NodeViewWrapper>

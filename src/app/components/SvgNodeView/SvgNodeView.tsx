@@ -3,7 +3,7 @@ import { ReactNodeViewRenderer, NodeViewWrapper } from '@tiptap/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { allStyleAttributes } from '@/utils/styles'
 import { useElementTracking } from '@/hooks/useElementTracking'
-
+import SVG from 'react-inlinesvg';
 export const SvgNode = Node.create({
     name: 'svg',
     group: 'block',
@@ -91,23 +91,7 @@ export const SvgNode = Node.create({
 })
 
 
-function InlineSvg({ url, color }: { url: string; color: string }) {
-    const [svgContent, setSvgContent] = useState<string>('')
 
-    useEffect(() => {
-        fetch(url)
-            .then(res => res.text())
-            .then(setSvgContent)
-    }, [url])
-
-    return (
-        <div
-            className="svg-wrapper"
-            style={{ fill: color }}
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-        />
-    )
-}
 
 const SvgNodeView = (props: any) => {
     const {
@@ -131,6 +115,7 @@ const SvgNodeView = (props: any) => {
         display,
         ...rest
     } = props.node.attrs
+    useElementTracking
     const svgStyle = {
         width: width || '100%',
         height: height || '100%',
@@ -147,16 +132,35 @@ const SvgNodeView = (props: any) => {
         minHeight: '2px',
         minWidth: '1px',
     };
-
+    const { ref, elementId, parentContainerWidth } = useElementTracking({
+        elementType: 'svg',
+        node: props.node,
+        getElementData: (elementId: string, slideNumber: string, coordinates: any) => {
+            let currentNode = props.editor.state.doc.nodeAt(props.getPos());
+            let { ...styleAttrs } = currentNode?.attrs || {};
+            return {
+                url: url,
+                style: {
+                    ...styleAttrs
+                },
+            }
+        }
+    })
     return (
-        <NodeViewWrapper as="div" className="relative inline-block w-full h-full overflow-hidden">
+        <NodeViewWrapper as="div" ref={ref as any} id={elementId}
+            className="relative inline-block w-full h-full overflow-hidden">
             {url ? (
-                <img
+                <SVG
                     src={url}
-                    alt="SVG"
-                    style={svgStyle}
-                    className="svg-element"
-                />
+                    width={'100%'}
+                    height={'100%'}
+                    title={url}
+                    // ref={ref as any}
+                    style={{
+                        color: color,
+                        width: '100%',
+                        height: '100%',
+                    }} />
             ) : (
                 <div
                     style={{

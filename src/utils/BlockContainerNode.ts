@@ -35,6 +35,8 @@ export const BlockContainerNode = Node.create({
                     marginLeft: (node as HTMLElement).style.marginLeft || '',
                     marginRight: (node as HTMLElement).style.marginRight || '',
                     display: (node as HTMLElement).style.display || '',
+                    justifyContent: (node as HTMLElement).style.justifyContent || '',
+                    alignItems: (node as HTMLElement).style.alignItems || '',
 
                 }),
             },
@@ -59,6 +61,8 @@ export const BlockContainerNode = Node.create({
         if (HTMLAttributes.marginTop) styles.push(`margin-top: ${HTMLAttributes.marginTop}`);
         if (HTMLAttributes.marginBottom) styles.push(`margin-bottom: ${HTMLAttributes.marginBottom}`);
         if (HTMLAttributes.display) styles.push(`display: ${HTMLAttributes.display}`);
+        if (HTMLAttributes.justifyContent) styles.push(`justify-content: ${HTMLAttributes.justifyContent}`);
+        if (HTMLAttributes.alignItems) styles.push(`align-items: ${HTMLAttributes.alignItems}`);
         return ['block-container', mergeAttributes(HTMLAttributes, {
             style: styles.length > 0 ? styles.join('; ') : undefined,
         }), 0]
