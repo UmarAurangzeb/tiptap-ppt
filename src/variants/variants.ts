@@ -3,6 +3,7 @@ type VariantElement = {
     content: string
     name?: string
     class?: string
+    u_id?: string
     bulletColor?: string
     bulletText?: string
     src?: string
@@ -46,26 +47,28 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'title-image'
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Title header',
+                        content: '',
                         class: '',
+                        u_id: 'title-header',
                         attributes: {
-                            color: 'blue',
+                            color: 'black',
                             'text-align': 'center',
-                            'font-weight': 'bold',
-                            'align-self': 'center'
+                            'align-self': 'center',
+                            'font-weight': 'bold'
                         }
                     },
                     {
                         type: 'paragraph',
                         name: 'credit line',
-                        content: 'credit line',
+                        content: '',
                         class: '',
-
+                        u_id: 'title-credit-line',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'left'
@@ -74,9 +77,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'date',
-                        content: 'date',
+                        content: '',
                         class: '',
-
+                        u_id: 'title-date',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'right'
@@ -89,25 +92,28 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'title-image'
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Title header',
+                        content: '',
                         class: '',
+                        u_id: 'title-header',
                         attributes: {
                             color: 'blue',
                             'text-align': 'center',
-                            'font-weight': 'bold',
-                            'align-self': 'center'
+                            'align-self': 'center',
+                            'font-weight': 'bold'
                         }
                     },
                     {
                         type: 'paragraph',
                         name: 'credit line',
-                        content: 'credit line',
+                        content: '',
                         class: '',
+                        u_id: 'title-credit-line',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'left'
@@ -116,8 +122,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'date',
-                        content: 'date',
+                        content: '',
                         class: '',
+                        u_id: 'title-date',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'right'
@@ -128,24 +135,26 @@ export const SlideVariants = [
             {
                 name: 'centerTitle',
                 elements: [
-                    // {
-                    //     type: 'image',
-                    //     content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-                    //     setDisplayNone: true,
-                    //     attributes: {
-                    //     }
-                    // },
+                    {
+                        type: 'image',
+                        content: '',
+                        setDisplayNone: true,
+                        u_id: 'title-image',
+                        attributes: {
+                        }
+                    },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Title header',
+                        content: '',
                         class: '',
+                        u_id: 'title-header',
                         attributes: {
-                            'color': 'pink',
+                            'color': 'black',
                             'text-align': 'center',
-                            'font-weight': 'bold',
                             'align-self': 'center',
-                            'justify-self': 'center'
+                            'justify-self': 'center',
+                            'font-weight': 'bold'
 
                         }
 
@@ -153,8 +162,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'credit line',
-                        content: 'credit line',
+                        content: '',
                         class: '',
+                        u_id: 'title-credit-line',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'right'
@@ -163,8 +173,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'date',
-                        content: 'date',
+                        content: '',
                         class: '',
+                        u_id: 'title-date',
                         attributes: {
                             'align-self': 'center',
                             'text-align': 'left'
@@ -177,19 +188,21 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'title-image'
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Title header',
+                        content: '',
                         class: '',
+                        u_id: 'title-header',
                         attributes: {
                             color: 'white',
                             'text-align': 'center',
-                            'font-weight': 'bold',
                             'align-self': 'center',
-                            'justify-self': 'center'
+                            'justify-self': 'center',
+                            'font-weight': 'bold'
 
                         }
 
@@ -197,8 +210,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'credit line',
-                        content: 'credit line',
+                        content: '',
                         class: '',
+                        u_id: 'title-credit-line',
                         attributes: {
                             color: 'white',
                             'align-self': 'center',
@@ -208,8 +222,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'date',
-                        content: 'date',
+                        content: '',
                         class: '',
+                        u_id: 'title-date',
                         attributes: {
                             color: 'white',
                             'align-self': 'center',
@@ -228,22 +243,26 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'accent-image-img'
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Accent Image header',
+                        content: '',
                         class: '',
+                        u_id: 'accent-image-header',
                         attributes: {
-                            'text-align': 'left'
+                            'text-align': 'left',
+                            'font-weight': 'bold'
                         }
                     },
                     {
                         type: 'paragraph',
                         name: 'paragraph',
-                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        content: '',
                         class: '',
+                        u_id: 'accent-image-paragraph',
                         attributes: {
                             'text-align': 'left'
                         }
@@ -255,13 +274,15 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'accent-image-img'
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the Accent Image header',
+                        content: '',
                         class: '',
+                        u_id: 'accent-image-header',
                         attributes: {
                             'text-align': 'left'
                         }
@@ -269,8 +290,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'paragraph',
-                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        content: '',
                         class: '',
+                        u_id: 'accent-image-paragraph',
                         attributes: {
                             'text-align': 'left',
                         }
@@ -299,7 +321,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'headertext-layout-header',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -309,8 +332,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'paragraph',
-                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        content: '',
                         class: '',
+                        u_id: 'headertext-layout-paragraph',
                         attributes: {
                             'text-align': 'left',
                         }
@@ -334,7 +358,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'headertext-layout-header',
                                 class: '',
                                 attributes: {
                                     'text-align': 'center'
@@ -345,8 +370,9 @@ export const SlideVariants = [
                     {
                         type: 'paragraph',
                         name: 'paragraph',
-                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                        content: '',
                         class: '',
+                        u_id: 'headertext-layout-paragraph',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -364,7 +390,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'text-card-layout-header',
                         class: '',
                         attributes: {
                             'text-align': 'left',
@@ -392,7 +419,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-1',
                                         attributes: {
                                             'text-align': 'center'
                                         }
@@ -400,7 +428,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-1',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -423,7 +452,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-2',
                                         attributes: {
                                             'text-align': 'center'
                                         }
@@ -431,7 +461,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque . loeremasd sdks asdfn s skdan skfekfms skm',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-2',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -454,7 +485,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-3',
                                         attributes: {
                                             'text-align': 'center'
                                         }
@@ -462,7 +494,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque .',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-3',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -479,7 +512,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'text-card-layout-header',
                         class: '',
                         attributes: {
                             'text-align': 'left',
@@ -510,7 +544,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-1',
                                         attributes: {
                                             'text-align': 'left',
                                             'margin-left': '2%'
@@ -520,7 +555,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adip',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-1',
                                         attributes: {
                                             'text-align': 'left',
                                         }
@@ -543,7 +579,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-2',
                                         attributes: {
                                             'text-align': 'left',
                                             'margin-left': '2%'
@@ -552,7 +589,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-2',
                                         attributes: {
                                             'text-align': 'left',
                                         }
@@ -575,7 +613,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-3',
                                         attributes: {
                                             'text-align': 'left',
                                             'margin-left': '2%'
@@ -584,7 +623,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-3',
                                         attributes: {
                                             'text-align': 'left',
                                         }
@@ -601,7 +641,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'text-card-layout-header',
                         class: '',
                         attributes: {
                             'text-align': 'left'
@@ -631,7 +672,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-1',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -639,7 +681,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolorsectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-1',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -660,7 +703,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-2',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -668,7 +712,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-2',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -689,7 +734,8 @@ export const SlideVariants = [
                                     {
                                         type: 'heading',
                                         name: 'card-header',
-                                        content: 'text card header',
+                                        content: '',
+                                        u_id: 'text-card-content-header-3',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -697,7 +743,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'card-content',
-                                        content: 'Lorem, ipsum dolor sit  ipsum dolor sit amet ctetur adipisicing  ipsum dolor sit amet consectetur adipisicing',
+                                        content: '',
+                                        u_id: 'text-card-content-paragraph-3',
                                         attributes: {
                                             'text-align': 'left'
                                         }
@@ -718,15 +765,18 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'image-format-img-1'
                     },
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'image-format-img-2'
                     },
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d'
+                        content: '',
+                        u_id: 'image-format-img-3'
                     },
                     {
                         type: 'block-container',
@@ -740,7 +790,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-1',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -748,7 +799,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-1',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -767,7 +819,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-2',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -775,7 +828,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-2',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -794,7 +848,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-3',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -802,7 +857,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-3',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -816,21 +872,24 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        content: '',
+                        u_id: 'image-format-img-1',
                         attributes: {
                             'border-radius': '200px'
                         }
                     },
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        content: '',
+                        u_id: 'image-format-img-2',
                         attributes: {
                             'border-radius': '200px'
                         }
                     },
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
+                        content: '',
+                        u_id: 'image-format-img-3',
                         attributes: {
                             'border-radius': '200px'
                         }
@@ -847,7 +906,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-1',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -855,7 +915,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-1',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -874,7 +935,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-2',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -882,7 +944,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-2',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -901,7 +964,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'title',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'image-format-header-3',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -909,7 +973,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'content',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'image-format-paragraph-3',
                                 attributes: {
                                     'text-align': 'left'
                                 }
@@ -928,13 +993,14 @@ export const SlideVariants = [
                 elements: [
                     {
                         type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-
+                        content: '',
+                        u_id: 'bullet-list-img',
                     },
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'bullet-list-header',
                         attributes: {
                             'text-align': 'left',
                         },
@@ -948,7 +1014,7 @@ export const SlideVariants = [
                             {
                                 type: 'li',
                                 name: 'item1',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
 
                                 attributes: {
@@ -958,14 +1024,15 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p1',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-1',
                                     }
                                 ]
                             },
                             {
                                 type: 'li',
                                 name: 'item2',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
 
                                 attributes: {
@@ -975,14 +1042,15 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p2',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-2',
                                     }
                                 ]
                             },
                             {
                                 type: 'li',
                                 name: 'item3',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
                                 attributes: {
                                 },
@@ -990,7 +1058,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p3',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-3',
                                     }
                                 ]
                             },
@@ -1001,25 +1070,22 @@ export const SlideVariants = [
             {
                 name: 'noImage',
                 elements: [
-                    // {
-                    //     type: 'image',
-                    //     content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-                    //     attributes: {
-                    //         display: 'none'
-                    //     },
-                    // },
                     {
-                        type: 'heading',
-                        name: 'title',
-                        content: 'this is the header',
+                        type: 'image',
+                        content: '',
+                        u_id: 'bullet-list-img',
+                        setDisplayNone: true,
                         attributes: {
-                            'text-align': 'left',
                         },
                     },
                     {
-                        type: 'image',
-                        content: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d',
-                        setDisplayNone: true,
+                        type: 'heading',
+                        name: 'title',
+                        content: '',
+                        u_id: 'bullet-list-header',
+                        attributes: {
+                            'text-align': 'left',
+                        },
                     },
                     {
                         type: 'block-container',
@@ -1030,7 +1096,7 @@ export const SlideVariants = [
                             {
                                 type: 'li',
                                 name: 'item1',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
                                 attributes: {
                                 },
@@ -1038,14 +1104,15 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p1',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-1',
                                     }
                                 ]
                             },
                             {
                                 type: 'li',
                                 name: 'item2',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
 
                                 attributes: {
@@ -1054,14 +1121,15 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p2',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-2',
                                     }
                                 ]
                             },
                             {
                                 type: 'li',
                                 name: 'item3',
-                                content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                content: '',
                                 bulletColor: '#D9D9D9',
                                 attributes: {
                                     bulletColor: '#D9D9D9',
@@ -1070,7 +1138,8 @@ export const SlideVariants = [
                                     {
                                         type: 'paragraph',
                                         name: 'p3',
-                                        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!',
+                                        content: '',
+                                        u_id: 'bullet-list-item-3',
                                     }
                                 ]
                             },
@@ -1089,7 +1158,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'info-collection-header',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -1102,7 +1172,7 @@ export const SlideVariants = [
                         attributes: {
                             'width': '100%',
                             'height': '100%',
-                            'color': 'purple'
+                            'color': '#D9D9D9'
                         }
                     },
                     {
@@ -1136,12 +1206,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-1',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-1',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1183,12 +1255,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-2',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-2',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1230,12 +1304,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-3',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-3',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1251,9 +1327,9 @@ export const SlideVariants = [
                         name: 'info-collection-item-4',
                         content: '',
                         class: 'info-collection-item-4',
+                        setDisplayNone: true,
                         attributes: {
                             'margin-top': '4%',
-                            'display': 'none'
                         },
                         children: [
                             {
@@ -1274,12 +1350,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-4',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-4',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1298,7 +1376,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'info-collection-header',
                         attributes: {
                             'text-align': 'left'
                         }
@@ -1327,12 +1406,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-1',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-1',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1367,12 +1448,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-2',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-2',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1410,12 +1493,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-3',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-3',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1453,12 +1538,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-4',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-4',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1477,7 +1564,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'info-collection-header',
                         attributes: {
                             'text-align': 'left'
                         }
@@ -1519,12 +1607,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-1',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolorlit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-1',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1562,12 +1652,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-2',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor elit. Dignissimos at recusandae assibero asperiores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-2',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1605,12 +1697,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-3',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet conseriores rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-3',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1625,10 +1719,10 @@ export const SlideVariants = [
                         type: 'block-container',
                         name: 'info-collection-item-4',
                         content: '',
+                        setDisplayNone: true,
                         class: 'info-collection-item-4',
                         attributes: {
                             'margin-top': '4%',
-                            'display': 'none'
                         },
                         children: [
                             {
@@ -1649,12 +1743,14 @@ export const SlideVariants = [
                                             {
                                                 type: 'heading',
                                                 name: 'item-title',
-                                                content: 'this is the header'
+                                                content: '',
+                                                u_id: 'info-item-header-4',
                                             },
                                             {
                                                 type: 'paragraph',
                                                 name: 'item-content',
-                                                content: 'Lorem ipsum dolor sit amet issimoes rerum minus magnam totam iusto quis!',
+                                                content: '',
+                                                u_id: 'info-item-paragraph-4',
                                                 attributes: {
                                                     'text-align': 'left'
                                                 }
@@ -1673,7 +1769,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'title',
-                        content: 'this is the header',
+                        content: '',
+                        u_id: 'info-collection-header',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -1695,7 +1792,7 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconColor': 'purple'
+                                    'iconColor': 'black'
                                 }
                             }
                         ]
@@ -1717,7 +1814,7 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconColor': 'purple'
+                                    'iconColor': 'black'
                                 }
                             }
                         ]
@@ -1739,7 +1836,7 @@ export const SlideVariants = [
                                 content: '',
                                 attributes: {
                                     'iconName': 'fa-solid fa-star',
-                                    'iconColor': 'purple'
+                                    'iconColor': 'black'
                                 }
                             }
                         ]
@@ -1756,7 +1853,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'block-title-1',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'info-item-header-1',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1764,7 +1862,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'block-content-1',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'info-item-paragraph-1',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1783,7 +1882,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'block-title-2',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'info-item-header-2',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1791,7 +1891,8 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'block-content-2',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'info-item-paragraph-2',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1810,7 +1911,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'block-title-3',
-                                content: 'this is the header',
+                                content: '',
+                                u_id: 'info-item-header-3',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1818,7 +1920,38 @@ export const SlideVariants = [
                             {
                                 type: 'paragraph',
                                 name: 'block-content-3',
-                                content: 'icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.',
+                                content: '',
+                                u_id: 'info-item-paragraph-3',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        type: 'block-container',
+                        name: 'content-block-4',
+                        content: '',
+                        setDisplayNone: true,
+                        attributes: {
+                            'width': '100%',
+                            'height': '100%'
+                        },
+                        children: [
+                            {
+                                type: 'heading',
+                                name: 'block-title-4',
+                                content: '',
+                                u_id: 'info-item-header-4',
+                                attributes: {
+                                    'text-align': 'center'
+                                }
+                            },
+                            {
+                                type: 'paragraph',
+                                name: 'block-content-4',
+                                content: '',
+                                u_id: 'info-item-paragraph-4',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1853,7 +1986,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'section-number',
-                                content: '#1',
+                                u_id: 'section-break-item-1',
+                                content: '',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1863,7 +1997,8 @@ export const SlideVariants = [
                     {
                         type: 'heading',
                         name: 'section-title',
-                        content: 'Section Title #1',
+                        u_id: 'section-break-item-2',
+                        content: '',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -1890,7 +2025,8 @@ export const SlideVariants = [
                             {
                                 type: 'heading',
                                 name: 'section-number',
-                                content: '#1',
+                                u_id: 'section-break-item-1',
+                                content: '',
                                 attributes: {
                                     'text-align': 'center'
                                 }
@@ -1899,8 +2035,10 @@ export const SlideVariants = [
                     },
                     {
                         type: 'heading',
+
                         name: 'section-title',
-                        content: 'Section Title #1',
+                        u_id: 'section-break-item-2',
+                        content: '',
                         attributes: {
                             'text-align': 'center'
                         }
@@ -1911,9 +2049,46 @@ export const SlideVariants = [
     }
 ]
 
-export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string) => {
+export const renderHTML = (Updatedvariant: string, slideType: string, slideNumber: string, content_level: any) => {
     const variant = SlideVariants.find(v => v.type === slideType)?.variants.find(v => v.name === Updatedvariant);
     if (!variant) return '';
+
+    function convertTiptapJSONToHTML(children: any, element: any) {
+        if (!children) return '';
+
+        return children.map((node: any) => {
+            let text = node.text || '';
+
+            // Handle marks as an object (not array)
+            if (node.marks && typeof node.marks === 'object') {
+                if (node.marks.bold && element.attributes['font-weight'] !== 'bold') {
+                    text = `<strong>${text}</strong>`;
+                }
+                if (node.marks.italic) {
+                    text = `<em>${text}</em>`;
+                }
+                if (node.marks.underline) {
+                    text = `<u>${text}</u>`;
+                }
+                if (node.marks.strike) {
+                    text = `<s>${text}</s>`;
+                }
+                if (node.marks.fontFamily) {
+                    text = `<span style="font-family: ${node.marks.fontFamily}">${text}</span>`;
+                }
+                // Handle textStyle as a nested object
+                // if (node.marks.textStyle) {
+                //     const style: string[] = [];
+                //     if (node.marks.textStyle.fontFamily) style.push(`font-family: ${node.marks.textStyle.fontFamily}`);
+                //     text = `<span style="${style.join('; ')}">${text}</span>`;
+                // }
+            }
+
+            return text;
+        }).join('');
+    }
+
+
 
     const renderElement = (element: VariantElement): string => {
         const attributes = element.attributes || {};
@@ -1921,23 +2096,32 @@ export const renderHTML = (Updatedvariant: string, slideType: string, slideNumbe
             .map(([key, value]) => `${key}: ${value}`)
             .join('; ');
 
+        const content_level_element = content_level.find((item: any) => item.u_id === element.u_id);
+        let innerHTML = ''
+        if (content_level_element && (content_level_element.type === 'paragraph' || content_level_element.type === 'heading')) {
+            innerHTML = convertTiptapJSONToHTML(content_level_element.children, element)
+            console.log("innerHTML", innerHTML)
+        }
+
+
         const classAttr = element.class ? ` class="${element.class}"` : '';
         const bulletColorAttr = element.bulletColor ? ` bulletColor="${element.bulletColor}"` : '';
         const bulletTextAttr = element.bulletText ? ` bulletText="${element.bulletText}"` : '';
         const DisplayNoneAttr = element.setDisplayNone && element.setDisplayNone === true ? 'true' : 'false';
+
         switch (element.type) {
             case 'image':
-                return `<img src="${element.content}" style="${styleString}" alt="Mountain Landscape" setDisplayNone="${DisplayNoneAttr}" />`;
+                return `<img u_id="${element.u_id}" src="${content_level_element?.src}" style="${styleString}" alt="Mountain Landscape" setDisplayNone="${DisplayNoneAttr}" />`;
             case 'heading':
-                return `<h1 style="${styleString}">${element.content}</h1>`;
+                return `<h${content_level_element.level} u_id="${element.u_id}" style="${styleString}">${innerHTML || content_level_element?.content || element.content}</h${content_level_element.level}>`;
             case 'paragraph':
-                return `<p style="${styleString}">${element.content}</p>`;
+                return `<p u_id="${element.u_id}" style="${styleString}">${innerHTML || element.content}</p>`;
             case 'li':
                 const liChildrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
                 return `<li${bulletColorAttr}${bulletTextAttr} style="${styleString}">${liChildrenHTML}</li>`;
             case 'block-container':
                 const childrenHTML = element.children?.map(child => renderElement(child)).join('\n') || '';
-                return `<block-container${classAttr} style="${styleString}">${childrenHTML}</block-container>`;
+                return `<block-container ${classAttr} setDisplayNone="${DisplayNoneAttr}" style="${styleString}">${childrenHTML}</block-container>`;
             case 'svg-node':
                 const srcAttr = element.src ? ` src="${element.src}"` : '';
                 return `<svg-node${srcAttr} style="${styleString}"></svg-node>`;

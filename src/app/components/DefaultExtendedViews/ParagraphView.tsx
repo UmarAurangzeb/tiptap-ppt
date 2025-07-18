@@ -1,6 +1,6 @@
 // components/ParagraphView.tsx
 "use client"
-import React from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { NodeViewWrapper, NodeViewContent, ReactNodeViewRenderer } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
 import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
@@ -11,6 +11,9 @@ export const CustomParagraph = Paragraph.extend({
         return {
             ...this.parent?.(),
             ...allStyleAttributes,
+            u_id: {
+                default: null,
+            }
         }
     },
     renderHTML({ HTMLAttributes }) {
@@ -36,6 +39,7 @@ export const CustomParagraph = Paragraph.extend({
             {
                 ...HTMLAttributes,
                 style: styles.length > 0 ? styles.join('; ') : undefined,
+                u_id: HTMLAttributes.u_id,
             },
             0,
         ];
@@ -48,6 +52,68 @@ export const CustomParagraph = Paragraph.extend({
 export default function ParagraphView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
     let fontSize = useResponsiveFontSize(32)
     node.attrs.fontSize = fontSize
+
+
+    const extractTextWithMarks = (node: any) => {
+        const chunks: any = []
+
+        node.descendants((child: any) => {
+            if (child.isText) {
+                const text = child.text
+                const markStyles: any = {}
+
+                // Handle marks more robustly
+                if (child.marks && Array.isArray(child.marks)) {
+                    child.marks.forEach((mark: any) => {
+                        // Handle different mark type structures
+                        const markType = mark.type?.name || mark.type
+
+                        switch (markType) {
+                            case 'bold':
+                                markStyles.bold = true
+                                break
+                            case 'italic':
+                                markStyles.italic = true
+                                break
+                            case 'underline':
+                                markStyles.underline = true
+                                break
+                            case 'strike':
+                                markStyles.strike = true
+                                break
+                            case 'textStyle':
+                                const { fontFamily, color } = mark.attrs || {}
+                                if (fontFamily) markStyles.fontFace = fontFamily
+                                if (color) markStyles.color = color
+                                break
+                            case 'fontFamily':
+                                if (mark.attrs?.fontFamily) {
+                                    markStyles.fontFace = mark.attrs.fontFamily
+                                }
+                                break
+                            default:
+                                // Handle any other mark types
+                                if (mark.attrs) {
+                                    Object.assign(markStyles, mark.attrs)
+                                }
+                                break
+                        }
+                    })
+                }
+
+                // Only add chunk if there's text content
+                if (text && text.trim()) {
+                    chunks.push({
+                        text,
+                        options: markStyles,
+                    })
+                }
+            }
+        })
+        console.log("chunks updated of paragraph", chunks)
+        return chunks
+    }
+
     const { ref, elementId, parentContainerWidth } = useElementTracking(
         {
             elementType: node.type.name,
@@ -55,9 +121,13 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
             getElementData: (elementId, slideNumber, coordinates) => {
                 const currentNode = editor.state.doc.nodeAt(getPos());
                 const { ...styleAttrs } = currentNode?.attrs || {};
+
+                // Calculate chunks directly here instead of relying on state
+                const currentChunks = currentNode ? extractTextWithMarks(currentNode) : [];
                 return {
                     content: currentNode?.textContent || '',
                     style: styleAttrs,
+                    textChunks: currentChunks,
                 }
             }
         }
@@ -80,12 +150,12 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
     return (
         <NodeViewWrapper ref={ref} className="relative group">
             {/* 3-dots button - outside the paragraph */}
-            <div
+            {/* <div
                 className="absolute left-1 bg-gray-200 top-[1px] opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded"
                 onClick={selectParagraph}
             >
                 ⋮
-            </div>
+            </div> */}
             {/* Actual editable paragraph */}
             <NodeViewContent
                 as="p"
@@ -96,7 +166,6 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                     // paddingBottom: useResponsiveStrokeWidth(16),
                     // lineHeight: useResponsiveStrokeWidth(40),
                     textAlign: node.attrs.textAlign || '',
-                    fontWeight: node.attrs.fontWeight || '',
                     alignSelf: node.attrs.alignSelf || '',
                     marginLeft: node.attrs.marginLeft || '',
                     marginRight: node.attrs.marginRight || '',

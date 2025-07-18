@@ -1,17 +1,24 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { NodeViewWrapper, NodeViewContent, ReactNodeViewRenderer } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
 import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/responsive'
 import Heading from '@tiptap/extension-heading'
 import { allStyleAttributes } from '@/utils/styles'
+import { BubbleMenu } from '@tiptap/react'
 export const CustomHeader = Heading.extend({
     addAttributes() {
         return {
             ...this.parent?.(),
             ...allStyleAttributes,
+            u_id: {
+                default: null,
+            }
         }
+
     },
+    content: 'inline*',
+    marks: '_',
     renderHTML({ HTMLAttributes }) {
         const styles = [];
         if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
@@ -36,6 +43,7 @@ export const CustomHeader = Heading.extend({
             {
                 ...HTMLAttributes,
                 style: styles.length > 0 ? styles.join('; ') : undefined,
+                u_id: HTMLAttributes.u_id,
             },
             0,
         ];
@@ -50,6 +58,66 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     const level = node.attrs.level || 1
     const headerTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
+
+    const extractTextWithMarks = (node: any) => {
+        const chunks: any = []
+
+        node.descendants((child: any) => {
+            if (child.isText) {
+                const text = child.text
+                const markStyles: any = {}
+
+                // Handle marks more robustly
+                if (child.marks && Array.isArray(child.marks)) {
+                    child.marks.forEach((mark: any) => {
+                        // Handle different mark type structures
+                        const markType = mark.type?.name || mark.type
+
+                        switch (markType) {
+                            case 'bold':
+                                markStyles.bold = true
+                                break
+                            case 'italic':
+                                markStyles.italic = true
+                                break
+                            case 'underline':
+                                markStyles.underline = true
+                                break
+                            case 'strike':
+                                markStyles.strike = true
+                                break
+                            case 'textStyle':
+                                const { fontFamily, color } = mark.attrs || {}
+                                if (fontFamily) markStyles.fontFace = fontFamily
+                                if (color) markStyles.color = color
+                                break
+                            case 'fontFamily':
+                                if (mark.attrs?.fontFamily) {
+                                    markStyles.fontFace = mark.attrs.fontFamily
+                                }
+                                break
+                            default:
+                                // Handle any other mark types
+                                if (mark.attrs) {
+                                    Object.assign(markStyles, mark.attrs)
+                                }
+                                break
+                        }
+                    })
+                }
+
+                // Only add chunk if there's text content
+                if (text && text.trim()) {
+                    chunks.push({
+                        text,
+                        options: markStyles,
+                    })
+                }
+            }
+        })
+        console.log("chunks updated", chunks)
+        return chunks
+    }
     // Calculate responsive font sizes based on header level
     const getHeaderFontSize = (level: number): string => {
         const baseSizes = {
@@ -67,19 +135,20 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
         elementType: 'heading',
         node,
         getElementData: (elementId, slideNumber, coordinates) => {
-            // Get the current node attributes at the time this function is called
 
             const currentNode = editor.state.doc.nodeAt(getPos());
-            // console.log("currentNode of header", currentNode)
             const { level, ...styleAttrs } = currentNode?.attrs || {};
-            // console.log("styleAttrs of header", styleAttrs)
+
+            const currentChunks = currentNode ? extractTextWithMarks(currentNode) : [];
+
             return {
                 content: currentNode?.textContent || '',
                 style: styleAttrs,
+                textChunks: currentChunks,
             }
         }
     })
-    // console.log("parentContainerWidth from header", parentContainerWidth)
+
     const selectHeader = () => {
         const from = getPos()
         console.log("getting starting position", from)
@@ -95,35 +164,35 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
         editor.view.focus()
     }
 
+
     // Get header level for appropriate styling
-
-
     return (
-        <NodeViewWrapper
-            ref={ref}
-            className="relative group"
-        >
-            {/* 3-dots button - Outside the heading */}
-            <div
-                className="absolute left-1 bg-gray-200 top-[1px] opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded"
-                onClick={selectHeader}
+        <>
+            <NodeViewWrapper
+                ref={ref}
+                className="relative group"
             >
-                ⋮
-            </div>
+                {/* 3-dots button - Outside the heading */}
+                {/* <div
+                    className="absolute left-1 top-1/2 -translate-y-1/2 bg-gray-200 opacity-0 group-hover:opacity-100 cursor-pointer p-1 text-black hover:bg-gray-200 rounded z-10"
+                    onClick={selectHeader}
+                >
+                    ⋮
+                </div> */}
 
-            {/* Actual editable header */}
-            <NodeViewContent
-                as={headerTag}
-                className=""
-                style={{
-                    fontSize: getHeaderFontSize(level),
-                    paddingTop: useResponsiveStrokeWidth(16),
-                    color: node.attrs.color || 'black',
-                    textAlign: node.attrs.textAlign || '',
-                    fontWeight: node.attrs.fontWeight || '',
-                    alignSelf: node.attrs.alignSelf || '',
-                }}
-            />
-        </NodeViewWrapper>
+                {/* Actual editable header */}
+                <NodeViewContent
+                    as={headerTag}
+                    className="relative"
+                    style={{
+                        fontSize: getHeaderFontSize(level),
+                        paddingTop: useResponsiveStrokeWidth(16),
+                        color: node.attrs.color || 'black',
+                        textAlign: node.attrs.textAlign || '',
+                        alignSelf: node.attrs.alignSelf || '',
+                    }}
+                />
+            </NodeViewWrapper>
+        </>
     )
 } 

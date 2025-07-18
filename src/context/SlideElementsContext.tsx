@@ -10,6 +10,7 @@ export type SlideElement = {
     width: number
     height: number
     content: string
+    textChunks: any[]
     // Shape-specific properties
     shapeType?: 'rectangle' | 'roundedRectangle'
     fillColor?: string
@@ -94,7 +95,7 @@ export const SlideElementsProvider = ({ children }: { children: ReactNode }) => 
                 // Add new element
                 newState[element.slide_number].push(element)
             }
-            // console.log(' updated slide elements:', newState)
+            console.log(' updated slide elements:', newState)
             return newState
         })
     }, [])

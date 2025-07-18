@@ -12,6 +12,9 @@ export const customImage = Image.extend({
             ...allStyleAttributes,
             setDisplayNone: {
                 default: false
+            },
+            u_id: {
+                default: null,
             }
         }
     },
@@ -39,6 +42,7 @@ export const customImage = Image.extend({
             {
                 ...HTMLAttributes,
                 style: styles.length > 0 ? styles.join('; ') : undefined,
+                u_id: HTMLAttributes.u_id,
             },
         ];
     },
@@ -65,7 +69,6 @@ export default function ImageView({ editor, node, getPos }: { editor: any, node:
         getElementData: (elementId, slideNumber, coordinates) => {
             // Exclude src and alt from node.attrs
             const currentNode = editor.state.doc.nodeAt(getPos());
-            currentNode.attrs.display = currentNode.attrs.setDisplayNone && currentNode.attrs.setDisplayNone === true ? 'none' : 'block';
             const { src, alt, setDisplayNone, ...styleAttrs } = currentNode?.attrs || {};
             // console.log("styleAttrs for image", styleAttrs)
             return {

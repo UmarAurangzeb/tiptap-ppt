@@ -206,8 +206,6 @@ export async function exportToPowerPoint(slideElements: Record<string, SlideElem
             else if (element.type === 'image' && element.src) {
                 // Add image to slide
                 try {
-                    console.log("element.style?.display", element.style?.display)
-
                     const imageNode = document.getElementById(element.id)
                     if (imageNode) {
                         const pngDataUrl = await htmlToImage.toPng(imageNode)
@@ -242,8 +240,10 @@ export async function exportToPowerPoint(slideElements: Record<string, SlideElem
                     console.warn(`⚠️ Could not add image: ${element.src}`, error)
                 }
             } else if (element.type === 'heading') {
+
                 let parsedFontSize = parseFontSize(element.style?.fontSize || '0px')
                 let pptFontSize = convertFontSizeToPoints(parsedFontSize, containerDims.width)
+
                 const textOptions = {
                     x: Math.max(0, pptX),
                     y: Math.max(0, pptY) + 0.15,
@@ -255,37 +255,65 @@ export async function exportToPowerPoint(slideElements: Record<string, SlideElem
                     lineWrap: false,
                     autoFit: true,
                     align: (element.style?.textAlign || 'left') as 'left' | 'center' | 'right',
-                    bold: element.style?.fontWeight === 'bold' || false,
-                    margin: 0
+                    margin: 0,
                 }
-                slide.addText(element.content, textOptions)
+
+                if (element.textChunks.length === 0) {
+                    slide.addText(element.content, textOptions)
+                } else {
+                    slide.addText(
+                        element.textChunks.map(chunk => ({
+                            text: chunk.text,
+                            options: {
+                                bold: chunk.options?.bold,
+                                italic: chunk.options?.italic,
+                                underline: chunk.options?.underline,
+                                fontFace: chunk.options?.fontFace || 'Arial',
+                                fontSize: chunk.options?.fontSize || pptFontSize - 4,
+                                color: chunk.options?.color || cssColorToHex(element.style?.color || '000000'),
+                            }
+                        })),
+                        textOptions
+                    )
+                }
+
             }
             else if (element.type === 'paragraph') {
                 let parsedFontSize = parseFontSize(element.style?.fontSize || '0px')
                 let pptFontSize = convertFontSizeToPoints(parsedFontSize, containerDims.width)
-
-                // const marginLeft = element.style?.marginLeft && percentMarginToPptUnits(element.style.marginLeft, containerDims.width, SLIDE_WIDTH)
-                // const marginRight = element.style?.marginRight && percentMarginToPptUnits(element.style.marginRight, containerDims.width, SLIDE_WIDTH)
-                // const marginTop = element.style?.marginTop && percentMarginToPptUnits(element.style.marginTop, containerDims.height, SLIDE_HEIGHT)
-                // const marginBottom = element.style?.marginBottom && percentMarginToPptUnits(element.style.marginBottom, containerDims.height, SLIDE_HEIGHT)
-
-
-                // const overallXmargin = (marginLeft || 0) - (marginRight || 0)
-                // const overallYmargin = (marginTop || 0) - (marginBottom || 0)
 
                 const textOptions = {
                     x: Math.max(0, pptX),
                     y: Math.max(0, pptY),
                     w: Math.max(0.5, pptW),
                     h: Math.max(0.2, pptH),
-                    color: cssColorToHex(element.style?.color || '000000'),
                     fontSize: pptFontSize,
+                    color: cssColorToHex(element.style?.color || '000000'),
                     fontFace: 'Arial',
-                    align: (element.style?.textAlign || 'left') as 'left' | 'center' | 'right',
+                    lineWrap: false,
                     autoFit: true,
-                    bold: element.style?.fontWeight === 'bold' || false,
+                    align: (element.style?.textAlign || 'left') as 'left' | 'center' | 'right',
+                    margin: 0,
                 }
-                slide.addText(element.content, textOptions)
+
+                if (element.textChunks.length === 0) {
+                    slide.addText(element.content, textOptions)
+                } else {
+                    slide.addText(
+                        element.textChunks.map(chunk => ({
+                            text: chunk.text,
+                            options: {
+                                bold: chunk.options?.bold,
+                                italic: chunk.options?.italic,
+                                underline: chunk.options?.underline,
+                                fontFace: chunk.options?.fontFace || 'Arial',
+                                fontSize: chunk.options?.fontSize || pptFontSize,
+                                color: chunk.options?.color || cssColorToHex(element.style?.color || '000000'),
+                            }
+                        })),
+                        textOptions
+                    )
+                }
             }
             else if (element.type === 'icon') {
 
@@ -360,7 +388,7 @@ export function debugSlideMappings(slideElements: Record<string, SlideElement[]>
                 console.log(`     PowerPoint: x=${pptX.toFixed(2)}", y=${pptY.toFixed(2)}", w=${pptW.toFixed(2)}", h=${pptH.toFixed(2)}"`)
                 console.log(`     Style: fill=${element.fillColor}, border=${element.borderColor}, radius=${element.cornerRadius}px`)
             } else if (element.type === 'paragraph' || element.type === 'heading') {
-                // const fontSize = calculateFontSize(element, containerDims.height)
+                const fontSize = parseFontSize(element.style?.fontSize || '12px')
 
                 console.log(`  ${index + 1}. ${element.type.toUpperCase()}: "${element.content.substring(0, 30)}..."`)
                 console.log(`     Browser: x=${element.x}px, y=${element.y}px, w=${element.width}px, h=${element.height}px`)

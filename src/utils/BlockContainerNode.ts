@@ -14,6 +14,9 @@ export const BlockContainerNode = Node.create({
                 default: '',
             },
             ...allStyleAttributes,
+            setDisplayNone: {
+                default: false,
+            },
         }
     },
 
@@ -37,7 +40,7 @@ export const BlockContainerNode = Node.create({
                     display: (node as HTMLElement).style.display || '',
                     justifyContent: (node as HTMLElement).style.justifyContent || '',
                     alignItems: (node as HTMLElement).style.alignItems || '',
-
+                    setDisplayNone: (node as HTMLElement).getAttribute('setDisplayNone'),
                 }),
             },
         ]

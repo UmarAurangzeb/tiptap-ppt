@@ -5,7 +5,8 @@ import { Document } from '@tiptap/extension-document';
 import { Paragraph } from '@tiptap/extension-paragraph';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Bold from '@tiptap/extension-bold';
-import TextStyle from '@tiptap/extension-text-style';
+import Italic from '@tiptap/extension-italic';
+import Underline from '@tiptap/extension-underline';
 import FontFamily from '@tiptap/extension-font-family'
 import { FontSize } from 'tiptap-extension-font-size';
 import StarterKit from '@tiptap/starter-kit';
@@ -40,15 +41,17 @@ import { SvgNode } from './SvgNodeView/SvgNodeView'
 import { SectionBreakNode } from './SectionBreakNodeView/SectionBreakNodeView'
 import { IconNode } from './IconNodeView/IconNode'
 import { useSlideElements } from '@/context/SlideElementsContext'
+import { TextStyle } from '@tiptap/extension-text-style'
+
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
 <div class="slide-body" n="1">
 <title-slide variant="imageTop" slideNumber="1">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
-<h1 style="color: blue; text-align: center; font-weight: bold; align-self: center;">this is the Title header</h1>
-<p style=" align-self: center; text-align: left;">credit line</p>
-<p style=" align-self: center; text-align: right;">date</p>
+<img u_id='title-image' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+<h1 u_id='title-header'  style="color: black; text-align: center; align-self: center; font-weight: bold;">this is the Title header</h1>
+<p u_id='title-credit-line' style=" align-self: center; text-align: left;">credit line</p>
+<p u_id='title-date' style=" align-self: center; text-align: right;">date</p>
 </title-slide>
 </div>
 
@@ -57,19 +60,19 @@ export default function TiptapEditor() {
 <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <block-container>
     <li bulletColor="#D9D9D9">
-    <h1>this is the header</h1>
+    <h1 u_id='agenda-item-1'>this is the header</h1>
     </li>
     <li bulletColor="#D9D9D9">
-    <h1>this is the header</h1>
+    <h1 u_id='agenda-item-2'>this is the header</h1>
     </li>
     <li bulletColor="#D9D9D9">
-    <h1>this is the header</h1>
+    <h1 u_id='agenda-item-3'>this is the header</h1>
     </li>
      <li bulletColor="#D9D9D9">
-    <h1>this is thr</h1>
+    <h1 u_id='agenda-item-4'>this is the header</h1>
     </li>
      <li bulletColor="#D9D9D9">
-    <h1>this is the header</h1>
+    <h1 u_id='agenda-item-5'>this is the header</h1>
     </li>
 </block-container>
 </div>
@@ -77,20 +80,18 @@ export default function TiptapEditor() {
 <div class="slide-body" n="3">
 <section-break variant="SectionBreak1" slideNumber="3">
 <block-container class="section-break-item" style="width: 100%; height: 100%; border-radius: 50%; background-color: #D9D9D9; display: flex; justify-content: center; align-items: center;">
-<h1 style="text-align: center;">#1</h1>
+<h1 u_id='section-break-item-1' style="text-align: center;">#1</h1>
 </block-container>
-<h1 style="text-align: center;">Section Title #1</h1>
+<h1 u_id='section-break-item-2' style="text-align: center;">Section Title #1</h1>
 </section-break>
 </div>
 
-
-
 <div class="slide-body" n="4">
 <accentimage-layout variant="rightImage" slideNumber="4">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
+<img u_id='accent-image-img' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <accentimage-content>
-<h1 style=" text-align: left;">this is the Accent Image header</h1>
-<p style=" text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 u_id='accent-image-header' style=" text-align: left;">this is the Accent Image header</h1>
+<p u_id='accent-image-paragraph' style=" text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </accentimage-content>
 </accentimage-layout>
 </div>
@@ -98,63 +99,64 @@ export default function TiptapEditor() {
 <div class="slide-body" n="5">
 <headertext-layout variant="leftHeader" slideNumber="5">
 <block-container style="background-color: #D9D9D9; width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
+<h1 u_id='headertext-layout-header' style="text-align: left;">this is the header</h1>
 </block-container>
-<p style="text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<p u_id='headertext-layout-paragraph' style="text-align: left;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor sint eius eligendi quo itaque officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </headertext-layout>
 </div>
 
 <div class="slide-body" n="6">
 <image-format variant="imageFormat-rounded" slideNumber="6">
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
-<img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
+<img u_id='image-format-img-1' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
+<img u_id='image-format-img-2' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
+<img u_id='image-format-img-3' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" style='border-radius: 50%;' alt="Mountain Landscape" />
 <block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 u_id='image-format-header-1' style="text-align: left;">this is the header</h1>
+<p u_id='image-format-paragraph-1' style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
 <block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 u_id='image-format-header-2' style="text-align: left;">this is the header</h1>
+<p u_id='image-format-paragraph-2' style="text-align: left;">ue officia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
 <block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: left;">this is the header</h1>
-<p style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 u_id='image-format-header-3' style="text-align: left;">this is the header</h1>
+<p u_id='image-format-paragraph-3' style="text-align: left;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
 </image-format>
 </div>
 
 <div class="slide-body" n="7" >
 <bullet-list variant="noImage" slideNumber="7">
-<h1 style="text-align: left;">this is the header</h1>
+<h1 u_id='bullet-list-header' style="text-align: left;">this is the header</h1>
+<img u_id='bullet-list-img' src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d" alt="Mountain Landscape" />
 <block-container class="unordered-list">
-<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p></li>
-<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!</p></li>
-<li bulletColor="#D9D9D9"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!</p></li>
+<li bulletColor="#D9D9D9"><p u_id='bullet-list-item-1'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libero asperiores rerum minus magnam totam iusto quis!</p></li>
+<li bulletColor="#D9D9D9"><p u_id='bullet-list-item-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at recusandae assumenda libem iusto quis!</p></li>
+<li bulletColor="#D9D9D9"><p u_id='bullet-list-item-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos at r libero asperiores rerum minus magnam totam iusto quis!</p></li>
 </block-container>
 </bullet-list>
 </div>
 
 <div class="slide-body" n="8">
 <text-card-layout variant="columns" slideNumber="8">
-<h1 style="text-align: left; ">this is the header</h1>
+<h1 u_id='text-card-layout-header' style="text-align: left; ">this is the header</h1>
 <block-container class="text-card-parent" style="width: 100%; height: 100%;">
 
 <block-container class="text-card-content" style=" margin-right: 1%; width: 100%; height: 100%; ;">
-<h2 style="text-align: left; ">text card header</h2>
-<p style="text-align:left; ">Lorem, ipsum dolor sit  ipsum dolor sitamet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+<h2 u_id='text-card-content-header-1' style="text-align: left; ">text card header</h2>
+<p u_id='text-card-content-paragraph-1' style="text-align:left; ">Lorem, ipsum dolor sit ipsum dolor sit amet consectetur adipisicing ipsum dolor sit amet consectetur adipisicing ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
 
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
-<h2 style="text-align: left;">text card header</h2>
-<p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+<h2 u_id='text-card-content-header-2' style="text-align: left;">text card header</h2>
+<p u_id='text-card-content-paragraph-2' style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
 
 <block-container class="text-card-content" style=" margin-right: 1%;  width: 100%; height: 100%; ">
-<h2 style="text-align: left;">text card header</h2>
-<p style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
+<h2 u_id='text-card-content-header-3' style="text-align: left;">text card header</h2>
+<p u_id='text-card-content-paragraph-3' style="text-align:left;">Lorem, ipsum dolor sit  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing  ipsum dolor sit amet consectetur adipisicing
 </p>
 </block-container>
 
@@ -164,30 +166,38 @@ export default function TiptapEditor() {
 
 <div class="slide-body" n="9">
 <info-collection variant="icon-text" slideNumber="9">
-<h1 style="text-align: center;">this is the header</h1>
+<h1 u_id='info-collection-header' style="text-align: center;">this is the header</h1>
 <block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
+<icon iconName="fa-solid fa-star" iconColor="black"></icon>
+</block-container>
+
+<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
+<icon iconName="fa-solid fa-star" iconColor="black"></icon>
 </block-container>
 <block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
-</block-container>
-<block-container style="width: 50%; height: 80%; background-color: #D9D9D9; border-radius: 50%;">
-<icon iconName="fa-solid fa-star" iconColor="purple"></icon>
+<icon iconName="fa-solid fa-star" iconColor="black"></icon>
 </block-container>
 
 <block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+<h1 u_id='info-item-header-1' style="text-align: center;">this is the header</h1>
+<p u_id='info-item-paragraph-1' style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
-</block-container>
-<block-container style="width: 100%; height: 100%;">
-<h1 style="text-align: center;">this is the header</h1>
-<p style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 
+<block-container style="width: 100%; height: 100%;">
+<h1 u_id='info-item-header-2' style="text-align: center;">this is the header</h1>
+<p u_id='info-item-paragraph-2' style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
+
+<block-container style="width: 100%; height: 100%;">
+<h1 u_id='info-item-header-3' style="text-align: center;">this is the header</h1>
+<p u_id='info-item-paragraph-3' style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+
+<block-container setDisplayNone={true} style="width: 100%; height: 100%;">
+<h1 u_id='info-item-header-4' style="text-align: center;">this is the header</h1>
+<p u_id='info-item-paragraph-4' style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
+</block-container>
+
 </info-collection>
 </div>
 
@@ -206,6 +216,9 @@ export default function TiptapEditor() {
                 bulletList: false, // Disable the built-in bulletList to use our custom one
                 listItem: false, // Disable the built-in listItem
             }),
+            Bold,
+            Italic,
+            Underline,
             TextStyle,
             FontFamily.configure({ types: ['textStyle'] }),
             FontSize,
@@ -288,7 +301,7 @@ export default function TiptapEditor() {
                 removeElementsBySlide(slideNumber)
                 let content_level = getCurrentContent(node)
                 console.log("content_level", content_level)
-                ReplaceHTML(variant || '', prevVariant || '', nodeType, slideNumber)
+                ReplaceHTML(variant || '', prevVariant || '', nodeType, slideNumber, content_level)
 
                 variantMap.set(key, variant)
             }
@@ -297,136 +310,106 @@ export default function TiptapEditor() {
     })
 
 
-
-    // editor?.on('update', ({ editor }) => {
-    //     editor.state.doc.descendants((node, pos) => {
-    //         if (node.type.name === 'titleSlide') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.titleSlide;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 console.log("content_level", content_level)
-    //                 ReplaceHTML(currentVariant, previousVariant, 'titleSlide', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'accentImage') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.accentImage;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 // console.log("node of accentImage", node.content.content)
-    //                 let content_level = getCurrentContent(node);
-    //                 // console.log("content_level in accentImage", content_level)
-    //                 ReplaceHTML(currentVariant, previousVariant, 'accentImage', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'headerText') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.headerText;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-
-    //                 // console.log("content_level in headerText", content_level)
-    //                 ReplaceHTML(currentVariant, previousVariant, 'headerText', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'textCardLayout') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.textCardLayout;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 // console.log("content_level in accentIm", content_level)
-    //                 ReplaceHTML(currentVariant, previousVariant, 'textCardLayout', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'imageFormat') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.imageFormat;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 ReplaceHTML(currentVariant, previousVariant, 'imageFormat', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'bulletList') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.bulletList;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 ReplaceHTML(currentVariant, previousVariant, 'bulletList', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'infoCollection') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.infoCollection;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 ReplaceHTML(currentVariant, previousVariant, 'infoCollection', currentSlideNumber);
-    //             }
-    //         }
-    //         if (node.type.name === 'sectionBreak') {
-    //             const currentVariant = node.attrs.variant;
-    //             const currentSlideNumber = node.attrs.slideNumber;
-    //             let previousVariant = previousVariantRef.current.sectionBreak;
-    //             if (previousVariant !== currentVariant) {
-    //                 removeElementsBySlide(currentSlideNumber)
-    //                 let content_level = getCurrentContent(node);
-    //                 ReplaceHTML(currentVariant, previousVariant, 'sectionBreak', currentSlideNumber);
-    //             }
-    //         }
-    //     });
-    // });
-
     const getCurrentContent = (node: any) => {
-        const contentArr: any = [];
+        const contentArr: any[] = []
 
-        // Helper function to recursively process nodes
         const processNode = (n: any) => {
-            if (!n) return;
-            if (n.type && n.type.name) {
-                if (n.type.name === 'heading') {
-                    contentArr.push({
-                        type: 'heading',
-                        content: n.textContent,
-                        level: n.attrs.level
-                    });
-                } else if (n.type.name === 'paragraph') {
-                    contentArr.push({
-                        type: 'paragraph',
-                        content: n.textContent
-                    });
-                } else if (n.type.name === 'image') {
-                    contentArr.push({
-                        type: 'image',
-                        content: n.attrs.src
-                    });
+            if (!n) return
+
+            const nodeType = n.type?.name
+
+            // Handle block-level elements
+            if (['paragraph', 'heading'].includes(nodeType)) {
+                const block: any = {
+                    type: nodeType,
+                    level: n.attrs?.level || null,
+                    u_id: n.attrs?.u_id || null,
+                    children: [],
                 }
+                n.content?.content?.forEach((child: any) => {
+                    if (child.type.name === 'text') {
+                        const marks: any = {}
+
+                        child.marks?.forEach((mark: any) => {
+                            if (mark.type.name === 'bold') marks.bold = true
+                            if (mark.type.name === 'italic') marks.italic = true
+                            if (mark.type.name === 'underline') marks.underline = true
+                            if (mark.type.name === 'textStyle') {
+                                if (mark.attrs?.fontSize) marks.fontSize = mark.attrs.fontSize
+                                if (mark.attrs?.color) marks.color = mark.attrs.color
+                                if (mark.attrs?.fontFamily) marks.fontFamily = mark.attrs.fontFamily
+                            }
+                        })
+
+                        block.children.push({
+                            text: child.text,
+                            marks,
+                        })
+                    }
+                })
+
+                contentArr.push(block)
             }
-            // If this node has children, process them recursively
-            if (n.content && n.content.content && Array.isArray(n.content.content)) {
-                n.content.content.forEach(processNode);
+
+            // Handle images
+            if (nodeType === 'image') {
+                contentArr.push({
+                    type: 'image',
+                    src: n.attrs?.src,
+                    u_id: n.attrs?.u_id,
+                })
             }
-        };
 
-        processNode(node);
-        return contentArr;
-    };
+            // Recursively process nested content
+            n.content?.content?.forEach(processNode)
+        }
 
-    const ReplaceHTML = (currentVariant: string, previousVariant: string | null, VariantType: string, slideNumber: string) => {
+        processNode(node)
+        return contentArr
+    }
 
-        const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber);
+
+    // const getCurrentContent = (node: any) => {
+    //     const contentArr: any = [];
+
+    //     // Helper function to recursively process nodes
+    //     const processNode = (n: any) => {
+    //         if (!n) return;
+    //         if (n.type && n.type.name) {
+    //             if (n.type.name === 'heading') {
+    //                 console.log("heading node", n)
+    //                 contentArr.push({
+    //                     type: 'heading',
+    //                     content: n.textContent,
+    //                     level: n.attrs.level
+    //                 });
+    //             } else if (n.type.name === 'paragraph') {
+    //                 console.log("paragraph node", n)
+    //                 contentArr.push({
+    //                     type: 'paragraph',
+    //                     content: n.textContent
+    //                 });
+    //             } else if (n.type.name === 'image') {
+    //                 console.log("image node", n)
+    //                 contentArr.push({
+    //                     type: 'image',
+    //                     content: n.attrs.src
+    //                 });
+    //             }
+    //         }
+    //         // If this node has children, process them recursively
+    //         if (n.content && n.content.content && Array.isArray(n.content.content)) {
+    //             n.content.content.forEach(processNode);
+    //         }
+    //     };
+
+    //     processNode(node);
+    //     return contentArr;
+    // };
+
+    const ReplaceHTML = (currentVariant: string, previousVariant: string | null, VariantType: string, slideNumber: string, content_level: any) => {
+
+        const newSlideHTML = renderHTML(currentVariant, VariantType, slideNumber, content_level);
         setBackendHTMLContent(prevContent => {
             // Split the content into slides
             const slides = prevContent.split('</div>').filter(slide => slide.trim());
@@ -447,7 +430,6 @@ export default function TiptapEditor() {
 
     }
 
-
     useEffect(() => {
         if (editor && backendHTMLContent) {
             const cleanHTML = backendHTMLContent
@@ -463,29 +445,12 @@ export default function TiptapEditor() {
                 .replace(/&lt;/g, '<')
                 .replace(/&gt;/g, '>')
                 .replace(/&#39;/g, "'")
-
             editor.commands.setContent(decodedHTML, false)
             // console.log('Decoded HTML:', decodedHTML)
         }
     }, [editor, backendHTMLContent])
 
-    // const addImage = useCallback(() => {
-    //     const url = window.prompt('Enter image URL:', 'https://example.com/image.jpg')
-
-    //     if (url) {
-    //         // Basic URL validation
-    //         try {
-    //             new URL(url)
-    //             editor?.chain().focus().setImage({
-    //                 src: url,
-    //                 alt: 'Image',
-    //                 title: 'Image'
-    //             }).run()
-    //         } catch (error) {
-    //             alert('Please enter a valid URL')
-    //         }
-    //     }
-    // }, [editor])
+    //to store styles marks etc across render
 
 
 
@@ -527,14 +492,34 @@ export default function TiptapEditor() {
                                     B
                                 </button>
 
+                                {/* Italic Button */}
+                                <button
+                                    onClick={() => editor?.chain().focus().toggleItalic().run()}
+                                    className={`flex items-center justify-center w-8 h-8 rounded-md text-sm font-semibold transition-all duration-150 hover:bg-gray-100 active:bg-gray-200 ${editor?.isActive('italic') ? 'bg-gray-200 text-gray-800' : 'text-gray-600'
+                                        }`}
+                                    style={{ fontStyle: 'italic' }}
+                                >
+                                    I
+                                </button>
+
+                                {/* Underline Button */}
+                                <button
+                                    onClick={() => editor?.chain().focus().toggleUnderline().run()}
+                                    className={`flex items-center justify-center w-8 h-8 rounded-md text-sm font-semibold transition-all duration-150 hover:bg-gray-100 active:bg-gray-200 ${editor?.isActive('underline') ? 'bg-gray-200 text-gray-800' : 'text-gray-600'
+                                        }`}
+                                    style={{ textDecoration: 'underline' }}
+                                >
+                                    U
+                                </button>
+
                                 {/* Divider */}
                                 <div className="w-px h-6 bg-gray-300 mx-1"></div>
 
                                 {/* Font Size Dropdown */}
-                                <select
+                                {/* <select
+                                    value={editor?.getAttributes('textStyle').fontSize || ''}
                                     onChange={(e) => editor?.chain().focus().setFontSize(e.target.value).run()}
                                     className="px-3 py-1.5 text-sm border border-gray-200 rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer min-w-[70px]"
-                                    defaultValue="16px"
                                 >
                                     <option value="12px">12px</option>
                                     <option value="14px">14px</option>
@@ -544,13 +529,13 @@ export default function TiptapEditor() {
                                     <option value="24px">24px</option>
                                     <option value="28px">28px</option>
                                     <option value="32px">32px</option>
-                                </select>
+                                </select> */}
 
                                 {/* Font Family Dropdown */}
                                 <select
+                                    value={editor?.getAttributes('textStyle').fontFamily || ''}
                                     onChange={(e) => editor?.chain().focus().setFontFamily(e.target.value).run()}
                                     className="px-3 py-1.5 text-sm border border-gray-200 rounded-md bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer min-w-[120px]"
-                                    defaultValue=""
                                 >
                                     <option value="" disabled>Font Family</option>
                                     <option value="Arial">Arial</option>
@@ -564,7 +549,8 @@ export default function TiptapEditor() {
                                 </select>
                             </div>
                         </BubbleMenu>
-                    )}
+                    )
+                }
 
                 <EditorContent editor={editor} />
 

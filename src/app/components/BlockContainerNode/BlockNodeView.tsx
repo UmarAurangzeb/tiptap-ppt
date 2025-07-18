@@ -3,7 +3,7 @@ import { NodeViewWrapper, NodeViewContent } from '@tiptap/react'
 import { useElementTracking } from '@/hooks/useElementTracking'
 
 export default function BlockContainerNodeView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
-    const { width, height, backgroundColor, borderWidth, borderStyle, borderColor, borderRadius, marginTop, marginBottom, marginLeft, marginRight, text, display, justifyContent, alignItems } = node.attrs;
+    const { width, setDisplayNone, height, backgroundColor, borderWidth, borderStyle, borderColor, borderRadius, marginTop, marginBottom, marginLeft, marginRight, text, display, justifyContent, alignItems } = node.attrs;
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'shape',
         node,
@@ -29,7 +29,7 @@ export default function BlockContainerNodeView({ editor, node, getPos }: { edito
         marginBottom: marginBottom || '',
         marginLeft: marginLeft || '',
         marginRight: marginRight || '',
-        display: display || 'block',
+        display: setDisplayNone ? 'none' : display || 'block',
         justifyContent: justifyContent || '',
         alignItems: alignItems || '',
     };
