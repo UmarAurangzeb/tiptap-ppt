@@ -6,6 +6,7 @@ import { useResponsiveFontSize, useResponsiveStrokeWidth } from '@/utils/respons
 import Heading from '@tiptap/extension-heading'
 import { allStyleAttributes } from '@/utils/styles'
 import { BubbleMenu } from '@tiptap/react'
+import { useSlideElements } from '@/context/SlideElementsContext'
 export const CustomHeader = Heading.extend({
     addAttributes() {
         return {
@@ -57,7 +58,7 @@ export const CustomHeader = Heading.extend({
 export default function HeaderView({ editor, node, getPos }: { editor: any, node: any, getPos: any }) {
     const level = node.attrs.level || 1
     const headerTag = `h${level}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
-
+    const { updateElement } = useSlideElements()
 
     const extractTextWithMarks = (node: any) => {
         const chunks: any = []
@@ -115,10 +116,10 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
                 }
             }
         })
-        console.log("chunks updated", chunks)
+        // console.log("chunks updated", chunks)
         return chunks
     }
-    // Calculate responsive font sizes based on header level
+
     const getHeaderFontSize = (level: number): string => {
         const baseSizes = {
             1: 48,  // h1: 2em equivalent at 24px base
@@ -133,18 +134,17 @@ export default function HeaderView({ editor, node, getPos }: { editor: any, node
     node.attrs.fontSize = getHeaderFontSize(level)
     const { ref, elementId, parentContainerWidth } = useElementTracking({
         elementType: 'heading',
-        node,
+        node: node,
         getElementData: (elementId, slideNumber, coordinates) => {
-
             const currentNode = editor.state.doc.nodeAt(getPos());
+            // console.log("currentNode", currentNode)
             const { level, ...styleAttrs } = currentNode?.attrs || {};
 
-            const currentChunks = currentNode ? extractTextWithMarks(currentNode) : [];
-
+            const chunks = extractTextWithMarks(currentNode)
             return {
                 content: currentNode?.textContent || '',
                 style: styleAttrs,
-                textChunks: currentChunks,
+                textChunks: chunks,
             }
         }
     })

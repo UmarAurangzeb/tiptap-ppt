@@ -42,7 +42,8 @@ import { SectionBreakNode } from './SectionBreakNodeView/SectionBreakNodeView'
 import { IconNode } from './IconNodeView/IconNode'
 import { useSlideElements } from '@/context/SlideElementsContext'
 import { TextStyle } from '@tiptap/extension-text-style'
-
+import { ChartLayoutNode } from './ChartLayout/ChartLayoutView'
+import { ChartRendererNode } from './ChartLayout/ChartLayoutView'
 export default function TiptapEditor() {
     const [isMounted, setIsMounted] = useState(false);
     const [backendHTMLContent, setBackendHTMLContent] = useState(`
@@ -197,15 +198,20 @@ export default function TiptapEditor() {
 <h1 u_id='info-item-header-4' style="text-align: center;">this is the header</h1>
 <p u_id='info-item-paragraph-4' style="text-align: center;">icia soluta odio beatae, sit, possimus enim ad, ex ea asperiores. Dignissimos excepturi tempora ipsa? Nobis.</p>
 </block-container>
-
 </info-collection>
 </div>
 
-
+<div class="slide-body" n="10">
+<chart-layout variant="chart-layout-1" slideNumber="10">
+<h1 u_id='chart-layout-header' style="text-align: center;">this is the header</h1>
+<chart-renderer 
+  chartType="line" 
+  chartData='[{"name":"Page A","value":400},{"name":"Page B","value":300},{"name":"Page C","value":500}]'>
+</chart-renderer>
+</chart-layout>
+</div>
 `
     );
-
-
     const editorRef = useRef<HTMLDivElement>(null) as React.RefObject<HTMLDivElement>
 
     const { removeElementsBySlide } = useSlideElements()
@@ -252,6 +258,8 @@ export default function TiptapEditor() {
             SvgNode,
             SectionBreakNode,
             IconNode,
+            ChartLayoutNode,
+            ChartRendererNode,
         ],
         content: ``,
         editorProps: {

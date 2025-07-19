@@ -13,9 +13,13 @@ export const CustomParagraph = Paragraph.extend({
             ...allStyleAttributes,
             u_id: {
                 default: null,
-            }
+            },
+
+
         }
     },
+    content: 'inline*',
+    marks: '_',
     renderHTML({ HTMLAttributes }) {
         const styles = [];
         if (HTMLAttributes.color) styles.push(`color: ${HTMLAttributes.color}`);
@@ -110,7 +114,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                 }
             }
         })
-        console.log("chunks updated of paragraph", chunks)
+        // console.log("chunks updated of paragraph", chunks)
         return chunks
     }
 
@@ -127,7 +131,7 @@ export default function ParagraphView({ editor, node, getPos }: { editor: any, n
                 return {
                     content: currentNode?.textContent || '',
                     style: styleAttrs,
-                    textChunks: currentChunks,
+                    textChunks: currentChunks
                 }
             }
         }

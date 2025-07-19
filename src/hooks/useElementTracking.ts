@@ -54,6 +54,8 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                                 width: nodeRect.width,
                                 height: nodeRect.height
                             }
+
+
                             const elementData = getElementData(elementId, slide_number, coordinates)
                             updateElement({
                                 id: elementId,
@@ -64,6 +66,7 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                                 width: nodeRect.width,
                                 height: nodeRect.height,
                                 content: '',
+                                textChunks: elementData.textChunks || [],
                                 ...elementData,
                             })
                         }
@@ -116,7 +119,7 @@ export function useElementTracking({ elementType, node, getElementData }: UseEle
                 mutationObserver.disconnect()
             }
         }
-    }, [elementId, updateElement, editorRef, node.textContent])
+    }, [elementId, updateElement, editorRef, node.textContent, node])
 
     // Cleanup: remove element when component unmounts
     useEffect(() => {

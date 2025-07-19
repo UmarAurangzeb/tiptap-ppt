@@ -95,7 +95,7 @@ export const SlideElementsProvider = ({ children }: { children: ReactNode }) => 
                 // Add new element
                 newState[element.slide_number].push(element)
             }
-            console.log(' updated slide elements:', newState)
+            // console.log(' updated slide elements:', newState)
             return newState
         })
     }, [])
